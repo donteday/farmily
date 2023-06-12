@@ -10,7 +10,7 @@ const Bed = ({ index, setMoney, bedCount, nonBedCount, setBedCount, setNonBedCou
     let nonBed = bedCount - nonBedCount;
     useEffect(() => {
         if (index < nonBed) setBedSate('bed');
-    }, [])
+    }, [index, nonBed])
     const bedSquare = useRef();
 
     const money = useSelector(state => state.counter.value);
