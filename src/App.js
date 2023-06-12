@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Bed from './components/Bed/Bed';
+import Header from './components/Header/Header';
 
 function App() {
+
+  const [money, setMoney] = useState(20);
+  const [bedCount, setBedCount] = useState(20);
+  const [nonBedCount, setNonBedCount] = useState(5);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header money={money}/>
+      <div className='garden'>
+        {
+          [...Array(bedCount)].map((x, index) =>
+          <Bed
+          key={index}
+          index={index}
+          money={money}
+          setMoney={setMoney}
+          bedCount={bedCount}
+          setBedCount={setBedCount}
+          nonBedCount={nonBedCount}
+          setNonBedCount={setNonBedCount}
+          />)
+        }
+      </div>
+
     </div>
+
   );
 }
 

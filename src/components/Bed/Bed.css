@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.bed, .bed__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-image: url(../../img/bed.png);
+    background-size: cover;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0); */
+}
+
+.bed__empty {
+    background-image: url(../../img/bed_non.png);
+    cursor: cell;
+}
+
+.plant {
+    width: 50%;
+    height: 50%;
+    background-color: aliceblue;
+}
+
+.tomato {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/tomato.png);
+    background-size: cover;
+}
+
+.rotten {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/tomato_rotten.png);
+    background-size: cover;
+
+
+}
+
+.seedling {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/seedling.png);
+    background-size: cover;
+}
+
+.bed__price {
+    font-family: 'VT323', monospace;
+    color: rgb(162, 162, 162);
+    font-weight: normal;
+    font-size: 30px;
+    cursor: cell;
+}
