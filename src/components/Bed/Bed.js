@@ -4,13 +4,16 @@ import { incrementMoney } from '../../redux/money/moneySlice'
 import './Bed.css'
 
 
-const Bed = ({ index, setMoney, bedCount, nonBedCount, setBedCount, setNonBedCount }) => {
+const Bed = ({ index, bedCount, nonBedCount, setBedCount, setNonBedCount }) => {
     const [isPlant, setPlant] = useState('');
     const [bedState, setBedSate] = useState('bed__empty');
     let nonBed = bedCount - nonBedCount;
+
+    
     useEffect(() => {
         if (index < nonBed) setBedSate('bed');
-    }, [index, nonBed])
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const bedSquare = useRef();
 
     const money = useSelector(state => state.counter.value);
