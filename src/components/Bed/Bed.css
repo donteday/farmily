@@ -52,3 +52,10 @@
     font-size: 30px;
     cursor: cell;
 }
+
+@media (max-width: 500px) {
+    .bed, .bed__empty {
+      width: 60px;
+      height: 60px;
+    }
+  }

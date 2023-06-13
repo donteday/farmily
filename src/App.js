@@ -1,29 +1,28 @@
-import { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux'
+import { store } from './redux/root'
 import './App.css';
 import Bed from './components/Bed/Bed';
 import Header from './components/Header/Header';
 
 function App() {
+  const data = useSelector(state => state.counter.data)
+  function sub() {
+    console.log(1);
+  }
+  store.subscribe(sub);
 
-  const [money, setMoney] = useState(20);
-  const [bedCount, setBedCount] = useState(20);
-  const [nonBedCount, setNonBedCount] = useState(5);
   return (
     <div>
-      <Header money={money}/>
+      <Header />
       <div className='garden'>
         {
-          [...Array(bedCount)].map((x, index) =>
-          <Bed
-          key={index}
-          index={index}
-          money={money}
-          setMoney={setMoney}
-          bedCount={bedCount}
-          setBedCount={setBedCount}
-          nonBedCount={nonBedCount}
-          setNonBedCount={setNonBedCount}
-          />)
+          data.map((bed, index) =>
+            <Bed
+              key={index}
+              index={index}
+              bed={bed}
+            />)
         }
       </div>
 
@@ -32,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default React.memo(App);

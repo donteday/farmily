@@ -1,66 +1,52 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { incrementMoney } from '../../redux/money/moneySlice'
+import { incrementMoney, plowed, bedAdd, setPlant } from '../../redux/store/store'
 import './Bed.css'
 
 
-const Bed = ({ index, bedCount, nonBedCount, setBedCount, setNonBedCount }) => {
-    const [isPlant, setPlant] = useState('');
-    const [bedState, setBedSate] = useState('bed__empty');
-    let nonBed = bedCount - nonBedCount;
-
-    
-    useEffect(() => {
-        if (index < nonBed) setBedSate('bed');
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    const bedSquare = useRef();
-
-    const money = useSelector(state => state.counter.value);
+const Bed = ({ index, bed }) => {
+    const money = useSelector(state => state.counter.money);
+    const data = useSelector(state => state.counter.data);
     const dispatch = useDispatch();
-
-    function plant() {
-        console.log(index, nonBed);
-        if (bedState === 'bed__empty') {
-            if (money - index * 10 > 0) {
-                setBedSate('bed');
-                setNonBedCount(nonBedCount - 1);
-                dispatch(incrementMoney(-1 * index * 10))
-                if (nonBedCount <= 1) {
-                    setNonBedCount(5);
-                    setBedCount(bedCount + 5);
+    const bedPrice = Math.round(index*index/4);
+    function bedHandler() {
+        if (!bed.plowed) {
+            if (money - bedPrice > 0) {
+                dispatch(plowed(index));
+                dispatch(incrementMoney(-1 * Math.round(index*index/4)))
+                if (data.filter((e) => !e.plowed).length <= 1) {
+                    dispatch(bedAdd());
                 }
-                console.log(bedCount, nonBedCount, nonBed);
             }
             return;
         }
 
-        if ((money <= 0 && isPlant === '') || isPlant === 'seedling') return;
-        if (isPlant === '') {
+        if ((money <= 0 && bed.plant === '') || bed.plant === 'seedling') return;
+        if (bed.plant === '') {
             dispatch(incrementMoney(-5))
-            setPlant('seedling');
+            dispatch(setPlant({index: index, plant:'seedling'}));
             setTimeout(() => {
-                setPlant('tomato');
+                dispatch(setPlant({index: index, plant:'tomato'}));
             }, Math.round(Math.random() *10000))
         }
-        if (isPlant !== 'seedling' && isPlant !== '') {
+        if (bed.plant !== 'seedling' && bed.plant !== '') {
             dispatch(incrementMoney(10))
-            setPlant('');
+            dispatch(setPlant({index: index, plant:''}));
         }
     }
 
-    function mouseIn(e) {
-        e.stopPropagation()
-        if (e.buttons >= 1) plant();
-    }
+    // function mouseIn(e) {
+    //     e.stopPropagation()
+    //     if (e.buttons >= 1) plant();onMouseEnter={mouseIn}
+    // }
 
     return (
-        <div onClick={plant} onMouseEnter={mouseIn} className={bedState}>
-            <div className={isPlant} ref={bedSquare}></div>
-            <span className='bed__price'>{bedState === 'bed__empty' ? `${index*10}$` : ''} </span>           
+        <div onClick={bedHandler} className={bed.plowed ? 'bed' : 'bed__empty'}>
+            <div className={bed.plant}></div>
+            <span className='bed__price'>{!bed.plowed ? `${Math.round(index*index/4)}$` : ''} </span>           
         </div>
     );
 }
 
-export default Bed;
+export default React.memo(Bed);
 

@@ -6,3 +6,9 @@
   /* background-color: rgb(110, 72, 2); */
   box-shadow: 0px 0px 10px rgb(46, 26, 1);
 }
+
+@media (max-width: 500px) {
+  .garden {
+    max-width: 300px;
+  }
+}

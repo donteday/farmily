@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import moneyCounter from './money/moneySlice'
+import farmStore from './store/store'
 
 export const store = configureStore({
     reducer: {
-        counter: moneyCounter
+        counter: farmStore
     }
 })

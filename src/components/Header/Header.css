@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-.header {    
+.header {
     color: rgb(255, 255, 255);
     font-family: 'VT323', monospace;
     display: flex;
@@ -32,4 +32,13 @@
     height: 1em;
     background-image: url(../../img/money.png);
     background-size: cover;
+}
+
+@media (max-width: 500px) {
+    .header {
+        max-width: 300px;
+        height: 60px;
+        font-size: 40px;
+
+    }
 }
