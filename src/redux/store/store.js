@@ -9,46 +9,57 @@ export const counterSlice = createSlice({
   name: 'money',
   initialState: {
     money: 75,
+    shopActiveItem: null,
     data: [
       {
         plowed: true,
         plant: '',
+        sell: 0,
       },
       {
         plowed: true,
         plant: '',
+        sell: 0,
       },
       {
         plowed: true,
         plant: '',
+        sell: 0,
       },
       {
         plowed: true,
         plant: '',
+        sell: 0,
       },
       {
         plowed: true,
         plant: '',
+        sell: 0,
       },
       {
         plowed: false,
         plant: '',
+        sell: 0,
       },
       {
         plowed: false,
         plant: '',
+        sell: 0,
       },
       {
         plowed: false,
         plant: '',
+        sell: 0,
       },
       {
         plowed: false,
         plant: '',
+        sell: 0,
       },
       {
         plowed: false,
         plant: '',
+        sell: 0,
       },
     
     ]
@@ -68,11 +79,18 @@ export const counterSlice = createSlice({
     setPlant: (state, action) => {
       state.data[action.payload.index].plant = action.payload.plant;
     },
+    setSellPrice: (state, action) => {
+      state.data[action.payload.index].sell = action.payload.price;
+    },
+    makeShopActiveItem: (state, action) => {
+      state.shopActiveItem = action.payload;
+    },
+
   }
 })
 
 
 
-export const { incrementMoney, plowed, bedAdd, setPlant } = counterSlice.actions
+export const { incrementMoney, plowed, bedAdd, setPlant, makeShopActiveItem, setSellPrice } = counterSlice.actions
 
 export default counterSlice.reducer

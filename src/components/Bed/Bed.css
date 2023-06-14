@@ -22,27 +22,24 @@
     background-color: aliceblue;
 }
 
-.tomato {
+.tomato, .carrot, .seedling {
     width: 100%;
     height: 100%;
+}
+
+.tomato {
     background-image: url(../../img/tomato.png);
     background-size: cover;
     transition: all .3s ease-in-out;
     animation: wiggle 1s ease-in-out infinite;
 }
 
-.rotten {
-    width: 100%;
-    height: 100%;
-    background-image: url(../../img/tomato_rotten.png);
+.carrot {
+    background-image: url(../../img/carrot.png);
     background-size: cover;
-
-
 }
 
 .seedling {
-    width: 100%;
-    height: 100%;
     background-image: url(../../img/seedling.png);
     background-size: cover;
 }

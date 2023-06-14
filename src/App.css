@@ -1,6 +1,7 @@
 .garden {
   display: flex;
   margin: 20px auto;
+  margin-bottom: 120px;
   max-width: 500px;
   flex-wrap: wrap;
   /* background-color: rgb(110, 72, 2); */

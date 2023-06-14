@@ -6,3 +6,8 @@ export const store = configureStore({
         counter: farmStore
     }
 })
+
+function sub() {
+    console.log(1);
+  }
+store.subscribe(sub);
