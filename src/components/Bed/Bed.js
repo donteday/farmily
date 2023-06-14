@@ -9,12 +9,12 @@ const Bed = ({ index, bed }) => {
     const data = useSelector(state => state.counter.data);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const dispatch = useDispatch();
-    const bedPrice = Math.round(index*index/2);
+    const bedPrice = Math.round(index*index*1.5);
     function bedHandler() {
         if (!bed.plowed) {
             if (money - bedPrice > 0) {
                 dispatch(plowed(index));
-                dispatch(incrementMoney(-1 * Math.round(index*index/4)))
+                dispatch(incrementMoney(-1 * bedPrice));
                 if (data.filter((e) => !e.plowed).length <= 1) {
                     dispatch(bedAdd());
                 }

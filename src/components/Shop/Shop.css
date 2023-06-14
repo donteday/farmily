@@ -11,6 +11,7 @@
 }
 
 .shop__item {
+    position: relative;
     padding: 5px;
     width: 100px;
     height: 100px;
@@ -26,4 +27,38 @@
 
 .shop__input:checked + .shop__item {
     border: 5px solid rgb(94, 33, 17);
+}
+
+.shop__item-info {
+    position: absolute;
+    opacity: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: max-content;
+    top: -1.3em;
+    font-size: 1.4em;
+    font-family: 'VT323', monospace;
+    font-weight: normal;
+    color: white;
+    z-index: 5;
+}
+
+.shop__input:checked + .shop__item .shop__item-info {
+    opacity: 1;
+}
+
+@media (max-width: 500px) {
+    .shop {
+        max-width: 300px;
+    }
+
+    .shop__item {
+        width: 80px;
+        height: 80px;
+    }
+
+    .shop__item-info {
+        font-size: 1em;
+    }
 }

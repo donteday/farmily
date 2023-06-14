@@ -8,7 +8,7 @@ const bedExmple = {
 export const counterSlice = createSlice({
   name: 'money',
   initialState: {
-    money: 75,
+    money: 753333,
     shopActiveItem: null,
     data: [
       {

@@ -12,8 +12,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url(./img/grass_background.png);
-  background-size: 50%;  
+  background-image: url(./img/grass_background_2.png);
+  background-size: 40%;  
 }
 
 code {

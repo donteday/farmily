@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 .header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     color: rgb(255, 255, 255);
     font-family: 'VT323', monospace;
     display: flex;
@@ -19,17 +23,16 @@
 
 .money {
     position: relative;
-    text-shadow: 5px 0px 0 #3b2705;
+    /* text-shadow: 5px 0px 0 #3b2705; */
 }
 
 .money::after {
     content: '';
     position: absolute;
-    display: block;
-    left: -1em;
-    top: 0;
-    width: 1em;
-    height: 1em;
+    left: -.6em;
+    top: .25em;
+    width: .5em;
+    height: .5em;
     background-image: url(../../img/money.png);
     background-size: cover;
 }

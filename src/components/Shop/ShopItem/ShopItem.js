@@ -12,7 +12,10 @@ const ShopItem = ({ item, index }) => {
             <input className='shop__input' type="radio" id={index} name='shop' />
             <label className='shop__item' htmlFor={index} onClick={makeActiveItem}>
                 
-                {/* <span>{item.name}</span> */}
+                <span className='shop__item-info'>
+                    {`${item.purchasePrice}$/`}
+                    {`${item.sellingPrice}$/`}
+                    {`${item.riseTime/1000}s`}</span>
                 <div className={item.name}></div>
             </label>
         </>

@@ -8,7 +8,7 @@ export const shopData = [
     {
         name: 'carrot',
         purchasePrice: 10,
-        sellingPrice: 25,
-        riseTime: 10000,
+        sellingPrice: 30,
+        riseTime: 30000,
     },
 ]
