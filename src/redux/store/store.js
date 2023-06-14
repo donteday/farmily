@@ -7,63 +7,65 @@ const bedExmple = {
 
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: {
-    money: 75,
-    shopActiveItem: null,
-    data: [
-      {
-        plowed: true,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: true,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: true,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: true,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: true,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: false,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: false,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: false,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: false,
-        plant: '',
-        sell: 0,
-      },
-      {
-        plowed: false,
-        plant: '',
-        sell: 0,
-      },
-    
-    ]
-  },
+  initialState: localStorage.userData
+    ? JSON.parse(localStorage.userData)
+    : {
+      money: 75,
+      shopActiveItem: null,
+      data: [
+        {
+          plowed: true,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: true,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: true,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: true,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: true,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: false,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: false,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: false,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: false,
+          plant: '',
+          sell: 0,
+        },
+        {
+          plowed: false,
+          plant: '',
+          sell: 0,
+        },
+
+      ]
+    },
   reducers: {
     incrementMoney: (state, action) => {
       state.money += action.payload
@@ -85,12 +87,19 @@ export const counterSlice = createSlice({
     makeShopActiveItem: (state, action) => {
       state.shopActiveItem = action.payload;
     },
+    setDatePlant: (state, action) => {
+      state.data[action.payload.index].date = action.payload.date;
+      state.data[action.payload.index].namePlant = action.payload.namePlant;
+      state.data[action.payload.index].riseTime = action.payload.riseTime;
+    }
 
   }
 })
 
 
 
-export const { incrementMoney, plowed, bedAdd, setPlant, makeShopActiveItem, setSellPrice } = counterSlice.actions
+
+
+export const { incrementMoney, plowed, bedAdd, setPlant, makeShopActiveItem, setSellPrice, setDatePlant } = counterSlice.actions
 
 export default counterSlice.reducer

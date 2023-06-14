@@ -23,7 +23,7 @@
     background-color: aliceblue;
 }
 
-.tomato, .carrot, .seedling {
+.tomato, .carrot, .seedling, .cabbage {
     width: 100%;
     transition: all .3s ease-in-out;
     height: 100%;
@@ -37,6 +37,11 @@
 
 .carrot {
     background-image: url(../../img/carrot.png);
+    background-size: cover;
+}
+
+.cabbage {
+    background-image: url(../../img/cabbage.png);
     background-size: cover;
 }
 

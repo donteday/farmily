@@ -9,16 +9,11 @@ import { store } from './redux/root';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// if (!localStorage.getItem('money')) {
-//   localStorage.setItem('money', 5);
-// }
 
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
