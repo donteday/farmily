@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlant, makeShopActiveItem } from './redux/store/store';
+import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -12,6 +12,7 @@ import Barn from './components/Barn/Barn';
 function App() {
   const barnEnter = useSelector(state => state.counter.barnIn);
   const data = useSelector(state => state.counter.dataGarden);
+  const dataBarn = useSelector(state => state.counter.dataBarn);
   const dispatch = useDispatch();
 
   function init() {
@@ -29,6 +30,13 @@ function App() {
         }, dateNow.getTime() - element.date);
       }
     });
+    setInterval(() => {
+      dataBarn.map(function (e) {
+          if (e.moneyPerSecond) dispatch(incrementMoney(e.moneyPerSecond));
+          return true;
+      }
+      )
+  }, 1000);
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

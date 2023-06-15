@@ -7,7 +7,7 @@ const bedExmple = {
 
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: !localStorage.userData
+  initialState: localStorage.userData
     ? JSON.parse(localStorage.userData)
     : {
       barnIn: false,
