@@ -1,0 +1,68 @@
+.barn {
+    display: flex;
+    padding: 15px;
+    margin: 30px auto 80px;
+    margin-bottom: 120px;
+    max-width: 500px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.barn__square,
+.barn__square-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-image: url(../../img/barn_square_2.png);
+    background-size: cover;
+    transition: all .3s ease-in-out;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0); */
+}
+
+.barn__square-empty {
+    background-image: url(../../img/barn_square_non.png);
+}
+
+.chicken {
+    width: 60%;
+    height: 60%;
+    animation: chicken 3s linear infinite;
+    background-size: cover;
+}
+
+@keyframes chicken {
+    0% {
+        background-image: url(../../img/chicken_1.png);
+
+    }
+
+    5% {
+        background-image: url(../../img/chicken_2.png);
+
+    }
+
+    10% {
+        background-image: url(../../img/chicken_1.png);
+
+    }
+
+    100% {
+        background-image: url(../../img/chicken_1.png);
+
+    }
+}
+
+@media (max-width: 500px) {
+    .barn {
+        max-width: 300px;
+        padding: 15px;
+    }
+
+    .barn__square,
+    .barn__square-empty {
+        width: 80px;
+        height: 80px;
+    }
+}

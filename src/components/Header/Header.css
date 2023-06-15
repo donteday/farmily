@@ -49,11 +49,11 @@
     background-size: cover;
 }
 
-.barn {
+.barn__icon {
     width: 200px;
     height: 200px;
     background-image: url(../../img/barn.png);
-    background-size: 80%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -75,7 +75,7 @@
 
     }
 
-    .barn, .tractor {
+    .barn__icon, .tractor {
         width: 100px;
         height: 100px;
     }

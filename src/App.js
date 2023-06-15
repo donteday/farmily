@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem } from './redux/store/store';
 import './App.css';
-import Bed from './components/Bed/Bed';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
+import Garden from './components/Garden/Garden';
+import Barn from './components/Barn/Barn';
 
 
 
 function App() {
-  const data = useSelector(state => state.counter.data);
+  const barnEnter = useSelector(state => state.counter.barnIn);
+  const data = useSelector(state => state.counter.dataGarden);
   const dispatch = useDispatch();
 
   function init() {
@@ -17,15 +19,14 @@ function App() {
     data.forEach((element, index) => {
       const dateNow = new Date()
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
-        dispatch(setPlant({index: index, plant: element.namePlant}));
+        dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
 
       if (element.date && (dateNow.getTime() - element.date < element.riseTime)) {
-        console.log(2);
 
         setTimeout(() => {
-          dispatch(setPlant({index: index, plant: element.namePlant}));
-      }, dateNow.getTime() - element.date);
+          dispatch(setPlant({ index: index, plant: element.namePlant }));
+        }, dateNow.getTime() - element.date);
       }
     });
   }
@@ -33,19 +34,11 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => init(), []);
 
+
   return (
     <div>
       <Header />
-      <div className='garden'>
-        {
-          data.map((bed, index) =>
-            <Bed
-              key={index}
-              index={index}
-              bed={bed}
-            />)
-        }
-      </div>
+      {barnEnter ? <Barn /> : <Garden />}
       <Shop />
     </div>
 

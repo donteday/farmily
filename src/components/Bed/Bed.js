@@ -1,18 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant} from '../../redux/store/store'
+import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
 import './Bed.css'
 
 
 const Bed = ({ index, bed }) => {
-    const money = useSelector(state => state.counter.money);
-    const data = useSelector(state => state.counter.data);
-    const activeItem = useSelector(state => state.counter.shopActiveItem);
     const dispatch = useDispatch();
-    const bedPrice = Math.round(index * index * data.length);
+    const money = useSelector(state => state.counter.money);
+    const data = useSelector(state => state.counter.dataGarden);
+    const activeItem = useSelector(state => state.counter.shopActiveItem);
+    const bedPrice = Math.round(index * index * data.length/2);
 
     function roundThousend(amount) {
-        if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
+        if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';
         return amount;
     }
 
@@ -52,12 +52,23 @@ const Bed = ({ index, bed }) => {
     }
 
     function mouseIn(e) {
-        e.stopPropagation()
-        if (e.buttons >= 1) bedHandler();
+        e.stopPropagation();
+        if (e.buttons >= 1) {
+            bedHandler();
+        };
+        if (e.type === 'touchmove') {
+            let myLocation = e.touches[0];
+            let realTarget = document.elementFromPoint(myLocation.clientX, myLocation.clientY);
+            console.log(realTarget.index);
+        }
     }
 
     return (
-        <div onClick={bedHandler} onMouseEnter={mouseIn} className={bed.plowed ? 'bed' : 'bed__empty'}>
+        <div
+            onClick={bedHandler}
+            onMouseEnter={mouseIn}
+
+            className={bed.plowed ? 'bed' : 'bed__empty'}>
             <div className={`${bed.plant}`}></div>
             <span className='bed__price'>{!bed.plowed ? `${roundThousend(bedPrice)}$` : ''} </span>
         </div>

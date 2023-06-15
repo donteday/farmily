@@ -1,12 +1,18 @@
 import './Header.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { barnEnter } from '../../redux/store/store'
 
 const Header = () => {
-    const data = useSelector(state => state.counter.data);
+    const data = useSelector(state => state.counter.dataGarden);
     const count = useSelector(state => state.counter.money)
+    const dispatch = useDispatch();
+
     function roundThousend(amount) {
         if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
+    }
+    function tooggleView() {
+        dispatch(barnEnter());
     }
     return (
         <div className='header'>
@@ -15,10 +21,7 @@ const Header = () => {
                 <span>LVL {data.length / 5 - 1}</span>
                 <span className='money'>{roundThousend(count)}</span>
             </div>
-            <div className="barn">
-
-            </div>
-
+            <div className="barn__icon" onClick={tooggleView}></div>
         </div>
     );
 }

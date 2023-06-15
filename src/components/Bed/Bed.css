@@ -101,7 +101,7 @@
     }
 
     50% {
-        transform: skewX(-.05rad) translateX(2px);
+        transform: skewX(-.05rad) translateX(2.5px);
     }
 
     100% {

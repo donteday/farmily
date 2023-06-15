@@ -1,10 +1,11 @@
-import './ShopItem.css';
 import { makeShopActiveItem } from '../../../redux/store/store'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ShopItem = ({ item, index }) => {
     const dispatch = useDispatch();
+    const lvl = useSelector(state => state.counter.dataGarden).length / 5 - 1;
     function makeActiveItem() {
+        if (index >= lvl) return;
         dispatch(makeShopActiveItem(item));
     }
     return (
@@ -15,8 +16,14 @@ const ShopItem = ({ item, index }) => {
                 <span className='shop__item-info'>
                     {`${item.purchasePrice}$/`}
                     {`${item.sellingPrice}$/`}
-                    {`${item.riseTime/1000}s`}</span>
+                    {`${item.riseTime/1000}s`}
+                </span>
+                {index >= lvl ?
+                 <div className='shop__item-alert'>{`Нужен ${index+1} lvl`}</div> :
+                 <div></div>          
+                }
                 <div className={item.name}></div>
+
             </label>
         </>
     );
