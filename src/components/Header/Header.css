@@ -1,44 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 .header {
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     top: 0;
     color: rgb(255, 255, 255);
     font-family: 'VT323', monospace;
-    justify-content: space-around;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 10px auto;
     max-width: 500px;
-    gap: 100px;
-    height: 100px;
-    font-size: 40px;
-    background-image: url(../../img/header.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    font-size: 4em;
+    font-size: 3em;
     font-weight: normal;
+}
+
+.header__stat {
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 5px 10px;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    z-index: 10;
+
 }
 
 .money {
     position: relative;
-    right: 0;
-    width: 100px;
+    margin-left: .6em;
     /* text-shadow: 5px 0px 0 #3b2705; */
 }
 
 .money::after {
     content: '';
     position: absolute;
-    left: -.6em;
     top: .25em;
+    left: -.55em;
     width: .5em;
     height: .5em;
     background-image: url(../../img/money.png);
     background-size: cover;
+}
+
+.barn {
+    width: 200px;
+    height: 200px;
+    background-image: url(../../img/barn.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tractor {
+    width: 200px;
+    height: 200px;
+    background-image: url(../../img/tractor.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media (max-width: 500px) {
@@ -47,5 +73,10 @@
         height: 60px;
         font-size: 40px;
 
+    }
+
+    .barn, .tractor {
+        width: 100px;
+        height: 100px;
     }
 }

@@ -9,10 +9,16 @@ const Bed = ({ index, bed }) => {
     const data = useSelector(state => state.counter.data);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const dispatch = useDispatch();
-    const bedPrice = Math.round(index * index * 1.5);
+    const bedPrice = Math.round(index * index * data.length);
+
+    function roundThousend(amount) {
+        if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
+        return amount;
+    }
+
     function bedHandler() {
         if (!bed.plowed) {
-            if (money - bedPrice > 5) {
+            if (money - bedPrice >= 5) {
                 dispatch(plowed(index));
                 dispatch(incrementMoney(-1 * bedPrice));
                 if (data.filter((e) => !e.plowed).length <= 1) {
@@ -24,7 +30,7 @@ const Bed = ({ index, bed }) => {
 
         if ((money <= 0 && bed.plant === '') || bed.plant === 'seedling') return;
         if (activeItem) {
-            if (bed.plant === '' && money - activeItem.purchasePrice > 0) {
+            if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
                 const dateNow = new Date();
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
@@ -52,8 +58,8 @@ const Bed = ({ index, bed }) => {
 
     return (
         <div onClick={bedHandler} onMouseEnter={mouseIn} className={bed.plowed ? 'bed' : 'bed__empty'}>
-            <div className={bed.plant}></div>
-            <span className='bed__price'>{!bed.plowed ? `${bedPrice}$` : ''} </span>
+            <div className={`${bed.plant}`}></div>
+            <span className='bed__price'>{!bed.plowed ? `${roundThousend(bedPrice)}$` : ''} </span>
         </div>
     );
 }

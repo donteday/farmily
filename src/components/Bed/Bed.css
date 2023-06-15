@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-.bed, .bed__empty {
+.bed,
+.bed__empty {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +24,10 @@
     background-color: aliceblue;
 }
 
-.tomato, .carrot, .seedling, .cabbage {
+.tomato,
+.carrot,
+.seedling,
+.cabbage {
     width: 100%;
     transition: all .3s ease-in-out;
     height: 100%;
@@ -32,7 +36,6 @@
 .tomato {
     background-image: url(../../img/tomato.png);
     background-size: cover;
-    animation: wiggle 1s ease-in-out infinite;
 }
 
 .carrot {
@@ -43,11 +46,13 @@
 .cabbage {
     background-image: url(../../img/cabbage.png);
     background-size: cover;
+
 }
 
 .seedling {
     background-image: url(../../img/seedling.png);
     background-size: cover;
+    animation: skew 1s ease-in-out infinite;
 }
 
 .bed__price {
@@ -58,19 +63,49 @@
     cursor: cell;
 }
 
+.wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+}
+
 @media (max-width: 500px) {
-    .bed, .bed__empty {
-      width: 55px;
-      height: 55px;
+
+    .bed,
+    .bed__empty {
+        width: 55px;
+        height: 55px;
     }
 
     .bed__price {
         font-size: 20px;
     }
-  }
+}
 
 @keyframes wiggle {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes skew {
+    0% {
+        transform: skewX(0);
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: skewX(-.05rad) translateX(2px);
+    }
+
+    100% {
+        transform: skewX(0);
+        transform: translateX(0);
+    }
 }
