@@ -7,14 +7,14 @@ export const shopData = [
     },
     {
         name: 'tomato',
-        purchasePrice: 10,
-        sellingPrice: 50,
+        purchasePrice: 40,
+        sellingPrice: 80,
         riseTime: 30000,
     },
     {
         name: 'cabbage',
-        purchasePrice: 20,
-        sellingPrice: 110,
+        purchasePrice: 90,
+        sellingPrice: 180,
         riseTime: 60000,
     },
 ]
