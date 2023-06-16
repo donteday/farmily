@@ -7,14 +7,13 @@ import Shop from './components/Shop/Shop';
 import Garden from './components/Garden/Garden';
 import Barn from './components/Barn/Barn';
 
-
+let moneyInterval;
 
 function App() {
   const barnEnter = useSelector(state => state.counter.barnIn);
   const data = useSelector(state => state.counter.dataGarden);
-  const dataBarn = useSelector(state => state.counter.dataBarn);
+  let dataBarn = useSelector(state => state.counter.dataBarn);
   const dispatch = useDispatch();
-
   function init() {
     dispatch(makeShopActiveItem(null))
     data.forEach((element, index) => {
@@ -30,17 +29,28 @@ function App() {
         }, dateNow.getTime() - element.date);
       }
     });
-    setInterval(() => {
-      dataBarn.map(function (e) {
-          if (e.moneyPerSecond) dispatch(incrementMoney(e.moneyPerSecond));
-          return true;
-      }
-      )
-  }, 1000);
+
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => init(), []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    clearInterval(moneyInterval);
+    moneyInterval = setInterval(() => {
+      let count = 0;      
+      dataBarn.map(function (e) {
+        if (e.moneyPerSecond) {
+          count += e.moneyPerSecond;
+        };
+        return true;
+      });
+      console.log(count);
+      dispatch(incrementMoney(count))
+    }, 1000);
+
+  }, [dataBarn, dispatch]);
 
 
   return (

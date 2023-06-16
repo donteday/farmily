@@ -13,6 +13,7 @@
 
 .shop__item {
     position: relative;
+    /* margin: 0 auto; */
     padding: 5px;
     width: 100px;
     height: 100px;

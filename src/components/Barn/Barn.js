@@ -8,7 +8,7 @@ const Barn = () => {
     return (
         <div className='barn'>
             {dataBarn.map((pet, index) =>
-                <Pet key={index} pet={pet} index={index} />
+                <Pet key={index} yard={pet} index={index} />
             )}
         </div>
     );

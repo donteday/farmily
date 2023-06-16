@@ -26,10 +26,18 @@
 }
 
 .chicken {
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     animation: chicken 3s linear infinite;
     background-size: cover;
+}
+
+.pig {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/pig.png);
+    background-size: cover;
+
 }
 
 @keyframes chicken {

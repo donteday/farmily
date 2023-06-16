@@ -1,6 +1,6 @@
 import './Header.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { barnEnter } from '../../redux/store/store'
+import { barnEnter, makeShopActiveItem } from '../../redux/store/store'
 
 const Header = () => {
     const data = useSelector(state => state.counter.dataGarden);
@@ -13,6 +13,7 @@ const Header = () => {
     }
     function tooggleView() {
         dispatch(barnEnter());
+        dispatch(makeShopActiveItem(null))
     }
     return (
         <div className='header'>

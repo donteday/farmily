@@ -5,13 +5,18 @@ const bedExmple = {
   plant: ''
 };
 
+const yardExmple = {
+  plowed: false,
+  pet: '',
+};
+
 export const counterSlice = createSlice({
   name: 'money',
   initialState: localStorage.userData
     ? JSON.parse(localStorage.userData)
     : {
       barnIn: false,
-      money: 75,
+      money: 9500,
       shopActiveItem: null,
       dataGarden: [
         {
@@ -75,6 +80,7 @@ export const counterSlice = createSlice({
         {
           plowed: false,
           pet: '',
+          moneyPerSecond: null
         },
         {
           plowed: false,
@@ -89,13 +95,23 @@ export const counterSlice = createSlice({
     plowed: (state, index) => {
       state.dataGarden[index.payload].plowed = true;
     },
+    plowedYard: (state, index) => {
+      state.dataBarn[index.payload].plowed = true;
+    },
     bedAdd: (state) => {
       for (let i = 0; i < 5; i++) {
         state.dataGarden = [...state.dataGarden, bedExmple];
       }
     },
+    yardAdd: (state) => {
+        state.dataBarn = [...state.dataBarn, yardExmple];
+    },
     setPlant: (state, action) => {
       state.dataGarden[action.payload.index].plant = action.payload.plant;
+    },
+    setPet: (state, action) => {
+      state.dataBarn[action.payload.index].pet = action.payload.pet;
+      state.dataBarn[action.payload.index].moneyPerSecond = action.payload.money;
     },
     setSellPrice: (state, action) => {
       state.dataGarden[action.payload.index].sell = action.payload.price;
@@ -119,6 +135,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { incrementMoney, plowed, bedAdd, setPlant, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter} = counterSlice.actions
+export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter} = counterSlice.actions
 
 export default counterSlice.reducer
