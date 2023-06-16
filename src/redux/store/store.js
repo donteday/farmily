@@ -12,11 +12,11 @@ const yardExmple = {
 
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: localStorage.userData
+  initialState: !localStorage.userData
     ? JSON.parse(localStorage.userData)
     : {
       barnIn: false,
-      money: 9500,
+      money: 75,
       shopActiveItem: null,
       dataGarden: [
         {
@@ -74,8 +74,8 @@ export const counterSlice = createSlice({
       dataBarn: [
         {
           plowed: true,
-          pet: 'chicken',
-          moneyPerSecond: 10
+          pet: '',
+          moneyPerSecond: null
         },
         {
           plowed: false,

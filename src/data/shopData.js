@@ -26,8 +26,8 @@ export const shopData = {
         },
         {
             name: 'pig',
-            price: 5000,
-            moneyPerSecond: 125
+            price: 10000,
+            moneyPerSecond: 25
         }
     ]
 

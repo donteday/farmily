@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
+import pop from '../../img/pop.mp3';
+import grass from '../../img/grass.mp3';
 import './Bed.css'
 
 
@@ -10,6 +12,11 @@ const Bed = ({ index, bed }) => {
     const data = useSelector(state => state.counter.dataGarden);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const bedPrice = Math.round(index * index * data.length/2);
+
+    const popSound = new Audio(pop);
+    const grassSound = new Audio(grass);
+    popSound.preload = 'metadata';
+    grassSound.preload = 'auto';
 
     function roundThousend(amount) {
         if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';
@@ -32,6 +39,7 @@ const Bed = ({ index, bed }) => {
         if (activeItem) {
             if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
                 const dateNow = new Date();
+                grassSound.play().then().catch((e) => {});
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
@@ -44,6 +52,8 @@ const Bed = ({ index, bed }) => {
         }
 
         if (bed.plant !== 'seedling' && bed.plant !== '') {
+            console.log(popSound);
+            popSound.play();
             dispatch(incrementMoney(bed.sell))
             dispatch(setSellPrice({ index: index, price: 0 }))
             dispatch(setPlant({ index: index, plant: '' }));
