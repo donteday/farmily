@@ -39,7 +39,7 @@ const Bed = ({ index, bed }) => {
         if (activeItem) {
             if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
                 const dateNow = new Date();
-                grassSound.play().then().catch((e) => {});
+                grassSound.play();
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
