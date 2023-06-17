@@ -5,6 +5,10 @@ import pop from '../../img/pop.mp3';
 import grass from '../../img/grass.mp3';
 import './Bed.css'
 
+const popSound = new Audio(pop);
+const grassSound = new Audio(grass);
+popSound.preload = 'metadata';
+grassSound.preload = 'metadata';
 
 const Bed = ({ index, bed }) => {
     const dispatch = useDispatch();
@@ -13,10 +17,7 @@ const Bed = ({ index, bed }) => {
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const bedPrice = Math.round(index * index * data.length/2);
 
-    const popSound = new Audio(pop);
-    const grassSound = new Audio(grass);
-    popSound.preload = 'metadata';
-    grassSound.preload = 'auto';
+
 
     function roundThousend(amount) {
         if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';

@@ -8,22 +8,24 @@ const Shop = () => {
     const barnEnter = useSelector(state => state.counter.barnIn);
 
     return (
-        <form className='shop'>
-            {
-                barnEnter ?
-                    shopData.pets.map((e, index) =>
-                        <ShopItem
-                            key={index}
-                            item={e}
-                            index={index} />)
-                    : shopData.plants.map((e, index) =>
-                        <ShopItem
-                            key={index}
-                            item={e}
-                            index={index} />)
-            }
+        <div className="shop__wrapper">
+            <div className='shop'>
+                {
+                    barnEnter ?
+                        shopData.pets.map((e, index) =>
+                            <ShopItem
+                                key={index}
+                                item={e}
+                                index={index} />)
+                        : shopData.plants.map((e, index) =>
+                            <ShopItem
+                                key={index}
+                                item={e}
+                                index={index} />)
+                }
 
-        </form>
+            </div>
+        </div>
     );
 }
 

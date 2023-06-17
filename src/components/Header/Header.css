@@ -79,4 +79,8 @@
         width: 100px;
         height: 100px;
     }
+
+    .header__stat {
+        font-size: 25px;
+    }
 }

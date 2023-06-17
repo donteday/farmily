@@ -8,11 +8,20 @@ const ShopItem = ({ item, index }) => {
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const barnEnter = useSelector(state => state.counter.barnIn);
     const lvl = useSelector(state => state.counter.dataGarden).length / 5 - 1;
+
     function makeActiveItem() {
         if (index >= lvl) {
             dispatch(makeShopActiveItem(null));
             return; }
         dispatch(makeShopActiveItem(item));
+    }
+    function roundThousend(amount) {
+        if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
+        return amount;
+    }
+    function roundMinutes(amount) {
+        if (amount >= 60) return (amount/60) + 'm';
+        return amount + 's';
     }
     if (!activeItem && inputRef.current) {
         inputRef.current.checked = false;
@@ -25,21 +34,22 @@ const ShopItem = ({ item, index }) => {
                 <span className='shop__item-info'>
                     {
                         barnEnter ? 
-                        `${item.price}$/
-                        ${item.moneyPerSecond}$/s`
+                        `${roundThousend(item.price)}$/${item.moneyPerSecond}$/s`
                         :
-                        `${item.purchasePrice}$/
-                        ${item.sellingPrice}$/
-                        ${item.riseTime/1000}s`
+                        `${roundThousend(item.purchasePrice)}$/
+                        ${roundThousend(item.sellingPrice)}$/
+                        ${roundMinutes(item.riseTime/1000)}`
                     }
 
                 </span>
+
+
+                <div className={`${item.name} images`}></div>
+                <div className='item__box'></div>
                 {index >= lvl ?
-                 <div className='shop__item-alert'>{`Нужен ${index+1} lvl`}</div> :
+                 <div className='shop__item-alert'>{`${index+1} lvl`}</div> :
                  <div></div>          
                 }
-                <div className={item.name}></div>
-
             </label>
         </>
     );

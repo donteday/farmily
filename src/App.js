@@ -26,7 +26,7 @@ function App() {
 
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));
-        }, dateNow.getTime() - element.date);
+        }, element.date < element.riseTime - (dateNow.getTime() - element.date));
       }
     });
 

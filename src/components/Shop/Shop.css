@@ -1,9 +1,31 @@
-.shop {
+.shop__wrapper {
     position: fixed;
-    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    bottom: 10px;
     left: 0;
     right: 0;
-    max-width: 500px;
+    margin: 0 auto;
+    width: 500px;
+    height: 150px;
+    overflow-y: auto;
+    overflow-x: scroll;
+    /* background-color: rgba(68, 68, 68, 0.75); */
+    background-image: url(../../img/wood_texture_2.png);
+    /* background: linear-gradient(0deg, #000000ac 0%, rgba(0,0,0,0) 100%); */
+
+    background-size: contain; 
+    border: 6px solid rgba(43, 19, 19, 0.549);
+    border-radius: 10px;
+}
+
+.shop__wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+
+.shop {
+    width: 1000px;
     padding: 10px;
     margin: 0 auto;
     display: flex;
@@ -13,23 +35,35 @@
 
 .shop__item {
     position: relative;
-    /* margin: 0 auto; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
+    padding-bottom: 10px;
     width: 100px;
     height: 100px;
-    background-image: url(../../img/item_box.png);
-    background-size: cover;
-    background-color: azure;
     border-radius: 4px;
+    transition: all .3s ease-in-out;
 }
+
 
 .shop__input {
     display: none;
 }
 
-.shop__input:checked + .shop__item {
-    border: 5px solid rgba(6, 6, 6, 0.518);
-    box-shadow: 0px 0px 10px 2px rgba(83, 83, 83, 0.545);
+.images {
+    position: absolute;
+    margin: 0 auto;
+    width: 80% !important;
+    height: 80% !important;
+    margin-bottom: 10px;
+    transition: all .2s ease-in-out;
+
+}
+
+.shop__input:checked+.shop__item {
+    border-bottom: 5px solid rgba(6, 6, 6, 0.518);
+    /* box-shadow: 0px 0px 10px 2px rgba(83, 83, 83, 0.545); */
 }
 
 .shop__item-info {
@@ -47,19 +81,51 @@
     z-index: 5;
 }
 
-.shop__input:checked + .shop__item .shop__item-info {
+.item__box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/item_box.png);
+    background-size: cover;
+    transition: all .2s ease-in-out;
+}
+
+
+.shop__input:checked+.shop__item .shop__item-info {
     opacity: 1;
+}
+
+.shop__input:checked+.shop__item .images {
+    transform: translateY(-15px);
+}
+
+.shop__input:checked+.shop__item .item__box {
+    transform: scale(1.15) translateY(-6px);
 }
 
 .shop__item-alert {
     color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     position: absolute;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/block.png);
+    background-size: cover;
 }
 
+
+
+
+
 @media (max-width: 500px) {
-    .shop {
+    .shop__wrapper {
         max-width: 300px;
+    height: 125px;
+
     }
 
     .shop__item {

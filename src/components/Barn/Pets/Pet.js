@@ -27,22 +27,18 @@ const Pet = ({ index, yard }) => {
         if (activeItem) {
             if (yard.pet === '' && money - activeItem.price >= 0) {
                 dispatch(incrementMoney(- activeItem.price))
-                dispatch(setPet({ index: index, pet: activeItem.name, money: activeItem.moneyPerSecond }));
-                // dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
-                // dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
-
-                // setTimeout(() => {
-                //     dispatch(setPlant({ index: index, plant: activeItem.name }));
-                // }, activeItem.riseTime);
+                dispatch(setPet({ index: index, pet: activeItem.name, money: activeItem.moneyPerSecond, sell: activeItem.price }));
             }
+        }
+        if (yard.pet !== '') {
+            dispatch(incrementMoney(yard.sell/2))
+            dispatch(setPet({ index: index, pet: '', money: null, sell: null }));
         }
 
     }
     return (<div>
         <div
             onClick={barnHandler}
-            // onMouseEnter={mouseIn}
-
             className={yard.plowed ? 'barn__square' : 'barn__square-empty'}
         >
             <div className={`${yard.pet}`}></div>

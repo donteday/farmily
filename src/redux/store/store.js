@@ -112,6 +112,7 @@ export const counterSlice = createSlice({
     setPet: (state, action) => {
       state.dataBarn[action.payload.index].pet = action.payload.pet;
       state.dataBarn[action.payload.index].moneyPerSecond = action.payload.money;
+      state.dataBarn[action.payload.index].sell = action.payload.sell;
     },
     setSellPrice: (state, action) => {
       state.dataGarden[action.payload.index].sell = action.payload.price;

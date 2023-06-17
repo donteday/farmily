@@ -27,10 +27,13 @@
 .tomato,
 .carrot,
 .seedling,
-.cabbage {
+.cabbage,
+.corn,
+.broccoli,
+.strawberry {
     width: 100%;
-    transition: all .3s ease-in-out;
     height: 100%;
+    transition: all .3s ease-in-out;
 }
 
 .tomato {
@@ -46,7 +49,20 @@
 .cabbage {
     background-image: url(../../img/cabbage.png);
     background-size: cover;
+}
 
+.corn {
+    background-image: url(../../img/corn.png);
+    background-size: cover;
+}
+
+.broccoli {
+    background-image: url(../../img/broccoli.png);
+    background-size: cover;
+}
+.strawberry {
+    background-image: url(../../img/strawberry.png);
+    background-size: cover;
 }
 
 .seedling {

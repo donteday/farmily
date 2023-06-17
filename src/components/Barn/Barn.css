@@ -40,6 +40,14 @@
 
 }
 
+.cow {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/cow.png);
+    background-size: cover;
+
+}
+
 @keyframes chicken {
     0% {
         background-image: url(../../img/chicken_1.png);
