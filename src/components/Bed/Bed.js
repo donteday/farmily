@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
 import pop from '../../img/pop.mp3';
 import grass from '../../img/grass.mp3';
+import shovel from '../../img/shovel.mp3';
 import './Bed.css'
 
 const popSound = new Audio(pop);
 const grassSound = new Audio(grass);
+const shovelSound = new Audio(shovel);
 popSound.preload = 'metadata';
 grassSound.preload = 'metadata';
+shovelSound.preload = 'metadata';
 
 const Bed = ({ index, bed }) => {
     const dispatch = useDispatch();
@@ -27,6 +30,7 @@ const Bed = ({ index, bed }) => {
     function bedHandler() {
         if (!bed.plowed) {
             if (money - bedPrice >= 5) {
+                shovelSound.play();
                 dispatch(plowed(index));
                 dispatch(incrementMoney(-1 * bedPrice));
                 if (data.filter((e) => !e.plowed).length <= 1) {
@@ -53,7 +57,6 @@ const Bed = ({ index, bed }) => {
         }
 
         if (bed.plant !== 'seedling' && bed.plant !== '') {
-            console.log(popSound);
             popSound.play();
             dispatch(incrementMoney(bed.sell))
             dispatch(setSellPrice({ index: index, price: 0 }))
