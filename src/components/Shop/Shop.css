@@ -158,8 +158,8 @@
     }
 
     .shop__item-active {
-        width: 300px;
-        bottom: 125px;
+        width: 280px;
+        bottom: 100px;
         font-size: 20px;
     }
 }

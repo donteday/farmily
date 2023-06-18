@@ -22,7 +22,6 @@ const Header = () => {
 
     function roundThousend(amount) {
         if (amount > 1000000) return (amount/1000000).toFixed(1) + 'm';
-        if (amount > 100000) return (amount/100000).toFixed(1) + 't';
         if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
     }
