@@ -16,7 +16,8 @@ export const counterSlice = createSlice({
     ? JSON.parse(localStorage.userData)
     : {
       barnIn: false,
-      money: 75,
+      money: 100,
+      moneyMultiplier: 1,
       shopActiveItem: null,
       dataGarden: [
         {

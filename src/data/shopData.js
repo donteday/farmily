@@ -51,7 +51,7 @@ export const shopData = {
         {
             name: 'cow',
             price: 100000,
-            moneyPerSecond: 100
+            moneyPerSecond: 50
         }
     ]
 

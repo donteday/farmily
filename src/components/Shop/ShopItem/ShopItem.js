@@ -6,13 +6,15 @@ import box from '../../../img/box.mp3'
 const boxSound = new Audio(box);
 boxSound.preload = 'metadata';
 
-const ShopItem = ({ item, index }) => {
+const ShopItem = ({ item, index, shopRef }) => {
     const dispatch = useDispatch();
     const inputRef = useRef();
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const lvl = useSelector(state => state.counter.dataGarden).length / 5 - 1;
 
     function makeActiveItem() {
+        if (index >= 2) shopRef.current.scrollLeft = (index - 1) * 88;
+        console.log(shopRef.current.scrollLeft);
         boxSound.play();
         if (index >= lvl) {
             dispatch(makeShopActiveItem(null));
@@ -32,7 +34,7 @@ const ShopItem = ({ item, index }) => {
                 <div className={`${item.name} images`}></div>
                 <div className='item__box'></div>
                 {index >= lvl ?
-                    <div className='shop__item-alert'>{`${index + 1} lvl`}</div> :
+                    <div className='shop__item-alert'>{`Ур. ${index + 1}`}</div> :
                     <div></div>
                 }
             </label>

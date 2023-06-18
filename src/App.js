@@ -46,7 +46,6 @@ function App() {
         };
         return true;
       });
-      console.log(count);
       dispatch(incrementMoney(count))
     }, 1000);
 

@@ -6,28 +6,27 @@
     right: 0;
     top: 0;
     color: rgb(255, 255, 255);
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', cursive;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px auto;
     max-width: 500px;
-    font-size: 3em;
+    font-size: 1.5em;
     font-weight: normal;
 }
 
 .header__stat {
     position: fixed;
+    padding: 0 15px;
     left: 0;
     right: 0;
+    top: 200px;
     margin: 0 auto;
-    padding: 5px 10px;
-    width: max-content;
+    justify-content: space-between;
+    max-width: 500px;
     height: max-content;
     display: flex;
-    flex-direction: column;
-    text-align: left;
-    justify-content: center;
     z-index: 10;
 
 }
@@ -41,10 +40,10 @@
 .money::after {
     content: '';
     position: absolute;
-    top: .25em;
-    left: -.55em;
-    width: .5em;
-    height: .5em;
+    top: 0;
+    left: -1.2em;
+    width: 1em;
+    height: 1em;
     background-image: url(../../img/money.png);
     background-size: cover;
 }
@@ -81,6 +80,8 @@
     }
 
     .header__stat {
-        font-size: 25px;
+        max-width: 300px;
+        font-size: 15px;
+        top: 75px;
     }
 }

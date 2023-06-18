@@ -1,6 +1,10 @@
 import './Header.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { barnEnter, makeShopActiveItem } from '../../redux/store/store'
+import door from '../../img/door.mp3'
+
+const doorSound = new Audio(door);
+doorSound.preload = 'metadata';
 
 const Header = () => {
     const data = useSelector(state => state.counter.dataGarden);
@@ -17,10 +21,13 @@ const Header = () => {
     });
 
     function roundThousend(amount) {
+        if (amount > 1000000) return (amount/1000000).toFixed(1) + 'm';
+        if (amount > 100000) return (amount/100000).toFixed(1) + 't';
         if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
     }
     function tooggleView() {
+        doorSound.play();
         dispatch(barnEnter());
         dispatch(makeShopActiveItem(null))
     }
@@ -28,9 +35,9 @@ const Header = () => {
         <div className='header'>
             <div className="tractor"></div>
             <div className='header__stat'>
-                <span>LVL {data.length / 5 - 1}</span>
+                <span>УР. {data.length / 5 - 1}</span>
                 <span className='money'>{roundThousend(count)}</span>
-                <span >{moneyPerSec}/sec</span>
+                <span >{moneyPerSec}/сек</span>
             </div>
             <div className="barn__icon" onClick={tooggleView}></div>
         </div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +24,7 @@ body::after {
   background: url(../src/img/grass_background.png);
   background: linear-gradient(180deg, #000000ac 0%, rgba(0,0,0,0) 100%);
   z-index: -1;
+  font-family: 'Press Start 2P', cursive;
 }
 
 @media (max-width: 500px) {

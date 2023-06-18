@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { shopData } from '../../data/shopData'
 import './Shop.css'
 import ShopItem from './ShopItem/ShopItem';
@@ -15,28 +15,30 @@ const Shop = () => {
         if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
     }
+    const shopRef = useRef();
+
     return (
         <>
         {
             !barnEnter ? 
-            <span className='shop__item-active'>
+            <div className='shop__item-active'>
             {activeItem ?
             (<>
-            <div>Buy: {roundThousend(activeItem?.purchasePrice)}$</div>
-            <div>Sell: {roundThousend(activeItem?.sellingPrice)}$</div>
-            <div>Time: {roundMinutes(activeItem?.riseTime/1000)}</div>
+            <div>К: {roundThousend(activeItem?.purchasePrice)}$</div>
+            <div>П: {roundThousend(activeItem?.sellingPrice)}$</div>
+            <div>В: {roundMinutes(activeItem?.riseTime/1000)}</div>
             </>)
-        : ''} </span>
-            : <span className='shop__item-active'>
+        : ''} </div>
+            : <div className='shop__item-active'>
             {activeItem ?
             (<>
-            <div>Buy: {activeItem?.price}$</div>
-            <div>Money in sec: {activeItem?.moneyPerSecond}$</div>
+            <div>Цена: {roundThousend(activeItem?.price)}$</div>
+            <div>Денег/сек: {activeItem.moneyPerSecond}$</div>
             </>)
-        : ''} </span>
+        : ''} </div>
         }
 
-            <div className="shop__wrapper">
+            <div className="shop__wrapper" ref={shopRef}>
                 <div className='shop'>
                     {
                         barnEnter ?
@@ -44,12 +46,15 @@ const Shop = () => {
                                 <ShopItem
                                     key={index}
                                     item={e}
-                                    index={index} />)
+                                    index={index}
+                                    shopRef={shopRef} />)
                             : shopData.plants.map((e, index) =>
                                 <ShopItem
                                     key={index}
                                     item={e}
-                                    index={index} />)
+                                    index={index}
+                                    shopRef={shopRef}
+                                    />)
                     }
 
                 </div>
