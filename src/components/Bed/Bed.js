@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
 import pop from '../../img/pop.mp3';
@@ -18,9 +18,9 @@ const Bed = ({ index, bed }) => {
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
-    const bedPrice = Math.round(index * index * data.length/1.25);
+    const bedPrice = Math.round(index * index * data.length);
 
-
+    const bedRef = useRef();
 
     function roundThousend(amount) {
         if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';
@@ -58,10 +58,14 @@ const Bed = ({ index, bed }) => {
 
         if (bed.plant !== 'seedling' && bed.plant !== '') {
             popSound.play();
-            dispatch(incrementMoney(bed.sell))
-            dispatch(setSellPrice({ index: index, price: 0 }))
-            dispatch(setPlant({ index: index, plant: '' }));
-            dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+            bedRef.current.classList.add('destroy');
+            setTimeout(() => {
+                dispatch(incrementMoney(bed.sell))
+                dispatch(setSellPrice({ index: index, price: 0 }))
+                dispatch(setPlant({ index: index, plant: '' }));
+                dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+            }, 200)
+
         }
     }
 
@@ -83,7 +87,7 @@ const Bed = ({ index, bed }) => {
             onMouseEnter={mouseIn}
 
             className={bed.plowed ? 'bed' : 'bed__empty'}>
-            <div className={`${bed.plant}`}></div>
+            <div className={`${bed.plant === 'seedling' ? bed.plant : bed.plant + ' wiggle'}`} ref={bedRef}></div>
             <span className='bed__price'>{!bed.plowed ? `${roundThousend(bedPrice)}$` : ''} </span>
         </div>
     );

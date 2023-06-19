@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { makeShopActiveItem } from '../../../redux/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import box from '../../../img/box.mp3'
+import box from '../../../img/door.mp3'
 
 const boxSound = new Audio(box);
 boxSound.preload = 'metadata';
@@ -14,7 +14,6 @@ const ShopItem = ({ item, index, shopRef }) => {
 
     function makeActiveItem() {
         if (index >= 2) shopRef.current.scrollLeft = (index - 1) * 88;
-        console.log(shopRef.current.scrollLeft);
         boxSound.play();
         if (index >= lvl) {
             dispatch(makeShopActiveItem(null));

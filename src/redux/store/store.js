@@ -12,9 +12,10 @@ const yardExmple = {
 
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: localStorage.userData
-    ? JSON.parse(localStorage.userData)
+  initialState: localStorage.userDataTest
+    ? JSON.parse(localStorage.userDataTest)
     : {
+      sound: true,
       barnIn: false,
       money: 100,
       moneyMultiplier: 1,

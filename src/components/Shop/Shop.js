@@ -8,11 +8,13 @@ const Shop = () => {
     const barnEnter = useSelector(state => state.counter.barnIn);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     function roundMinutes(amount) {
+        if (amount >= 3600) return (amount/3600) + 'ч';
         if (amount >= 60) return (amount/60) + 'm';
         return amount + 's';
     }
     function roundThousend(amount) {
-        if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
+        if (amount >= 1000000) return (amount/1000000).toFixed(1) + 'm';
+        if (amount >= 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
     }
     const shopRef = useRef();
@@ -33,7 +35,7 @@ const Shop = () => {
             {activeItem ?
             (<>
             <div>Цена: {roundThousend(activeItem?.price)}$</div>
-            <div>Денег/сек: {activeItem.moneyPerSecond}$</div>
+            <div>Доход: {activeItem.moneyPerSecond}$/сек</div>
             </>)
         : ''} </div>
         }

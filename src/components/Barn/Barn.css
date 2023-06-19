@@ -18,7 +18,6 @@
     background-image: url(../../img/barn_square_2.png);
     background-size: cover;
     transition: all .3s ease-in-out;
-    /* box-shadow: 0px 0px 10px rgba(0, 0, 0); */
 }
 
 .barn__square-empty {
@@ -26,9 +25,9 @@
 }
 
 .chicken {
-    width: 100%;
-    height: 100%;
-    animation: chicken 3s linear infinite;
+    width: 90%;
+    height: 90%;
+    background-image: url(../../img/chicken_1.png);
     background-size: cover;
 }
 
@@ -48,26 +47,20 @@
 
 }
 
-@keyframes chicken {
-    0% {
-        background-image: url(../../img/chicken_1.png);
+.dog {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/dog.png);
+    background-size: cover;
 
-    }
+}
+.lama {
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/lama.png);
+    transform: translateY(-5px);
+    background-size: cover;
 
-    5% {
-        background-image: url(../../img/chicken_2.png);
-
-    }
-
-    10% {
-        background-image: url(../../img/chicken_1.png);
-
-    }
-
-    100% {
-        background-image: url(../../img/chicken_1.png);
-
-    }
 }
 
 @media (max-width: 500px) {
