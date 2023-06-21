@@ -48,19 +48,37 @@
 }
 
 .dog {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     background-image: url(../../img/dog.png);
     background-size: cover;
 
 }
+
 .lama {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     background-image: url(../../img/lama.png);
     transform: translateY(-5px);
     background-size: cover;
+}
 
+.pet-animation {
+    animation: skewer 4s ease-in-out infinite;
+}
+
+@keyframes skewer {
+    0% {
+        transform: skewX(.05rad) translateX(-2px);
+    }
+
+    50% {
+        transform: skewX(-.05rad) translateX(2px);
+    }
+
+    100% {
+        transform: skewX(.05rad) translateX(-2px);
+    }
 }
 
 @media (max-width: 500px) {

@@ -9,7 +9,8 @@ const Pet = ({ index, yard }) => {
     const barnPrice = index * index * 1000 * dataBarn.length;
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     function roundThousend(amount) {
-        if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';
+        if (amount > 1000000) return (amount/1000000).toFixed(1) + 'm';
+        if (amount > 1000) return (amount/1000).toFixed(1) + 'k';
         return amount;
     }
     function barnHandler() {
@@ -41,7 +42,7 @@ const Pet = ({ index, yard }) => {
             onClick={barnHandler}
             className={yard.plowed ? 'barn__square' : 'barn__square-empty'}
         >
-            <div className={`${yard.pet}`}></div>
+            <div className={`${yard.pet} pet-animation`}></div>
             <span className='bed__price'>{!yard.plowed ? `${roundThousend(barnPrice)}$` : ''} </span>
         </div>
     </div>);

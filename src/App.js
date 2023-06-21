@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -12,7 +12,8 @@ let moneyInterval;
 function App() {
   const barnEnter = useSelector(state => state.counter.barnIn);
   const data = useSelector(state => state.counter.dataGarden);
-  let dataBarn = useSelector(state => state.counter.dataBarn);
+  const dataBarn = useSelector(state => state.counter.dataBarn);
+  const shopContainerRef = useRef();
   const dispatch = useDispatch();
   function init() {
     dispatch(makeShopActiveItem(null))
@@ -54,9 +55,9 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header shopContainerRef={shopContainerRef}/>
       {barnEnter ? <Barn /> : <Garden />}
-      <Shop />
+      <Shop shopContainerRef={shopContainerRef}/>
     </div>
 
   );

@@ -1,19 +1,26 @@
+.shop__container {
+
+    position: relative;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
 .shop__wrapper {
     position: fixed;
     display: flex;
     align-items: flex-end;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 1000px;
     height: 150px;
     overflow-y: auto;
     overflow-x: scroll;
     background-image: url(../../img/wood_texture_2.png);
     background-size: contain; 
     border: 7px solid rgba(43, 19, 19, 0.549);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     transition: all 1s ease-in-out;
 }
 
@@ -43,7 +50,7 @@
     padding-bottom: 10px;
     width: 100px;
     height: 100px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     transition: all .3s ease-in-out;
 }
 
@@ -63,8 +70,8 @@
 }
 
 .shop__input:checked+.shop__item {
-    border-bottom: 5px solid rgba(6, 6, 6, 0.518);
-    /* box-shadow: 0px 0px 10px 2px rgba(83, 83, 83, 0.545); */
+    /* border-bottom: 5px solid #389f5f; */
+    background: linear-gradient(0deg, #389f5f, rgba(0, 0, 0, 0) 50%);
 }
 
 .shop__item-info {
@@ -86,10 +93,10 @@
     display: flex;
     justify-content: space-between;
     position: fixed;
-    bottom: 170px;
+    bottom: 130px;
     left: 0;
     right: 0;
-    max-width: 500px;
+    max-width: 450px;
     margin: 0 auto;
     font-family: 'Press Start 2P', cursive;
     font-weight: normal;
@@ -111,7 +118,6 @@
     background-size: cover;
     transition: all .2s ease-in-out;
 }
-
 
 .shop__input:checked+.shop__item .shop__item-info {
     opacity: 1;
@@ -138,11 +144,36 @@
     background-size: cover;
 }
 
+.shop__menu { 
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: 180px;
+    max-width: 1000px;
+
+}
+
+.btn__close {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    padding: 5px 7px;
+    position: absolute;
+    border: none;
+    /* border: 2px rgba(59, 7, 7, 0.575) solid; */
+
+}
 
 
 
 
-@media (max-width: 500px) {
+
+@media (max-width: 540px) {
     .shop__wrapper {
         max-width: 300px;
     height: 110px;
@@ -158,9 +189,15 @@
         font-size: 1em;
     }
 
+    .shop__menu {
+        bottom: 140px;
+        max-width: 300px;
+
+    }
+
     .shop__item-active {
         width: 280px;
-        bottom: 100px;
+        bottom: 90px;
     }
 
     .shop__item-active div {

@@ -24,6 +24,7 @@
     top: 20px;
     margin: 0 auto;
     justify-content: space-between;
+    align-items: center;
     max-width: 500px;
     height: max-content;
     display: flex;
@@ -33,13 +34,16 @@
 
 .money {
     position: relative;
+    flex-basis: 30%;
+    text-align: center;
+    position: relative;
     margin-left: .6em;
-    /* text-shadow: 5px 0px 0 #3b2705; */
 }
 
 .money::after {
     content: '';
     position: absolute;
+    text-align: center;
     top: 0;
     left: -1.2em;
     width: 1em;
@@ -66,7 +70,21 @@
     background-position: center;
 }
 
-@media (max-width: 500px) {
+.btn__menu {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    background-image: url(../../img/menu_icon.png);
+    background-size: cover;
+    width: 2em;
+    height: 2em;
+    border: none;
+    /* border: 2px rgba(59, 7, 7, 0.575) solid; */
+    color: white;
+    padding: 5px 7px;
+
+}
+
+@media (max-width: 540px) {
     .header {
         max-width: 300px;
         height: 40px;
@@ -83,5 +101,10 @@
         max-width: 300px;
         font-size: 10px;
         top: 10px;
+    }
+
+    .btn__menu {
+        width: 1.4em;
+        height: 1.3em;
     }
 }

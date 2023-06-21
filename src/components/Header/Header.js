@@ -6,7 +6,7 @@ import door from '../../img/door.mp3'
 const doorSound = new Audio(door);
 doorSound.preload = 'metadata';
 
-const Header = () => {
+const Header = ({shopContainerRef}) => {
     const data = useSelector(state => state.counter.dataGarden);
     const dataBarn = useSelector(state => state.counter.dataBarn);
     const count = useSelector(state => state.counter.money)
@@ -30,13 +30,19 @@ const Header = () => {
         dispatch(barnEnter());
         dispatch(makeShopActiveItem(null))
     }
+    function menuOpen() {
+        shopContainerRef.current.style.display = 'flex';
+    }
+
+
     return (
         <div className='header'>
             <div className="tractor"></div>
             <div className='header__stat'>
                 <span>УР. {data.length / 5 - 1}</span>
                 <span className='money'>{roundThousend(count)}</span>
-                <span >{moneyPerSec}/сек</span>
+                <span >{roundThousend(moneyPerSec)}$/сек</span>
+                <button className='btn__menu' onClick={menuOpen}></button>
             </div>
             <div className="barn__icon" onClick={tooggleView}></div>
         </div>

@@ -68,14 +68,17 @@
     background-image: url(../../img/broccoli.png);
     background-size: cover;
 }
+
 .strawberry {
     background-image: url(../../img/strawberry.png);
     background-size: cover;
 }
+
 .watermelon {
     background-image: url(../../img/watermelon.png);
     background-size: cover;
 }
+
 .grape {
     background-image: url(../../img/grape.png);
     background-size: cover;
@@ -84,7 +87,7 @@
 .seedling {
     background-image: url(../../img/seedling.png);
     background-size: cover;
-    animation: skew 1s ease-in-out infinite;
+    animation: skew 2s ease-in-out infinite;
 }
 
 .bed__price {
@@ -103,7 +106,7 @@
     animation: destroy .3s ease-in-out;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 540px) {
 
     .bed,
     .bed__empty {
@@ -132,8 +135,8 @@
 
 @keyframes skew {
     0% {
-        transform: skewX(0);
-        transform: translateX(0);
+        transform: skewX(0) translateX(0);
+        /* transform: translateX(0); */
     }
 
     50% {
@@ -141,10 +144,28 @@
     }
 
     100% {
-        transform: skewX(0);
-        transform: translateX(0);
+        transform: skewX(0) translateX(0);
+
+        /* transform: translateX(0); */
     }
 }
+
+@keyframes start {
+    0% {
+        transform-origin: center bottom;
+
+        transform: scale(0)
+    }
+
+    110% {
+        transform-origin: center bottom;
+
+        transform: scale(1)
+    }
+}
+
+
+
 
 @keyframes destroy {
     0% {
