@@ -1,0 +1,196 @@
+.pond__wrapper {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 auto;
+}
+
+.pond {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 500px;
+    height: 500px;
+    background-image: url(../../img/pond.png);
+}
+
+.pond__water {
+    position: absolute;
+    background-image: url(../../img/water_tile.png);
+    background-size: 30%;
+    background-position: 10px;
+    top: 10px;
+    bottom: 0;
+    left: 5px;
+    right: 0;
+    margin: auto;
+    width: 340px;
+    height: 340px;
+    z-index: -1;
+    animation: water 10s linear infinite;
+}
+
+.pond__cat {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 150px;
+    height: 150px;
+    background-image: url(../../img/cat.png);
+    background-size: cover;
+}
+
+.pond__rod {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background-image: url(../../img/rod.png);
+    background-size: cover;
+}
+
+.cat__speech {
+    /* border: 2px solid red; */
+    font-family: 'Press Start 2P', cursive;
+    padding: 15px;
+    font-size: 11px;
+    position: absolute;
+    right: -120%;
+    width: 210px;
+    height: 80px;
+    background-image: url(../../img/speech_bubble.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pond__float {
+    width: 100px;
+    height: 100px;
+    background-image: url(../../img/float.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 5;
+    animation: float 3s ease-in-out infinite;
+}
+
+.pond__waves {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image: url(../../img/waves.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: waves 3s ease-in-out infinite;
+}
+
+.rod-start {
+    animation: rod 1s ease-in-out;
+    transform-origin: bottom ;
+}
+
+@keyframes rod {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    30% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+@keyframes waves {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes water {
+    0% {
+        background-position: 0px;
+    }
+
+    100% {
+        background-position: 101px;
+    }
+}
+
+@media (max-width: 540px) {
+    .pond {
+        max-width: 300px;
+        height: 300px;
+        background-size: cover;
+    }
+
+    .pond__water {
+        width: 210px;
+        height: 200px;
+    }
+
+    .pond__cat {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pond__rod {
+        bottom: -20%;
+    }
+
+    .pond__float {
+        width: 70px;
+        height: 70px;
+    }
+    .pond__waves {
+        width: 150px;
+        height: 150px;
+    }
+
+    .pond__cat {
+        left: 10%;
+    }
+
+    .cat__speech {
+        right: -160%;
+        bottom: 60%;
+    }
+
+    @keyframes water {
+        0% {
+            background-position: 0px;
+        }
+    
+        100% {
+            background-position: 62px;
+        }
+    }
+
+}

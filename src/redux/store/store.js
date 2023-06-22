@@ -12,11 +12,12 @@ const yardExmple = {
 
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: localStorage.userDataTest
-    ? JSON.parse(localStorage.userDataTest)
+  initialState: localStorage.userDataTest2
+    ? JSON.parse(localStorage.userDataTest2)
     : {
       sound: true,
       barnIn: false,
+      view: 'garden',
       money: 100,
       moneyMultiplier: 1,
       shopActiveItem: null,
@@ -129,6 +130,9 @@ export const counterSlice = createSlice({
     },
     barnEnter: (state) => {
       state.barnIn = !state.barnIn;
+    },
+    update: (state, action) => {
+      state[action.payload.name] = action.payload.source;
     }
 
   }
@@ -138,6 +142,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter} = counterSlice.actions
+export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update} = counterSlice.actions
 
 export default counterSlice.reducer

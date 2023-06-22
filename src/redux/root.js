@@ -8,6 +8,6 @@ export const store = configureStore({
 })
 
 function sub() {
-    localStorage.userDataTest = JSON.stringify(store.getState().counter);
+    localStorage.userDataTest2 = JSON.stringify(store.getState().counter);
   }
 store.subscribe(sub);

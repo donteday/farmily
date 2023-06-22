@@ -34,7 +34,6 @@
 
 .money {
     position: relative;
-    flex-basis: 30%;
     text-align: center;
     position: relative;
     margin-left: .6em;
@@ -61,13 +60,22 @@
     background-position: center;
 }
 
+.pond__icon {
+    width: 200px;
+    height: 200px;
+    background-image: url(../../img/pond_icon.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .tractor {
     width: 200px;
     height: 200px;
     background-image: url(../../img/tractor.png);
-    background-size: cover;
+    background-size: 90%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 0 35px;
 }
 
 .btn__menu {
@@ -92,9 +100,13 @@
         margin-top: 40px;
     }
 
-    .barn__icon, .tractor {
+    .barn__icon, .tractor, .pond__icon {
         width: 100px;
         height: 100px;
+    }
+
+    .tractor {
+        background-position: 0 12px;
     }
 
     .header__stat {
