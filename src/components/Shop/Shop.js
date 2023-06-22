@@ -5,7 +5,7 @@ import ShopItem from './ShopItem/ShopItem';
 import { useSelector } from 'react-redux';
 
 const Shop = ({shopContainerRef}) => {
-    const barnEnter = useSelector(state => state.counter.barnIn);
+    const view = useSelector(state => state.counter.view);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     let shopRef = useRef();
 
@@ -28,7 +28,7 @@ const Shop = ({shopContainerRef}) => {
     return (
         <div className='shop__container' ref={shopContainerRef}>
             {
-                !barnEnter ?
+                view === 'garden' ?
                     <div className='shop__item-active'>
                         {activeItem ?
                             (<>
@@ -53,7 +53,7 @@ const Shop = ({shopContainerRef}) => {
             <div className="shop__wrapper" ref={shopRef}>
                 <div className='shop'>
                     {
-                        barnEnter ?
+                        view === 'barn' ?
                             shopData.pets.map((e, index) =>
                                 <ShopItem
                                     key={index}
