@@ -18,7 +18,7 @@ const Bed = ({ index, bed }) => {
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
-    const bedPrice = Math.round(index * index * data.length);
+    const bedPrice = Math.round(index * index * data.length * 1.2);
 
     const bedRef = useRef();
 
