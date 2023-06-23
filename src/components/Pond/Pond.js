@@ -16,6 +16,7 @@ const Pond = () => {
     const [speech, setSpeech] = useState(`Закидывай удочку за ${fihingPrice} деняк`);
     const [float, setFloat] = useState('');
     const rodRef = useRef();
+    const randomChance = 0.6;
 
     function rodHendler() {
         if (float !== '') return;
@@ -31,7 +32,7 @@ const Pond = () => {
         setTimeout(() => {
             rodRef.current.classList.remove('rod-start');
             setFloat('');
-            if (Math.random() < 0.5) {
+            if (Math.random() < randomChance) {
                 const fishSale = fihingPrice * 8 * Math.random();
                 setSpeech(`Ура! Ты поймал на ${fishSale.toFixed(0)}$`);
                 dispatch(incrementMoney(fishSale));
