@@ -145,6 +145,9 @@
 }
 
 @media (max-width: 540px) {
+    .pond__wrapper {
+        margin-top: 10vh;
+    }
     .pond {
         max-width: 300px;
         height: 300px;
@@ -180,7 +183,7 @@
 
     .cat__speech {
         right: -160%;
-        bottom: 60%;
+        bottom: 70%;
     }
 
     @keyframes water {

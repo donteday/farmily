@@ -103,6 +103,11 @@
     .barn__icon, .tractor, .pond__icon {
         width: 100px;
         height: 100px;
+        filter: drop-shadow(1px 2px 1px rgba(11, 11, 11, 0.176));
+    }
+
+    .pond__icon {
+        transform: translateY(3px);
     }
 
     .tractor {

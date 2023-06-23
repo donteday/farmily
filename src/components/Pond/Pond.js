@@ -12,11 +12,11 @@ const Pond = () => {
     const data = useSelector(state => state.counter.dataGarden);
     const money = useSelector(state => state.counter.money);
     const lvl = data.length / 5 - 1;
-    const fihingPrice = lvl * lvl * 100;
+    const fihingPrice = lvl * lvl * 150 ;
     const [speech, setSpeech] = useState(`Закидывай удочку за ${fihingPrice} деняк`);
     const [float, setFloat] = useState('');
     const rodRef = useRef();
-    const randomChance = 0.6;
+    const randomChance = 0.55;
 
     function rodHendler() {
         if (float !== '') return;
@@ -33,7 +33,7 @@ const Pond = () => {
             rodRef.current.classList.remove('rod-start');
             setFloat('');
             if (Math.random() < randomChance) {
-                const fishSale = fihingPrice * 8 * Math.random();
+                const fishSale = fihingPrice * 7 * Math.random();
                 setSpeech(`Ура! Ты поймал на ${fishSale.toFixed(0)}$`);
                 dispatch(incrementMoney(fishSale));
             } else {
