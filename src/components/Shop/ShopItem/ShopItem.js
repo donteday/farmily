@@ -10,11 +10,15 @@ const ShopItem = ({ item, index, shopRef }) => {
     const dispatch = useDispatch();
     const inputRef = useRef();
     const activeItem = useSelector(state => state.counter.shopActiveItem);
+    const sound = useSelector(state => state.counter.sound);
     const lvl = useSelector(state => state.counter.dataGarden).length / 5 - 1;
 
+
     function makeActiveItem() {
-        if (index >= 2) shopRef.current.scrollLeft = (index - 1) * 88;
-        boxSound.play();
+        if (window.innerWidth <= 540) {
+            if (index >= 2) shopRef.current.scrollLeft = (index - 1) * 88;        }
+
+        sound && boxSound.play();
         if (index >= lvl) {
             dispatch(makeShopActiveItem(null));
             return;
@@ -27,17 +31,17 @@ const ShopItem = ({ item, index, shopRef }) => {
         inputRef.current.checked = false;
     }
     return (
-        <>
+        <div >
             <input className='shop__input' type="radio" id={index} name='shop' ref={inputRef} />
             <label className='shop__item' htmlFor={index} onClick={makeActiveItem}>
-                <div className={`${item.name} images`}></div>
-                <div className='item__box'></div>
+                <div className={`${item.name} images`} ></div>
+                <div className='item__box' ></div>
                 {index >= lvl ?
                     <div className='shop__item-alert'>{`Ур. ${index + 1}`}</div> :
                     <div></div>
                 }
             </label>
-        </>
+        </div>
     );
 }
 

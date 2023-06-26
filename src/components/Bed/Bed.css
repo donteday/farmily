@@ -26,6 +26,7 @@
 
 .tomato,
 .carrot,
+.potato,
 .seedling,
 .cabbage,
 .corn,
@@ -81,6 +82,11 @@
 
 .grape {
     background-image: url(../../img/grape.png);
+    background-size: cover;
+}
+
+.potato {
+    background-image: url(../../img/potato.png);
     background-size: cover;
 }
 

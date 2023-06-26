@@ -92,6 +92,30 @@
 
 }
 
+.btn__sound {
+    background-image: url(../../img/sound_icon.png);
+    background-size: cover;
+    width: 2em;
+    height: 2em;
+    transition: all .4s ease-in-out;
+}
+
+.no-active {
+    filter: opacity(40%);
+}
+
+.no-active::after {
+    content: '';
+    position: absolute;
+    display: block;
+    transform: rotate(45deg);
+    top: 50%;
+    width: 32px;
+    height: 2px;
+    background-color: azure;
+}
+
+
 @media (max-width: 540px) {
     .header {
         max-width: 300px;
@@ -115,7 +139,7 @@
     }
 
     .header__stat {
-        max-width: 300px;
+        max-width: 320px;
         font-size: 10px;
         top: 10px;
     }
@@ -124,4 +148,10 @@
         width: 1.4em;
         height: 1.3em;
     }
+
+    .no-active::after {
+        width: 20px;
+        height: 1px;
+    }
 }
+

@@ -57,7 +57,7 @@
     padding: 15px;
     font-size: 11px;
     position: absolute;
-    right: -120%;
+    right: -125%;
     width: 210px;
     height: 80px;
     background-image: url(../../img/speech_bubble.png);
@@ -146,7 +146,7 @@
 
 @media (max-width: 540px) {
     .pond__wrapper {
-        margin-top: 10vh;
+        margin-top: 15vh;
     }
     .pond {
         max-width: 300px;
@@ -196,4 +196,10 @@
         }
     }
 
+}
+
+@media (max-height: 700px) {
+    .pond {
+        top: -80px;
+    }
 }

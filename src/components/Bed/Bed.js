@@ -17,20 +17,22 @@ const Bed = ({ index, bed }) => {
     const dispatch = useDispatch();
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
+    const sound = useSelector(state => state.counter.sound)
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const bedPrice = Math.round(index * index * data.length * 1.2);
 
     const bedRef = useRef();
 
     function roundThousend(amount) {
-        if (amount > 1000) return (amount / 1000).toFixed(1) + 'k';
-        return amount;
+        if (amount > 1000000) return (amount / 1000000).toFixed(1) + 'м';
+        if (amount > 1000) return (amount / 1000).toFixed(1) + 'т';
+        return amount.toFixed(0);
     }
 
     function bedHandler() {
         if (!bed.plowed) {
             if (money - bedPrice >= 5) {
-                shovelSound.play();
+                sound && shovelSound.play();
                 dispatch(plowed(index));
                 dispatch(incrementMoney(-1 * bedPrice));
                 if (data.filter((e) => !e.plowed).length <= 1) {
@@ -44,7 +46,7 @@ const Bed = ({ index, bed }) => {
         if (activeItem) {
             if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
                 const dateNow = new Date();
-                grassSound.play();
+                sound && grassSound.play();
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
@@ -57,7 +59,7 @@ const Bed = ({ index, bed }) => {
         }
 
         if (bed.plant !== 'seedling' && bed.plant !== '') {
-            popSound.play();
+            sound && popSound.play();
             bedRef.current.classList.add('destroy');
             setTimeout(() => {
                 dispatch(incrementMoney(bed.sell))

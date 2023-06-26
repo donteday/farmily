@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlant, makeShopActiveItem, incrementMoney, update } from './redux/store/store';
+import { setPlant, makeShopActiveItem, incrementMoney} from './redux/store/store';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -17,7 +17,6 @@ function App() {
   const shopContainerRef = useRef();
   const dispatch = useDispatch();
   function init() {
-    dispatch(update({name: 'view', source: 'garden'}));
     dispatch(makeShopActiveItem(null))
 
 

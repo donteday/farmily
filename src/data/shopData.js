@@ -25,6 +25,12 @@ export const shopData = {
             riseTime: 300000,
         },
         {
+            name: 'potato',
+            purchasePrice: 1300,
+            sellingPrice: 2500,
+            riseTime: 900000,
+        },
+        {
             name: 'corn',
             purchasePrice: 2700,
             sellingPrice: 5400,
@@ -72,14 +78,19 @@ export const shopData = {
             moneyPerSecond: 40
         },
         {
+            name: 'cat',
+            price: 500000,
+            moneyPerSecond: 65
+        },
+        {
             name: 'dog',
             price: 1000000,
-            moneyPerSecond: 80
+            moneyPerSecond: 100
         },
         {
             name: 'lama',
             price: 10000000,
-            moneyPerSecond: 160
+            moneyPerSecond: 200
         }
     ]
 

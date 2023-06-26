@@ -11,9 +11,10 @@ const Pond = () => {
     const dispatch = useDispatch();
     const data = useSelector(state => state.counter.dataGarden);
     const money = useSelector(state => state.counter.money);
+    const sound = useSelector(state => state.counter.sound);
     const lvl = data.length / 5 - 1;
     const fihingPrice = lvl * lvl * 150 ;
-    const [speech, setSpeech] = useState(`Закидывай удочку за ${fihingPrice} деняк`);
+    const [speech, setSpeech] = useState(`Закинуть удочку - ${fihingPrice}$`);
     const [float, setFloat] = useState('');
     const rodRef = useRef();
     const randomChance = 0.55;
@@ -21,16 +22,16 @@ const Pond = () => {
     function rodHendler() {
         if (float !== '') return;
         if (money - fihingPrice < 5) {
-            setSpeech('У тебя мало деняк');
+            setSpeech('У тебя мало монет :(');
             return;
         }
-        floatSound.play();
+        sound && floatSound.play();
         rodRef.current.classList.add('rod-start');
         dispatch(incrementMoney(- fihingPrice));
         setFloat('pond__float');
-        setSpeech('Лучший! Теперь ждемс до минутки');
+        setSpeech('Готово! Теперь ждемс до минутки');
         setTimeout(() => {
-            rodRef.current.classList.remove('rod-start');
+            rodRef.current?.classList.remove('rod-start');
             setFloat('');
             if (Math.random() < randomChance) {
                 const fishSale = fihingPrice * 7 * Math.random();

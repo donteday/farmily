@@ -10,87 +10,95 @@ const yardExmple = {
   pet: '',
 };
 
+const dataGardenExample = [
+  {
+    plowed: true,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: true,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: true,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: true,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: true,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: false,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: false,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: false,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: false,
+    plant: '',
+    sell: 0,
+  },
+  {
+    plowed: false,
+    plant: '',
+    sell: 0,
+  },
+
+]
+const dataBarnExample = [
+  {
+    plowed: true,
+    pet: '',
+    moneyPerSecond: null
+  },
+  {
+    plowed: false,
+    pet: '',
+    moneyPerSecond: null
+  },
+  {
+    plowed: false,
+    pet: '',
+  }
+]
+
+const localStore = localStorage.userDataTest2
+
+const dataGardenStart = localStore ? JSON.parse(localStore).dataGarden : dataGardenExample;
+
+const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
+
+const moneyStart = localStore ? JSON.parse(localStore).money : 100;
+
 export const counterSlice = createSlice({
   name: 'money',
-  initialState: localStorage.userDataTest2
-    ? JSON.parse(localStorage.userDataTest2)
-    : {
-      sound: true,
-      barnIn: false,
-      view: 'garden',
-      money: 100,
-      moneyMultiplier: 1,
-      shopActiveItem: null,
-      dataGarden: [
-        {
-          plowed: true,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: true,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: true,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: true,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: true,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: false,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: false,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: false,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: false,
-          plant: '',
-          sell: 0,
-        },
-        {
-          plowed: false,
-          plant: '',
-          sell: 0,
-        },
-
-      ],
-      dataBarn: [
-        {
-          plowed: true,
-          pet: '',
-          moneyPerSecond: null
-        },
-        {
-          plowed: false,
-          pet: '',
-          moneyPerSecond: null
-        },
-        {
-          plowed: false,
-          pet: '',
-        }
-      ]
-    },
+  initialState: {
+    sound: true,
+    view: 'garden',
+    money: moneyStart,
+    moneyMultiplier: 1,
+    shopActiveItem: null,
+    dataGarden: dataGardenStart,
+    dataBarn: dataBarnStart
+  },
   reducers: {
     incrementMoney: (state, action) => {
       state.money += action.payload
@@ -107,7 +115,7 @@ export const counterSlice = createSlice({
       }
     },
     yardAdd: (state) => {
-        state.dataBarn = [...state.dataBarn, yardExmple];
+      state.dataBarn = [...state.dataBarn, yardExmple];
     },
     setPlant: (state, action) => {
       state.dataGarden[action.payload.index].plant = action.payload.plant;
@@ -128,13 +136,9 @@ export const counterSlice = createSlice({
       state.dataGarden[action.payload.index].namePlant = action.payload.namePlant;
       state.dataGarden[action.payload.index].riseTime = action.payload.riseTime;
     },
-    barnEnter: (state) => {
-      state.barnIn = !state.barnIn;
-    },
     update: (state, action) => {
       state[action.payload.name] = action.payload.source;
     }
-
   }
 })
 
@@ -142,6 +146,6 @@ export const counterSlice = createSlice({
 
 
 
-export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update} = counterSlice.actions
+export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update } = counterSlice.actions
 
 export default counterSlice.reducer
