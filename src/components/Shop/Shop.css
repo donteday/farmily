@@ -89,7 +89,8 @@
     text-align: center;
     top: -1.4em;
     font-size: 10px;
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', cursive;
+
     font-weight: normal;
     color: white;
     z-index: 5;
@@ -138,10 +139,6 @@
 }
 
 .shop__item-alert {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-
     color: white;
     display: flex;
     align-items: flex-end;

@@ -88,6 +88,11 @@ export const shopData = {
             moneyPerSecond: 100
         },
         {
+            name: 'sheep',
+            price: 5000000,
+            moneyPerSecond: 150
+        },
+        {
             name: 'lama',
             price: 10000000,
             moneyPerSecond: 200

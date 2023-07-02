@@ -61,6 +61,13 @@
     background-size: cover;
 }
 
+.sheep {
+    width: 80%;
+    height: 80%;
+    background-image: url(../../img/sheep.png);
+    background-size: cover;
+}
+
 .lama {
     width: 80%;
     height: 80%;

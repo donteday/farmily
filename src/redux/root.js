@@ -9,6 +9,5 @@ export const store = configureStore({
 
 function sub() {
     localStorage.userDataTest2 = JSON.stringify(store.getState().counter);
-    // console.log(JSON.parse(localStorage.userDataTest2).dataBarn);
   }
 store.subscribe(sub);

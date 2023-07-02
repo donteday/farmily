@@ -17,7 +17,7 @@ const Shop = ({shopContainerRef}) => {
     }
 
     function roundThousend(amount) {
-        if (amount >= 1000000) return (amount / 1000000).toFixed(0) + 'м';
+        if (amount >= 1000000) return (amount / 1000000).toFixed(0) + 'м ';
         if (amount >= 1000) return (amount / 1000).toFixed(0) + 'т ';
         return amount;
     }

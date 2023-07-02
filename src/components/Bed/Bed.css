@@ -10,12 +10,15 @@
     background-image: url(../../img/bed.png);
     background-size: cover;
     transition: all .3s ease-in-out;
+    font-family: 'Press Start 2P', cursive;
     /* box-shadow: 0px 0px 10px rgba(0, 0, 0); */
 }
 
 .bed__empty {
     background-image: url(../../img/bed_non.png);
     cursor: cell;
+    font-family: 'Press Start 2P', cursive;
+
 }
 
 .plant {
@@ -97,10 +100,10 @@
 }
 
 .bed__price {
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', cursive;
     color: rgb(162, 162, 162);
     font-weight: normal;
-    font-size: 30px;
+    font-size: 15px;
     cursor: cell;
 }
 
@@ -121,7 +124,7 @@
     }
 
     .bed__price {
-        font-size: 20px;
+        font-size: 10px;
     }
 }
 
