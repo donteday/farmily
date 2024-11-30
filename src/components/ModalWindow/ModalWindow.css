@@ -1,0 +1,12 @@
+.modal_window {
+    position: absolute;
+    width: 80%;
+    height: 500px;
+    background-color: rgb(172, 172, 172);
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    margin: auto;
+}

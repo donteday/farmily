@@ -1,0 +1,40 @@
+.friends_window {
+    position: absolute;
+    padding: 30px;
+    width: 80%;
+    height: 600px;
+    background-image: url('../../img/bg/bg_window_friends.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    color: rgb(255, 255, 255);
+    font-family: 'Press Start 2P', cursive;
+    /* font-size: 1em; */
+    text-align: center;
+
+}
+.friends_window-title {
+    font-size: 1.5em;
+}
+
+.friends_window-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friends_window-list__item {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid rgb(67 39 32);
+    text-align: left;
+}

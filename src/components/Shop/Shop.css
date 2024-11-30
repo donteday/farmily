@@ -1,5 +1,5 @@
 .shop__container {
-    bottom: 0;
+    bottom: 100px;
     left: 0;
     right: 0;
     width: 670px;
@@ -15,7 +15,7 @@
     position: fixed;
     display: flex;
     align-items: flex-end;
-    bottom: 0;
+    bottom: 100px;
     left: 0;
     right: 0;
     margin: 0 auto;

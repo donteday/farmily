@@ -1,0 +1,19 @@
+.bottom_panel {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 100px;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.bottom_panel-icon {
+    width: 80px;
+    height: 80px;
+    background-image: url('../../img/icons/icon_friends.png');
+    background-size: contain;
+}

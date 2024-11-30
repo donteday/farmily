@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney} from './redux/store/store';
 import './App.css';
@@ -7,6 +7,9 @@ import Shop from './components/Shop/Shop';
 import Garden from './components/Garden/Garden';
 import Barn from './components/Barn/Barn';
 import Pond from './components/Pond/Pond';
+import BottomPanel from './components/BottomPanel/BottomPanel';
+// import ModalWindow from './components/ModalWindow/ModalWindow';
+import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 
 let moneyInterval;
 
@@ -16,9 +19,11 @@ function App() {
   const dataBarn = useSelector(state => state.counter.dataBarn);
   const shopContainerRef = useRef();
   const dispatch = useDispatch();
+  const [friendsWindowView, setFriendsWindowView] = useState(false)
+
+
   function init() {
     dispatch(makeShopActiveItem(null))
-
 
     data.forEach((element, index) => {
       const dateNow = new Date()
@@ -64,6 +69,9 @@ function App() {
     } 
   }
 
+  function friendsWindowViewHandler() {
+    setFriendsWindowView(!friendsWindowView);
+  }
 
   return (
     <div>
@@ -72,6 +80,8 @@ function App() {
       {
       viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
+      <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler}/>
+      {friendsWindowView&&<FriendsWindow/>}
     </div>
 
   );
