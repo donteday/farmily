@@ -33,7 +33,8 @@ const FriendsWindow = () => {
         })
         .catch(function (error) {
           setError(error.message);
-
+          console.log(error);
+          
         })
         .finally(function () {
           setLoading(false);
