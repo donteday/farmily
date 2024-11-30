@@ -23,7 +23,7 @@ const FriendsWindow = () => {
       // } finally {
       //   setLoading(false);
       // }
-      axios.get('http://90.156.156.62:5000/api/users')
+      axios.get('https://90.156.156.62:5000/api/users')
         .then(function (response) {
           // handle success
           console.log(response);
