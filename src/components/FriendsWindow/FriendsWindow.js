@@ -11,7 +11,7 @@ const FriendsWindow = () => {
     useEffect(() => {
         const fetchUsers = async () => {
           try {
-            const response = await axios.get('http://90.156.156.62:5000/api/users');
+            const response = await axios.get('https://90.156.156.62:5000/api/users');
             console.log(response);
             
             setUsers(response.data);
