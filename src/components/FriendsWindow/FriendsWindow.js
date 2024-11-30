@@ -1,27 +1,44 @@
 import './FriendsWindow.css';
 import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
 import axios from 'axios';
-
+// const axios = require('axios');
 
 
 const FriendsWindow = () => {
+  // const axios = require('axios');
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://90.156.156.62:5000/api/users');
-        console.log('Запрос ',response);
-        setUsers(response.data);
-      } catch (err) {
-        setError(err.message);
-        console.log('Ошибка ', err);
-      } finally {
-        setLoading(false);
-      }
+    const fetchUsers = () => {
+      // try {
+      //   const response = await axios.get('http://90.156.156.62:5000/api/users');
+      //   console.log('Запрос ', response);
+      //   setUsers(response.data);
+      // } catch (err) {
+      //   setError(err.message);
+      //   console.log('Ошибка ', err);
+      // } finally {
+      //   setLoading(false);
+      // }
+      axios.get('http://90.156.156.62:5000/api/users')
+        .then(function (response) {
+          // handle success
+          console.log(response);
+          
+          setUsers(response.data);
+
+        })
+        .catch(function (error) {
+          setError(error.message);
+
+        })
+        .finally(function () {
+          setLoading(false);
+
+        });
     };
 
     fetchUsers();
