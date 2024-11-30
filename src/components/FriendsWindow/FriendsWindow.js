@@ -17,6 +17,8 @@ const FriendsWindow = () => {
             setUsers(response.data);
           } catch (err) {
             setError(err.message);
+            console.log(err.message);
+            
           } finally {
             setLoading(false);
           }
