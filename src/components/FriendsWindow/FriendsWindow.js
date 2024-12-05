@@ -6,35 +6,47 @@ import axios from 'axios';
 
 
 const FriendsWindow = () => {
-  // const axios = require('axios');
-
   const [users, setUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const testUsers = [
+    {
+      userName: 'dimon',
+      id: 1,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'kaksha',
+      id: 2,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'dimas',
+      id: 3,
+      lvl: 4,
+      fiels: ''
+    }
+  ]
+
   useEffect(() => {
     const fetchUsers = () => {
-      // try {
-      //   const response = await axios.get('http://90.156.156.62:5000/api/users');
-      //   console.log('Запрос ', response);
-      //   setUsers(response.data);
-      // } catch (err) {
-      //   setError(err.message);
-      //   console.log('Ошибка ', err);
-      // } finally {
-      //   setLoading(false);
-      // }
       axios.get('/api/api/users')
         .then(function (response) {
           // handle success
-          console.log(response);
-          
+          console.log(users);
+
           setUsers(response.data);
 
         })
         .catch(function (error) {
           setError(error.message);
           console.log(error);
-          
+
         })
         .finally(function () {
           setLoading(false);
@@ -43,17 +55,75 @@ const FriendsWindow = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [users]);
 
+  const filteredUsers = searchTerm.length >= 3
+    ? testUsers.filter(user =>
+      !checkFriend(user) && user.userName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : [];
+  const filteredFriends = searchTerm.length >= 3
+    ? friends.filter(user =>
+      user.userName.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    : friends;
+
+  function addFriend(user) {
+    if (friends.some(friend => friend.id === user.id)) {
+      return;
+    }
+    setFriends([...friends, user]);
+  }
+
+  function removeFriend(user) {
+    setFriends(friends.filter(friend => friend.id !== user.id));
+  }
+
+  function checkFriend(user) {
+    return friends.some(friend => friend.id === user.id);
+  }
+
+  function fr() {
+    const allUsers = new Set([...filteredFriends, ...filteredUsers]);
+    return [...allUsers].map(user => (
+      <div key={user.id} className='friends_window-list__item'>
+        <div className='friends_window-list__item-name'>{user.lvl} {user.userName}</div>
+        {!checkFriend(user) ? (
+          <button className='friends_window-list__item friends_window-btn_add' onClick={() => addFriend(user)}>+</button>
+        ) :
+          <button className='friends_window-list__item friends_window-btn_del' onClick={() => removeFriend(user)}>x</button>
+        }
+      </div>
+    ))
+  }
 
   return (
     <div className='friends_window'>
       <div className='friends_window-title'>Друзья</div>
       {loading && <div>Загрузка</div>}
       {error && <div>Ошибка подключения</div>}
-      <div className='friends_window-list'>{users.map(user => (
-        <div key={user.id} className='friends_window-list__item'>{user.userName}</div>
-      ))} </div>
+      <div className='friends_window-list'>
+        {fr()}
+      </div>
+
+
+      <div className='friends_window-search'>
+        <input
+          type="text"
+          placeholder="Введите имя"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+        />
+
+        <button
+          onClick={() => setSearchTerm('')}
+          style={{ marginTop: '10px', padding: '8px 16px' }}
+        >
+          Х
+        </button>
+      </div>
+
     </div>
   );
 };

@@ -19,7 +19,7 @@ function App() {
   const dataBarn = useSelector(state => state.counter.dataBarn);
   const shopContainerRef = useRef();
   const dispatch = useDispatch();
-  const [friendsWindowView, setFriendsWindowView] = useState(false)
+  const [friendsWindowView, setFriendsWindowView] = useState(true)
 
 
   function init() {

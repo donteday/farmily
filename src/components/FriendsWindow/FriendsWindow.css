@@ -1,6 +1,6 @@
 .friends_window {
     position: absolute;
-    padding: 30px;
+    padding: 40px;
     width: 80%;
     height: 600px;
     background-image: url('../../img/bg/bg_window_friends.png');
@@ -32,9 +32,52 @@
 }
 
 .friends_window-list__item {
+    display: flex;
     width: 90%;
-    padding: 10px;
+    height: 50px;
+    padding: 5px;
     margin-top: 5px;
     border: 2px solid rgb(67 39 32);
-    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.friends_window-list__item-name {
+    display: block;
+    height: 20px;
+}
+
+.friends_window-search > input {
+    font-family: 'Press Start 2P', cursive;
+    width: 100%;
+}
+
+.friends_window-search {
+    display: flex;
+    width: 20rem;
+    flex-direction: row;
+    position: absolute;
+    bottom: 10%;
+}
+
+.friends_window-btn_add {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.friends_window-btn_del {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
 }
