@@ -61,7 +61,8 @@
 
 .friends_window-search {
     display: flex;
-    width: 20rem;
+    width: 100%;
+
     flex-direction: row;
     
 }

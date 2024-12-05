@@ -138,7 +138,7 @@ const FriendsWindow = () => {
   }
 
   function userList() {
-    const allUsers = new Set([...filteredFriends, ...filteredUsers]);
+    const allUsers = new Set([...filteredUsers, ...filteredFriends]);
     return [...allUsers].map(user => (
       <div key={user.id} className='friends_window-list__item'>
         <div className='friends_window-list__item-name'>{user.lvl} {user.userName}</div>
