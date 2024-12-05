@@ -20,7 +20,7 @@ const FriendsWindow = () => {
       fiels: ''
     },
     {
-      userName: 'kaksha',
+      userName: 'kakashka',
       id: 2,
       lvl: 1,
       fiels: ''
@@ -30,7 +30,61 @@ const FriendsWindow = () => {
       id: 3,
       lvl: 4,
       fiels: ''
-    }
+    },
+    {
+      userName: 'dimonsdf',
+      id: 4,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'kakashkasdf',
+      id: 5,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'dimassdf',
+      id: 6,
+      lvl: 4,
+      fiels: ''
+    },
+    {
+      userName: 'dimonsdf',
+      id: 7,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'kakashkadsf',
+      id: 8,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'dimasdfs',
+      id: 9,
+      lvl: 4,
+      fiels: ''
+    },
+    {
+      userName: 'dimonfds',
+      id: 11,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'kakashka123',
+      id: 22,
+      lvl: 1,
+      fiels: ''
+    },
+    {
+      userName: 'dimas123',
+      id: 33,
+      lvl: 4,
+      fiels: ''
+    },
   ]
 
   useEffect(() => {
@@ -83,7 +137,7 @@ const FriendsWindow = () => {
     return friends.some(friend => friend.id === user.id);
   }
 
-  function fr() {
+  function userList() {
     const allUsers = new Set([...filteredFriends, ...filteredUsers]);
     return [...allUsers].map(user => (
       <div key={user.id} className='friends_window-list__item'>
@@ -102,10 +156,6 @@ const FriendsWindow = () => {
       <div className='friends_window-title'>Друзья</div>
       {loading && <div>Загрузка</div>}
       {error && <div>Ошибка подключения</div>}
-      <div className='friends_window-list'>
-        {fr()}
-      </div>
-
 
       <div className='friends_window-search'>
         <input
@@ -123,6 +173,11 @@ const FriendsWindow = () => {
           Х
         </button>
       </div>
+      <div className='friends_window-list'>
+        {userList()}
+      </div>
+
+
 
     </div>
   );
