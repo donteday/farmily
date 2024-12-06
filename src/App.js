@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlant, makeShopActiveItem, incrementMoney} from './redux/store/store';
+import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -62,12 +62,12 @@ function App() {
   }, [dataBarn, dispatch]);
 
   function isView(view) {
-    switch(view) {
-      case 'garden': return <Garden/>;
-      case 'barn': return <Barn/>;
-      case 'pond': return <Pond/>;
+    switch (view) {
+      case 'garden': return <Garden />;
+      case 'barn': return <Barn />;
+      case 'pond': return <Pond />;
       default: break;
-    } 
+    }
   }
 
   function friendsWindowViewHandler() {
@@ -75,15 +75,16 @@ function App() {
   }
 
   return (
-    <div>
-      <Snowfall/>
+    <div className='app'>        
+    <Snowfall />
+
       <Header shopContainerRef={shopContainerRef} />
       {isView(viewNow)}
       {
-      viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
+        viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
-      <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler}/>
-      {friendsWindowView&&<FriendsWindow/>}
+      <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler} />
+      {friendsWindowView && <FriendsWindow />}
     </div>
 
   );

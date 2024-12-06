@@ -1,29 +1,49 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Snowfall.css'; // Импортируем стили для снежинок
 
-const Snowfall = () => {
+const Snowfall = ({ numberOfSnowflakes = 50 }) => {
+  const [snowflakes, setSnowflakes] = useState([]);
+
   useEffect(() => {
     const createSnowflake = () => {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.textContent = '•';
-      snowflake.style.fontSize = Math.random() * 24 + 10 + 'px';
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.animation = `fall ${Math.random() * 4 + 4}s linear infinite, sideWays ${Math.random() * 2 + 1}s ease-in-out infinite`;
+      const newSnowflake = {
+        id: Date.now() + Math.random(), // Уникальный идентификатор для каждого снежинки
+        fontSize: Math.random() * 24 + 10 + 'px',
+        left: Math.random() * 100 + 'vw',
+        animationDuration: Math.random() * 4 + 4 + 's',
+        sideAnimationDuration: Math.random() * 2 + 1 + 's',
+      };
 
-      document.body.appendChild(snowflake);
+      setSnowflakes((prev) => [...prev, newSnowflake]);
 
+      // Удаляем снежинку через заданное время
       setTimeout(() => {
-        snowflake.remove();
+        setSnowflakes((prev) => prev.filter(s => s.id !== newSnowflake.id));
       }, Math.random() * 4000 + 4000);
     };
 
-    const intervalId = setInterval(createSnowflake, 100);
+    const intervalId = setInterval(createSnowflake, 200);
 
     return () => clearInterval(intervalId); // Очистка интервала при размонтировании компонента
   }, []);
 
-  return null; // Этот компонент ничего не рендерит
+  return (
+    <div className="snowfall-container">
+      {snowflakes.map((snowflake) => (
+        <div
+          key={snowflake.id}
+          className="snowflake"
+          style={{
+            fontSize: snowflake.fontSize,
+            left: snowflake.left,
+            animation: `fall ${snowflake.animationDuration} linear infinite, sideWays ${snowflake.sideAnimationDuration} ease-in-out infinite`,
+          }}
+        >
+          •
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default Snowfall;

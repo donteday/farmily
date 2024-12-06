@@ -4,6 +4,7 @@
     color: white; /* Цвет снежинок */
     pointer-events: none; /* Чтобы снежинки не мешали кликам */
     user-select: none; /* Чтобы снежинки не выделялись */
+    z-index: 100;
   }
   
   @keyframes fall {
