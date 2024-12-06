@@ -1,0 +1,26 @@
+.snowflake {
+    position: absolute;
+    top: -50px;
+    color: white; /* Цвет снежинок */
+    pointer-events: none; /* Чтобы снежинки не мешали кликам */
+    user-select: none; /* Чтобы снежинки не выделялись */
+  }
+  
+  @keyframes fall {
+    0% {
+      top: -50px;
+    }
+    100% {
+      top: 100vh;
+    }
+  }
+  
+  @keyframes sideWays {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(20px);
+    }
+  }

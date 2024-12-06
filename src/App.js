@@ -10,6 +10,7 @@ import Pond from './components/Pond/Pond';
 import BottomPanel from './components/BottomPanel/BottomPanel';
 // import ModalWindow from './components/ModalWindow/ModalWindow';
 import FriendsWindow from './components/FriendsWindow/FriendsWindow';
+import Snowfall from './components/Snowfall/Snowfall';
 
 let moneyInterval;
 
@@ -19,7 +20,7 @@ function App() {
   const dataBarn = useSelector(state => state.counter.dataBarn);
   const shopContainerRef = useRef();
   const dispatch = useDispatch();
-  const [friendsWindowView, setFriendsWindowView] = useState(true)
+  const [friendsWindowView, setFriendsWindowView] = useState(false)
 
 
   function init() {
@@ -75,6 +76,7 @@ function App() {
 
   return (
     <div>
+      <Snowfall/>
       <Header shopContainerRef={shopContainerRef} />
       {isView(viewNow)}
       {
