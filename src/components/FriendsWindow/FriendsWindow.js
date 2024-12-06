@@ -5,95 +5,84 @@ import axios from 'axios';
 // const axios = require('axios');
 
 
-const FriendsWindow = () => {
+const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
   const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const dataGardenExample = [
+    {
+      plowed: true,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: true,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: true,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: true,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: true,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: false,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: false,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: false,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: false,
+      plant: '',
+      sell: 0,
+    },
+    {
+      plowed: false,
+      plant: '',
+      sell: 0,
+    },
+  
+  ]
   const testUsers = [
     {
       userName: 'dimon',
       id: 1,
       lvl: 1,
-      fiels: ''
+      gardenData: dataGardenExample
     },
     {
       userName: 'kakashka',
       id: 2,
       lvl: 1,
       fiels: ''
-    },
-    {
-      userName: 'dimas',
-      id: 3,
-      lvl: 4,
-      fiels: ''
-    },
-    {
-      userName: 'dimonsdf',
-      id: 4,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'kakashkasdf',
-      id: 5,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'dimassdf',
-      id: 6,
-      lvl: 4,
-      fiels: ''
-    },
-    {
-      userName: 'dimonsdf',
-      id: 7,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'kakashkadsf',
-      id: 8,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'dimasdfs',
-      id: 9,
-      lvl: 4,
-      fiels: ''
-    },
-    {
-      userName: 'dimonfds',
-      id: 11,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'kakashka123',
-      id: 22,
-      lvl: 1,
-      fiels: ''
-    },
-    {
-      userName: 'dimas123',
-      id: 33,
-      lvl: 4,
-      fiels: ''
-    },
+    }, 
   ]
 
   useEffect(() => {
     const fetchUsers = () => {
       axios.get('/api/api/users')
         .then(function (response) {
-          // handle success
-          console.log(users);
-
           setUsers(response.data);
 
         })
@@ -137,11 +126,19 @@ const FriendsWindow = () => {
     return friends.some(friend => friend.id === user.id);
   }
 
+  function openFriendsWindow(user) {
+    console.log('открываем');
+    console.log(user);
+    
+    setSelectedFriend(user);
+    friendsWindowViewHandler(false)
+  }
+
   function userList() {
     const allUsers = new Set([...filteredUsers, ...filteredFriends]);
     return [...allUsers].map(user => (
-      <div key={user.id} className='friends_window-list__item'>
-        <div className='friends_window-list__item-name'>{user.lvl} {user.userName}</div>
+      <div key={user.id} className='friends_window-list__item' >
+        <div className='friends_window-list__item-name' onClick={() => openFriendsWindow(user)}>{user.lvl} {user.userName}</div>
         {!checkFriend(user) ? (
           <button className='friends_window-list__item friends_window-btn_add' onClick={() => addFriend(user)}>+</button>
         ) :
@@ -176,9 +173,6 @@ const FriendsWindow = () => {
       <div className='friends_window-list'>
         {userList()}
       </div>
-
-
-
     </div>
   );
 };

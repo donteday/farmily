@@ -5,6 +5,8 @@
     pointer-events: none; /* Чтобы снежинки не мешали кликам */
     user-select: none; /* Чтобы снежинки не выделялись */
     z-index: 100;
+    width: 5px;
+    background-color: aliceblue;
   }
   
   @keyframes fall {

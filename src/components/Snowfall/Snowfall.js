@@ -6,13 +6,16 @@ const Snowfall = ({ numberOfSnowflakes = 50 }) => {
 
   useEffect(() => {
     const createSnowflake = () => {
+      const heightRandom = Math.round(Math.random() * 10 + 2);
       const newSnowflake = {
         id: Date.now() + Math.random(), // Уникальный идентификатор для каждого снежинки
         fontSize: Math.random() * 24 + 10 + 'px',
         left: Math.random() * 100 + 'vw',
         animationDuration: Math.random() * 4 + 4 + 's',
         sideAnimationDuration: Math.random() * 2 + 1 + 's',
-      };
+        height: heightRandom + 'px',
+        width: heightRandom + 'px'
+      };      
 
       setSnowflakes((prev) => [...prev, newSnowflake]);
 
@@ -36,10 +39,12 @@ const Snowfall = ({ numberOfSnowflakes = 50 }) => {
           style={{
             fontSize: snowflake.fontSize,
             left: snowflake.left,
+            height: snowflake.height,
+            width: snowflake.width,
             animation: `fall ${snowflake.animationDuration} linear infinite, sideWays ${snowflake.sideAnimationDuration} ease-in-out infinite`,
           }}
         >
-          •
+          
         </div>
       ))}
     </div>

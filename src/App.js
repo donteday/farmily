@@ -11,6 +11,7 @@ import BottomPanel from './components/BottomPanel/BottomPanel';
 // import ModalWindow from './components/ModalWindow/ModalWindow';
 import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
+import FriendGarden from './components/FriendGarden/FriendGarden';
 
 let moneyInterval;
 
@@ -21,7 +22,7 @@ function App() {
   const shopContainerRef = useRef();
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
-
+  const [selectedFriend, setSelectedFriend] = useState(null);
 
   function init() {
     dispatch(makeShopActiveItem(null))
@@ -62,11 +63,17 @@ function App() {
   }, [dataBarn, dispatch]);
 
   function isView(view) {
+    console.log('drug', selectedFriend);
+    
     switch (view) {
-      case 'garden': return <Garden />;
-      case 'barn': return <Barn />;
-      case 'pond': return <Pond />;
-      default: break;
+      case 'garden':
+        return selectedFriend ? <FriendGarden friend={selectedFriend} setSelectedFriend={setSelectedFriend} /> : <Garden />;
+      case 'barn':
+        return <Barn />;
+      case 'pond':
+        return <Pond />;
+      default:
+        return null;
     }
   }
 
@@ -75,7 +82,7 @@ function App() {
   }
 
   return (
-    <div className='app'>        
+    <div className='app'>    
     <Snowfall />
 
       <Header shopContainerRef={shopContainerRef} />
@@ -84,7 +91,7 @@ function App() {
         viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
       <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler} />
-      {friendsWindowView && <FriendsWindow />}
+      {friendsWindowView && <FriendsWindow setSelectedFriend={setSelectedFriend} friendsWindowViewHandler={friendsWindowViewHandler}/>}
     </div>
 
   );
