@@ -72,7 +72,7 @@ function App() {
       if (element.date && (dateNow - element.date < element.riseTime)) {
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));
-        }, element.riseTime - (dateNow - element.date));
+        }, element.riseTime - (dateNow.getTime() - element.date));
       }
     });
   }, [data, dispatch]);
