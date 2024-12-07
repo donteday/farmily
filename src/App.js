@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -25,11 +25,9 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const {loading} = useSelector((state) => state.money);
+  const loading = useSelector(state => state.counter.loading);
   useEffect(() => {
-    dispatch(fetchUserData()); 
-
-
+    dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
     console.log('dispatch data');
   }, [dispatch]);
@@ -40,8 +38,8 @@ function App() {
     if (data.length > 0) {
       sendPlantData(chatId, data);
     }
-  }, [data, chatId]);  
- 
+  }, [data, chatId]);
+
 
   async function sendPlantData(chatId, dataGarden) {
     try {
@@ -72,11 +70,11 @@ function App() {
       }
     });
 
-  }  
+  }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => !loading && init(), [loading]);
- 
+  useEffect(() => {if (!loading) init() }, [loading]);
+
 
   useEffect(() => {
     clearInterval(moneyInterval);
