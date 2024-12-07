@@ -110,7 +110,7 @@ export const counterSlice = createSlice({
   initialState: {
     sound: true,
     view: 'garden',
-    money: moneyStart,
+    money: 9999,
     moneyMultiplier: 1,
     shopActiveItem: null,
     dataGarden: dataGardenStart,

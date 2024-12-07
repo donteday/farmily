@@ -69,6 +69,7 @@ const Bed = ({ index, bed }) => {
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
                 dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
                 sendPlantData(chatId, data); // Отправляем данные на сервак
+                console.log('Send data');                
                 setTimeout(() => {
                     dispatch(setPlant({ index: index, plant: activeItem.name }));
                 }, activeItem.riseTime);
