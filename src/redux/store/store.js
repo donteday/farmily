@@ -103,7 +103,7 @@ const dataGardenStart = dataGarden ? dataGarden : dataGardenExample;
 
 const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
 
-const moneyStart = localStore ? JSON.parse(localStore).money : 100;
+// const moneyStart = localStore ? JSON.parse(localStore).money : 100;
 
 export const counterSlice = createSlice({
   name: 'money',
