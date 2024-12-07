@@ -27,14 +27,14 @@ function App() {
   
   useEffect(() => {
     dispatch(fetchUserData());
+    dispatch(makeShopActiveItem(null))
+
     console.log('dispatch data');
     
   }, [dispatch]);
 
   function init() {
-    dispatch(makeShopActiveItem(null))
-    console.log('инициализация', data);
-    
+    console.log('инициализация', data);    
     data.forEach((element, index) => {
       const dateNow = new Date()
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
@@ -51,7 +51,7 @@ function App() {
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), []);
+  useEffect(() => init(), [data]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
