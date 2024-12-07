@@ -28,9 +28,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
-
-    console.log('dispatch data');
-    
+    console.log('dispatch data');    
   }, [dispatch]);
 
   function init() {
@@ -40,7 +38,6 @@ function App() {
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
-
       if (element.date && (dateNow.getTime() - element.date < element.riseTime)) {
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));

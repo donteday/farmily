@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
 import pop from '../../img/pop.mp3';
@@ -24,6 +24,16 @@ const Bed = ({ index, bed }) => {
 
     const bedRef = useRef();
     const chatId = 205235580;
+    useEffect(() => {
+        // Отправляем данные на сервер при изменении dataGarden
+        if (data.length > 0) {
+            sendPlantData(chatId, data);
+            console.log('отправил данные');
+
+        }
+
+    }, [data, chatId]);
+
 
     async function sendPlantData(chatId, dataGarden) {
         try {
@@ -56,7 +66,7 @@ const Bed = ({ index, bed }) => {
                     dispatch(bedAdd());
                 }
                 setTimeout(() => {
-                    sendPlantData(chatId, data);
+                    // sendPlantData(chatId, data);
                 }, 200);
             }
             return;
@@ -65,16 +75,14 @@ const Bed = ({ index, bed }) => {
         if ((money <= 0 && bed.plant === '') || bed.plant === 'seedling') return;
         if (activeItem) {
             if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
-                const dateNow = new Date();
+                // const dateNow = new Date();
                 sound && grassSound.play();
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
-                dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
-                setTimeout(() => {
-                    sendPlantData(chatId, data);
-                }, 200);
-                console.log('Send data');
+
+                // sendPlantData(chatId, data);
+
                 setTimeout(() => {
                     dispatch(setPlant({ index: index, plant: activeItem.name }));
                 }, activeItem.riseTime);
@@ -90,7 +98,7 @@ const Bed = ({ index, bed }) => {
                 dispatch(setPlant({ index: index, plant: '' }));
                 dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
                 setTimeout(() => {
-                    sendPlantData(chatId, data);
+                    // sendPlantData(chatId, data);
                 }, 200);
             }, 200)
 
