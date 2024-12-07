@@ -31,7 +31,7 @@ const Bed = ({ index, bed }) => {
                 dataGarden
             });
             console.log('отправил данные на сервак', dataGarden);
-                
+
             if (response.status !== 200) {
                 throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
             }
@@ -55,7 +55,9 @@ const Bed = ({ index, bed }) => {
                 if (data.filter((e) => !e.plowed).length <= 1) {
                     dispatch(bedAdd());
                 }
-                sendPlantData(chatId, data);
+                setTimeout(() => {
+                    sendPlantData(chatId, data);
+                }, 200);
             }
             return;
         }
@@ -69,8 +71,10 @@ const Bed = ({ index, bed }) => {
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
                 dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
-                sendPlantData(chatId, data); // Отправляем данные на сервак
-                console.log('Send data');                
+                setTimeout(() => {
+                    sendPlantData(chatId, data);
+                }, 200);
+                console.log('Send data');
                 setTimeout(() => {
                     dispatch(setPlant({ index: index, plant: activeItem.name }));
                 }, activeItem.riseTime);
@@ -85,7 +89,9 @@ const Bed = ({ index, bed }) => {
                 dispatch(setSellPrice({ index: index, price: 0 }))
                 dispatch(setPlant({ index: index, plant: '' }));
                 dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
-                sendPlantData(chatId, data);
+                setTimeout(() => {
+                    sendPlantData(chatId, data);
+                }, 200);
             }, 200)
 
         }
