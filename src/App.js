@@ -37,7 +37,7 @@ function App() {
   const chatId = 205235580;
 
   useEffect(() => {
-    if (data.length > 0) {
+    if (!loading && data.length > 0) {
       sendPlantData(chatId, data);
     }
   }, [data, chatId]);
