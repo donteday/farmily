@@ -38,7 +38,6 @@ function App() {
     // Отправляем данные на сервер при изменении dataGarden
     if (data.length > 0) {
       sendPlantData(chatId, data);
-      console.log('отправил данные');
     }
   }, [data, chatId]);  
 
