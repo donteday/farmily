@@ -25,9 +25,11 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-
+  const {loading} = useSelector((state) => state.money);
   useEffect(() => {
-    dispatch(fetchUserData());
+    dispatch(fetchUserData()); 
+
+
     dispatch(makeShopActiveItem(null))
     console.log('dispatch data');
   }, [dispatch]);
@@ -35,11 +37,11 @@ function App() {
   const chatId = 205235580;
 
   useEffect(() => {
-    // Отправляем данные на сервер при изменении dataGarden
     if (data.length > 0) {
       sendPlantData(chatId, data);
     }
   }, [data, chatId]);  
+ 
 
   async function sendPlantData(chatId, dataGarden) {
     try {
@@ -73,7 +75,7 @@ function App() {
   }  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), [data]);
+  useEffect(() => !loading && init(), [loading]);
  
 
   useEffect(() => {
