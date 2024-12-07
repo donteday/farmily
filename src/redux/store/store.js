@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const bedExmple = {
@@ -82,26 +82,22 @@ const dataBarnExample = [
 ]
 
 const chatId = 205235580;
-let dataGarden = null;
 
-axios.get(`/api/users/${chatId}`)
-  .then(function (response) {
-    dataGarden = response.data.userData;
-    
-    console.log('response', response);
-    console.log('data garden', dataGarden);
-    
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-  .finally(function () {
-  });
-
+// axios.get(`/api/users/${chatId}`)
+//   .then(function (response) {
+//     dataGarden = response.data.userData;
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+//   .finally(function () {
+//   });
+export const fetchUserData = createAsyncThunk('users/fetchUserData', async () => {
+  const response = await axios.get(`/api/users/${chatId}`);
+  return response.data.userData; // Возвращаем полученные данные
+});
 
 const localStore = localStorage.userDataTest2
-
-const dataGardenStart = dataGarden ? dataGarden : dataGardenExample;
 
 const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
 
@@ -115,8 +111,10 @@ export const counterSlice = createSlice({
     money: 9999,
     moneyMultiplier: 1,
     shopActiveItem: null,
-    dataGarden: dataGardenStart,
-    dataBarn: dataBarnStart
+    dataGarden: dataGardenExample,
+    dataBarn: dataBarnStart,
+    loading: false,
+    error: null
   },
   reducers: {
     incrementMoney: (state, action) => {
@@ -158,7 +156,22 @@ export const counterSlice = createSlice({
     update: (state, action) => {
       state[action.payload.name] = action.payload.source;
     }
-  }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserData.pending, (state) => {
+        state.loading = true; // Устанавливаем состояние загрузки
+        state.error = null; // Сбрасываем ошибку
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        state.loading = false; // Устанавливаем состояние загрузки в false
+        state.dataGarden = action.payload; // Обновляем dataGarden
+      })
+      .addCase(fetchUserData.rejected, (state, action) => {
+        state.loading = false; // Устанавливаем состояние загрузки в false
+        state.error = action.error.message; // Сохраняем ошибку
+      });
+  },
 })
 
 
