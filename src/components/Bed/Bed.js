@@ -27,10 +27,9 @@ const Bed = ({ index, bed }) => {
 
     async function sendPlantData(chatId, dataGarden) {
         try {
-            const response = await axios.post(`/api/dataGarden/${chatId}`, {
+            const response = await axios.put(`/api/updateGarden/${chatId}`, {
                 dataGarden
-            });
-    
+            });    
             if (response.status !== 200) {
                 throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
             }
