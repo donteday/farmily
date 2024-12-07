@@ -27,6 +27,8 @@ function App() {
   
   useEffect(() => {
     dispatch(fetchUserData());
+    console.log('dispatch data');
+    
   }, [dispatch]);
 
   function init() {
@@ -49,7 +51,7 @@ function App() {
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), [data]);
+  useEffect(() => init(), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
