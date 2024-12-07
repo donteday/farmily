@@ -5,6 +5,7 @@ import pop from '../../img/pop.mp3';
 import grass from '../../img/grass.mp3';
 import shovel from '../../img/shovel.mp3';
 import './Bed.css'
+import axios from 'axios';
 
 const popSound = new Audio(pop);
 const grassSound = new Audio(grass);
@@ -22,6 +23,21 @@ const Bed = ({ index, bed }) => {
     const bedPrice = Math.round(index * index * data.length * 1.2);
 
     const bedRef = useRef();
+    const chatId = 205235580;
+
+    async function sendPlantData(chatId, dataGarden) {
+        try {
+            const response = await axios.post(`/api/dataGarden/${chatId}`, {
+                dataGarden
+            });
+    
+            if (response.status !== 200) {
+                throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
+            }
+        } catch (error) {
+            console.error('Ошибка сети:', error);
+        }
+    }
 
     function roundThousend(amount) {
         if (amount > 1000000) return (amount / 1000000).toFixed(1) + 'м';
@@ -51,7 +67,7 @@ const Bed = ({ index, bed }) => {
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
                 dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
-
+                sendPlantData(chatId, dataGarden); // Отправляем данные на сервак
                 setTimeout(() => {
                     dispatch(setPlant({ index: index, plant: activeItem.name }));
                 }, activeItem.riseTime);

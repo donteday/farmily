@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios';
 
 const bedExmple = {
   plowed: false,
@@ -80,9 +81,25 @@ const dataBarnExample = [
   }
 ]
 
+const chatId = 205235580;
+let dataGarden = null;
+
+axios.get(`/api/users/${chatId}`)
+  .then(function (response) {
+    dataGarden = response.data.dataGarden;
+    console.log('data ok');
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .finally(function () {
+  });
+
+
 const localStore = localStorage.userDataTest2
 
-const dataGardenStart = localStore ? JSON.parse(localStore).dataGarden : dataGardenExample;
+const dataGardenStart = dataGarden ? dataGarden : dataGardenExample;
 
 const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
 
