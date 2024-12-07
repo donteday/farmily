@@ -31,7 +31,8 @@ function App() {
 
   function init() {
     dispatch(makeShopActiveItem(null))
-
+    console.log('инициализация', data);
+    
     data.forEach((element, index) => {
       const dateNow = new Date()
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
