@@ -64,7 +64,7 @@ function App() {
     data.forEach((element, index) => {
       const dateNow = new Date();
       console.log('get time', dateNow.getTime());
-      console.log('element date', element.date);
+      console.log('element date', element.date.getTime());
       
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
