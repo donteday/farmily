@@ -29,7 +29,9 @@ const Bed = ({ index, bed }) => {
         try {
             const response = await axios.put(`/api/updateGarden/${chatId}`, {
                 dataGarden
-            });    
+            });
+            console.log('отправил данные на сервак', dataGarden);
+                
             if (response.status !== 200) {
                 throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
             }
