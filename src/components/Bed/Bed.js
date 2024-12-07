@@ -47,12 +47,12 @@ const Bed = ({ index, bed }) => {
         if ((money <= 0 && bed.plant === '') || bed.plant === 'seedling') return;
         if (activeItem) {
             if (bed.plant === '' && money - activeItem.purchasePrice >= 0) {
-                const dateNow = new Date();
+                const dateNow = new Date().getTime();
                 sound && grassSound.play();
                 dispatch(incrementMoney(- activeItem.purchasePrice))
                 dispatch(setPlant({ index: index, plant: 'seedling' }));
                 dispatch(setSellPrice({ index: index, price: activeItem.sellingPrice }))
-                dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow.getTime() }));
+                dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow}));
 
                 // sendPlantData(chatId, data);
 
