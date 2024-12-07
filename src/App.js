@@ -37,7 +37,7 @@ function App() {
   const chatId = 205235580;
 
   useEffect(() => {
-    if (!loading && data.length > 0) {
+    if (data.length > 0) {
       sendPlantData(chatId, data);
     }
   }, [data, chatId]);
@@ -66,10 +66,10 @@ function App() {
       console.log('get time', dateNow.getTime());
       console.log('element date', element.date.getTime());
       
-      if (element.date && (dateNow - element.date > element.riseTime)) {
+      if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
-      if (element.date && (dateNow - element.date < element.riseTime)) {
+      if (element.date && (dateNow.getTime() - element.date < element.riseTime)) {
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));
         }, element.riseTime - (dateNow.getTime() - element.date));
@@ -79,10 +79,10 @@ function App() {
 
   // Эффект для инициализации, когда data загружены
   useEffect(() => {
-    if (data.length > 0) {
+    if (!loading && data.length > 0) {
       init();
     }
-  }, [data, init]);
+  }, [data, init, loading]);
 
 
   useEffect(() => {
