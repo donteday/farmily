@@ -86,8 +86,8 @@ let dataGarden = null;
 
 axios.get(`/api/users/${chatId}`)
   .then(function (response) {
-    dataGarden = response.data.dataGarden;
-    console.log('data ok');
+    dataGarden = response.data.userData;
+    console.log('data ok', dataGarden);
     
   })
   .catch(function (error) {
