@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -31,6 +31,7 @@ function App() {
     dispatch(makeShopActiveItem(null))
     console.log('dispatch data');
   }, [dispatch]);
+
   const chatId = 205235580;
 
   useEffect(() => {
@@ -39,8 +40,7 @@ function App() {
       sendPlantData(chatId, data);
       console.log('отправил данные');
     }
-  }, [data, chatId]);
-  
+  }, [data, chatId]);  
 
   async function sendPlantData(chatId, dataGarden) {
     try {
@@ -57,7 +57,7 @@ function App() {
     }
   }
 
-  const init = useCallback(() => {
+  function init() {
     console.log('инициализация');
     data.forEach((element, index) => {
       const dateNow = new Date()
@@ -71,11 +71,11 @@ function App() {
       }
     });
 
-  }, [dispatch, data]);
+  }  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => init(), [data]);
+ 
 
   useEffect(() => {
     clearInterval(moneyInterval);
