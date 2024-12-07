@@ -25,7 +25,9 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-  // const loading = useSelector(state => state.counter.loading);
+  const loading = useSelector(state => state.counter.loading);
+  console.log('load', loading);
+  
   useEffect(() => {
     dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
@@ -61,6 +63,9 @@ function App() {
     console.log('инициализация', data);
     data.forEach((element, index) => {
       const dateNow = new Date();
+      console.log('get time', dateNow.getTime());
+      console.log('element date', element.date);
+      
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
