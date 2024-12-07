@@ -1,6 +1,6 @@
 .friends_window {
     position: absolute;
-    padding: 30px;
+    padding: 40px;
     width: 80%;
     height: 600px;
     background-image: url('../../img/bg/bg_window_friends.png');
@@ -18,6 +18,7 @@
     font-family: 'Press Start 2P', cursive;
     /* font-size: 1em; */
     text-align: center;
+    
 
 }
 .friends_window-title {
@@ -29,12 +30,59 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .friends_window-list__item {
+    display: flex;
     width: 90%;
-    padding: 10px;
+    height: 50px;
+    padding: 5px;
     margin-top: 5px;
     border: 2px solid rgb(67 39 32);
-    text-align: left;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.friends_window-list__item-name {
+    display: block;
+    height: 20px;
+}
+
+.friends_window-search > input {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    width: 100%;
+    background: none;
+    margin-right: 10px;
+}
+
+.friends_window-search {
+    display: flex;
+    width: 100%;
+
+    flex-direction: row;
+    
+}
+
+.friends_window-btn_add {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.friends_window-btn_del {
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
 }
