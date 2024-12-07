@@ -104,7 +104,7 @@ export const counterSlice = createSlice({
     shopActiveItem: null,
     dataGarden: dataGardenExample,
     dataBarn: dataBarnStart,
-    loading: false,
+    loading: true,
     error: null
   },
   reducers: {
