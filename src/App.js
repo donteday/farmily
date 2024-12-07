@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -25,7 +25,7 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-  const loading = useSelector(state => state.counter.loading);
+  // const loading = useSelector(state => state.counter.loading);
   useEffect(() => {
     dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
@@ -39,6 +39,7 @@ function App() {
       sendPlantData(chatId, data);
     }
   }, [data, chatId]);
+
 
 
   async function sendPlantData(chatId, dataGarden) {
@@ -56,10 +57,10 @@ function App() {
     }
   }
 
-  function init() {
+  const init = useCallback(() => {
     console.log('инициализация', data);
     data.forEach((element, index) => {
-      const dateNow = new Date()
+      const dateNow = new Date();
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
@@ -69,11 +70,14 @@ function App() {
         }, element.riseTime - (dateNow.getTime() - element.date));
       }
     });
+  }, [data, dispatch]);
 
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {if (!loading) init() }, [loading]);
+  // Эффект для инициализации, когда data загружены
+  useEffect(() => {
+    if (data.length > 0) {
+      init();
+    }
+  }, [data, init]);
 
 
   useEffect(() => {
