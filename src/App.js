@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -25,40 +25,40 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-  
+
   useEffect(() => {
     dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
-    console.log('dispatch data');    
+    console.log('dispatch data');
   }, [dispatch]);
   const chatId = 205235580;
 
   useEffect(() => {
-      // Отправляем данные на сервер при изменении dataGarden
-      if (data.length > 0) {
-          sendPlantData(chatId, data);
-          console.log('отправил данные');
-
-      }
+    // Отправляем данные на сервер при изменении dataGarden
+    if (data.length > 0) {
+      sendPlantData(chatId, data);
+      console.log('отправил данные');
+    }
   }, [data, chatId]);
   
+
   async function sendPlantData(chatId, dataGarden) {
     try {
-        const response = await axios.put(`/api/updateGarden/${chatId}`, {
-            dataGarden
-        });
-        console.log('отправил данные на сервак', dataGarden);
+      const response = await axios.put(`/api/updateGarden/${chatId}`, {
+        dataGarden
+      });
+      console.log('отправил данные на сервак', dataGarden);
 
-        if (response.status !== 200) {
-            throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
-        }
+      if (response.status !== 200) {
+        throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
+      }
     } catch (error) {
-        console.error('Ошибка сети:', error);
+      console.error('Ошибка сети:', error);
     }
-}
+  }
 
-  function init() {
-    console.log('инициализация', data);    
+  const init = useCallback(() => {
+    console.log('инициализация');
     data.forEach((element, index) => {
       const dateNow = new Date()
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
@@ -71,10 +71,10 @@ function App() {
       }
     });
 
-  }
+  }, [dispatch, data]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), [data]);
+  useEffect(() => init(), []);
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function App() {
 
   function isView(view) {
     console.log('drug', selectedFriend);
-    
+
     switch (view) {
       case 'garden':
         return selectedFriend ? <FriendGarden friend={selectedFriend} setSelectedFriend={setSelectedFriend} /> : <Garden />;
@@ -112,8 +112,8 @@ function App() {
   }
 
   return (
-    <div className='app'>    
-    <Snowfall />
+    <div className='app'>
+      <Snowfall />
 
       <Header shopContainerRef={shopContainerRef} />
       {isView(viewNow)}
@@ -121,7 +121,7 @@ function App() {
         viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
       <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler} />
-      {friendsWindowView && <FriendsWindow setSelectedFriend={setSelectedFriend} friendsWindowViewHandler={friendsWindowViewHandler}/>}
+      {friendsWindowView && <FriendsWindow setSelectedFriend={setSelectedFriend} friendsWindowViewHandler={friendsWindowViewHandler} />}
     </div>
 
   );
