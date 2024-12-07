@@ -55,6 +55,7 @@ const Bed = ({ index, bed }) => {
                 if (data.filter((e) => !e.plowed).length <= 1) {
                     dispatch(bedAdd());
                 }
+                sendPlantData(chatId, data);
             }
             return;
         }
@@ -84,6 +85,7 @@ const Bed = ({ index, bed }) => {
                 dispatch(setSellPrice({ index: index, price: 0 }))
                 dispatch(setPlant({ index: index, plant: '' }));
                 dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+                sendPlantData(chatId, data);
             }, 200)
 
         }
