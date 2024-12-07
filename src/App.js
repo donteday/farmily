@@ -66,13 +66,13 @@ function App() {
       console.log('get time', dateNow.getTime());
       console.log('element date', element.date.getTime());
       
-      if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
+      if (element.date && (dateNow - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
-      if (element.date && (dateNow.getTime() - element.date < element.riseTime)) {
+      if (element.date && (dateNow - element.date < element.riseTime)) {
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));
-        }, element.riseTime - (dateNow.getTime() - element.date));
+        }, element.riseTime - (dateNow - element.date));
       }
     });
   }, [data, dispatch]);
