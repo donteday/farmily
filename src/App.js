@@ -24,9 +24,9 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
-
+  
   useEffect(() => {
-    dispatch(fetchUserData()); // Вызов функции для получения данных
+    dispatch(fetchUserData());
   }, [dispatch]);
 
   function init() {
@@ -49,7 +49,7 @@ function App() {
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => init(), []);
+  useEffect(() => init(), [data]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
