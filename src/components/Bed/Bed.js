@@ -1,11 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
 import pop from '../../img/pop.mp3';
 import grass from '../../img/grass.mp3';
 import shovel from '../../img/shovel.mp3';
 import './Bed.css'
-import axios from 'axios';
 
 const popSound = new Audio(pop);
 const grassSound = new Audio(grass);
@@ -21,34 +20,7 @@ const Bed = ({ index, bed }) => {
     const sound = useSelector(state => state.counter.sound)
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const bedPrice = Math.round(index * index * data.length * 1.2);
-
     const bedRef = useRef();
-    const chatId = 205235580;
-    useEffect(() => {
-        // Отправляем данные на сервер при изменении dataGarden
-        if (data.length > 0) {
-            sendPlantData(chatId, data);
-            console.log('отправил данные');
-
-        }
-
-    }, [data, chatId]);
-
-
-    async function sendPlantData(chatId, dataGarden) {
-        try {
-            const response = await axios.put(`/api/updateGarden/${chatId}`, {
-                dataGarden
-            });
-            console.log('отправил данные на сервак', dataGarden);
-
-            if (response.status !== 200) {
-                throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
-            }
-        } catch (error) {
-            console.error('Ошибка сети:', error);
-        }
-    }
 
     function roundThousend(amount) {
         if (amount > 1000000) return (amount / 1000000).toFixed(1) + 'м';
