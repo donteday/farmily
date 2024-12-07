@@ -83,15 +83,6 @@ const dataBarnExample = [
 
 const chatId = 205235580;
 
-// axios.get(`/api/users/${chatId}`)
-//   .then(function (response) {
-//     dataGarden = response.data.userData;
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-//   .finally(function () {
-//   });
 export const fetchUserData = createAsyncThunk('users/fetchUserData', async () => {
   const response = await axios.get(`/api/users/${chatId}`);
   return response.data.userData; // Возвращаем полученные данные

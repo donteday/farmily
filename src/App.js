@@ -12,6 +12,7 @@ import BottomPanel from './components/BottomPanel/BottomPanel';
 import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
+import { fetchUserData } from './redux/store/store';
 
 let moneyInterval;
 
@@ -23,6 +24,10 @@ function App() {
   const dispatch = useDispatch();
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
+
+  useEffect(() => {
+    dispatch(fetchUserData()); // Вызов функции для получения данных
+  }, [dispatch]);
 
   function init() {
     dispatch(makeShopActiveItem(null))
