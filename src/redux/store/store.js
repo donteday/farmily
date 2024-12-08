@@ -92,14 +92,14 @@ const localStore = localStorage.userDataTest2
 
 const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
 
-// const moneyStart = localStore ? JSON.parse(localStore).money : 100;
+const moneyStart = localStore ? JSON.parse(localStore).money : 100;
 
 export const counterSlice = createSlice({
   name: 'money',
   initialState: {
     sound: true,
     view: 'garden',
-    money: 9999,
+    money: moneyStart,
     moneyMultiplier: 1,
     shopActiveItem: null,
     dataGarden: dataGardenExample,

@@ -4,8 +4,9 @@
   margin-bottom: 300px;
   max-width: 520px;
   flex-wrap: wrap;
-  gap: 5px;
+  /* gap: 5px; */
   background-color: #389f5f;
+  /* background-color: #2b0a01; */
 
   border-image:none;
 
