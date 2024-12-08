@@ -1,11 +1,14 @@
 .garden {
   display: flex;
-  margin: 30px auto 80px;
+  margin: 60px auto 80px;
   margin-bottom: 300px;
   max-width: 520px;
   flex-wrap: wrap;
   gap: 5px;
   background-color: #389f5f;
+
+  border-image:none;
+
   /* box-shadow: 0px 0px 10px rgb(46, 26, 1); */
 }
 
@@ -22,5 +25,10 @@
   .garden {
     margin-bottom: 250px;
     max-width: 300px;
+    border-image: url('./img/garden_border.png');
+    border-image-slice: 30;
+    border-image-width: 40px;
+    border-image-outset: 40px 15px;
+    border-image-repeat: repeat;
   }
 }
