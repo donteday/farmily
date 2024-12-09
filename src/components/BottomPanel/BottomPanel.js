@@ -6,21 +6,20 @@ import { update } from '../../redux/store/store'
 const BottomPanel = ({ friendsWindowViewHandler }) => {
     const bottomPanelList = [
         {
-            name: 'home',
-            handler: () => dispatch(update({ name: 'view', source: 'garden' }))
+            name: 'pond',
+            handler: () => dispatch(update({ name: 'view', source: 'pond' }))
         },
         {
             name: 'barn',
             handler: () => dispatch(update({ name: 'view', source: 'barn' }))
         },
         {
-            name: 'pond',
-            handler: () => dispatch(update({ name: 'view', source: 'pond' }))
+            name: 'home',
+            handler: () => dispatch(update({ name: 'view', source: 'garden' }))
         },
         {
             name: 'top',
             handler: () => console.log()
-
         },
         {
             name: 'friends',

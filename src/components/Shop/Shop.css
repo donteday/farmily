@@ -2,13 +2,14 @@
     bottom: 100px;
     left: 0;
     right: 0;
-    width: 670px;
+    width: 90%;
     height: 140px;
     position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .shop__wrapper {
@@ -19,13 +20,17 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    max-width: 570px;
+    width: 90%;
     height: 140px;
     overflow-y: auto;
     overflow-x: scroll;
     background-image: url(../../img/wood_texture_2.png);
-    background-size: contain; 
+    background-size: contain;
     border: 7px solid rgba(43, 19, 19, 0.549);
+    border: 5px solid rgb(49 12 0);
+    border: 6px solid;
+    border-image-slice: 1;
+    border-image-source: radial-gradient(rgb(135 46 0), rgb(49 12 0));
     /* border-radius: 10px; */
     transition: all 1s ease-in-out;
 }
@@ -34,17 +39,16 @@
     display: none;
 }
 
-
 .shop {
     position: absolute;
-    max-width: max-content;
+    width: 100%;
     padding: 10px;
     padding-bottom: 2px;
     margin: 0 auto;
     display: flex;
     left: 0;
     gap: 10px;
-    font-family: 'Press Start 2P', cursive;    
+    font-family: 'Press Start 2P', cursive;
 }
 
 .shop__item {
@@ -151,7 +155,7 @@
     background-size: cover;
 }
 
-.shop__menu { 
+.shop__menu {
     padding: 5px;
     display: flex;
     justify-content: flex-end;
@@ -189,16 +193,17 @@
 }
 
 @media (max-width: 700px) {
-    .btn_right, .btn_left {
+
+    .btn_right,
+    .btn_left {
         display: none;
     }
 }
 
 @media (max-width: 540px) {
     .shop__wrapper {
-        max-width: 300px;
-    height: 110px;
-
+        width: 80%;
+        height: 110px;
     }
 
     .shop__item {
@@ -218,7 +223,7 @@
 
     .shop__item-active {
         width: 280px;
-        bottom: 90px;
+        bottom: 190px;
     }
 
     .shop__item-active div {
