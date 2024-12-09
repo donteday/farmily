@@ -129,7 +129,7 @@ function App() {
       <Snowfall />
 
       <Header shopContainerRef={shopContainerRef} />
-      {!loading && isView(viewNow)}
+      {isView(viewNow)}
       {
         viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
