@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState,useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
 import './App.css';
@@ -27,11 +27,15 @@ function App() {
   const [selectedFriend, setSelectedFriend] = useState(null);
   const loading = useSelector(state => state.counter.loading);
   console.log('load', loading);
-  
+
   useEffect(() => {
-    dispatch(fetchUserData());
     dispatch(makeShopActiveItem(null))
-    console.log('dispatch data');
+    const intervalId = setInterval(() => {
+      dispatch(fetchUserData());
+    }, 1000); // 1000 мс = 1 
+
+    // Очистка интервала при размонтировании компонента
+    return () => clearInterval(intervalId);
   }, [dispatch]);
 
   const chatId = 205235580;
@@ -65,7 +69,7 @@ function App() {
       const dateNow = new Date();
       console.log('get time', dateNow.getTime());
       console.log('element date', element.date);
-      
+
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
