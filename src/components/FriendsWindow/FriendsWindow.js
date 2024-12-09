@@ -6,29 +6,12 @@ import axios from 'axios';
 
 
 const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
   const [resUsers, setResUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    const fetchUsers = () => {
-      axios.get('/api/api/users')
-        .then(function (response) {
-          setUsers(response.data);
-        })
-        .catch(function (error) {
-          setError(error.message);
-          console.log(error);
-        })
-        .finally(function () {
-          setLoading(false);
-        });
-    };
-    fetchUsers();
-  }, [users]);
 
   const filteredUsers = searchTerm.length >= 3
     ? resUsers.filter(user =>
@@ -69,12 +52,13 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     setSearchTerm(findUserName);
     if (searchTerm.length >= 3) {
       try {
-        const response = await axios.get(`/api/findUser?search=${searchTerm}`);
+        const response = await axios.get(`/api/findUser/${searchTerm}`);
         setResUsers(response.data); // Предполагается, что сервер возвращает массив пользователей
       } catch (error) {
+        setError('error');
         console.error('Ошибка при получении пользователей:', error);
       } finally {
-        setLoading(false);
+        setError(null);
       }
     }
   }
@@ -108,7 +92,6 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     <div className='friends_window'>
       <button className='friends_window-close' onClick={() => friendsWindowViewHandler()}></button>
       <div className='friends_window-title'>Друзья</div>
-      {loading && <div>Загрузка</div>}
       {error && <div>Ошибка подключения</div>}
 
       <div className='friends_window-search'>
