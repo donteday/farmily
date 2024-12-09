@@ -122,7 +122,6 @@ function App() {
       }
       <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler} />
       {friendsWindowView && <FriendsWindow setSelectedFriend={setSelectedFriend} friendsWindowViewHandler={friendsWindowViewHandler} />}
-      <div className='tractor'></div>
     </div>
 
   );
