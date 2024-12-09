@@ -46,7 +46,7 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
 
   async function findUsers(findUserName, searchTerm) {
     setSearchTerm(findUserName);
-    if (searchTerm.length >= 3) {
+    if (searchTerm.length >= 2) {
       try {
         const response = await axios.get(`/api/findUser/${searchTerm}`);
         setResUsers(response.data); // Предполагается, что сервер возвращает массив пользователей
