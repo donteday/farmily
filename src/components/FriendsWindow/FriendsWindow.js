@@ -8,103 +8,34 @@ import axios from 'axios';
 const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
   const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [resUsers, setResUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const dataGardenExample = [
-    {
-      plowed: true,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: true,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: true,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: true,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: true,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: false,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: false,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: false,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: false,
-      plant: '',
-      sell: 0,
-    },
-    {
-      plowed: false,
-      plant: '',
-      sell: 0,
-    },
-
-  ]
-  const testUsers = [
-    {
-      userName: 'dimon',
-      id: 1,
-      lvl: 1,
-      gardenData: dataGardenExample
-    },
-    {
-      userName: 'kakashka',
-      id: 2,
-      lvl: 1,
-      fiels: ''
-    },
-  ]
 
   useEffect(() => {
     const fetchUsers = () => {
       axios.get('/api/api/users')
         .then(function (response) {
           setUsers(response.data);
-
         })
         .catch(function (error) {
           setError(error.message);
           console.log(error);
-
         })
         .finally(function () {
           setLoading(false);
-
         });
     };
-
     fetchUsers();
   }, [users]);
 
   const filteredUsers = searchTerm.length >= 3
-    ? testUsers.filter(user =>
+    ? resUsers.filter(user =>
       !checkFriend(user) && user.userName.toLowerCase().includes(searchTerm.toLowerCase())
     )
     : [];
+
   const filteredFriends = searchTerm.length >= 3
     ? friends.filter(user =>
       user.userName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -134,18 +65,32 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     friendsWindowViewHandler(false)
   }
 
+  async function findUsers(findUserName, searchTerm) {
+    setSearchTerm(findUserName);
+    if (searchTerm.length >= 3) {
+      try {
+        const response = await axios.get(`/api/findUser?search=${searchTerm}`);
+        setResUsers(response.data); // Предполагается, что сервер возвращает массив пользователей
+      } catch (error) {
+        console.error('Ошибка при получении пользователей:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
+
   function userList() {
     const allUsers = new Set([...filteredUsers, ...filteredFriends]);
     return [...allUsers].map(user => {
       // Динамическая загрузка изображения
-      const userImgUrl = user.imgUrl ? require(`${user.imgUrl}`) : require(`../../img/icons/icon_friends.png`) ; // Используйте imgUrl как запасной вариант
-  
+      const userImgUrl = user.imgUrl ? require(`${user.imgUrl}`) : require(`../../img/icons/icon_friends.png`);
+
       return (
         <div key={user.id} className='friends_window-list__item'>
           <div className='friends_window-list__item-img' style={{ backgroundImage: `url(${userImgUrl})` }}>
             {user.lvl}
           </div>
-  
+
           <div className='friends_window-list__item-name' onClick={() => openFriendsWindow(user)}>
             {user.userName}
           </div>
@@ -171,7 +116,7 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
           type="text"
           placeholder="Введите имя"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => findUsers(e.target.value, searchTerm)}
           style={{ width: '100%', padding: '5px', marginTop: '10px' }}
         />
 
