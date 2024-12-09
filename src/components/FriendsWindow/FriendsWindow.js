@@ -1,15 +1,11 @@
 import './FriendsWindow.css';
-import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
 import axios from 'axios';
-// const axios = require('axios');
-
 
 const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
   // const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
   const [resUsers, setResUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
