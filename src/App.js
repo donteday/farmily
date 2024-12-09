@@ -32,7 +32,7 @@ function App() {
     dispatch(makeShopActiveItem(null))
     const intervalId = setInterval(() => {
       dispatch(fetchUserData());
-    }, 1000); // 1000 мс = 1 
+    }, 5000); // 1000 мс = 1 
 
     // Очистка интервала при размонтировании компонента
     return () => clearInterval(intervalId);
