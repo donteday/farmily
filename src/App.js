@@ -30,6 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch(makeShopActiveItem(null))
+    dispatch(fetchUserData());
     const intervalId = setInterval(() => {
       dispatch(fetchUserData());
     }, 5000); // 1000 мс = 1 
@@ -128,7 +129,7 @@ function App() {
       <Snowfall />
 
       <Header shopContainerRef={shopContainerRef} />
-      {isView(viewNow)}
+      {!loading && isView(viewNow)}
       {
         viewNow === 'pond' ? '' : <Shop shopContainerRef={shopContainerRef} />
       }
