@@ -18,7 +18,7 @@ const Garden = ({ gardenData }) => {
             />)
         }
       </div>
-      <div className='tractor'></div>
+      {/* <div className='tractor'></div> */}
     </>
 
   );
