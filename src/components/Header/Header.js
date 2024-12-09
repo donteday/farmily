@@ -1,7 +1,7 @@
 import './Header.css'
 import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { makeShopActiveItem, update} from '../../redux/store/store'
+import { update } from '../../redux/store/store'
 import door from '../../img/door.mp3'
 
 const doorSound = new Audio(door);
@@ -9,7 +9,6 @@ doorSound.preload = 'metadata';
 
 const Header = ({ shopContainerRef }) => {
     const data = useSelector(state => state.counter.dataGarden);
-    const view = useSelector(state => state.counter.view);
     const dataBarn = useSelector(state => state.counter.dataBarn);
     const count = useSelector(state => state.counter.money)
     const sound = useSelector(state => state.counter.sound)
@@ -28,17 +27,6 @@ const Header = ({ shopContainerRef }) => {
         if (amount > 1000000) return (amount / 1000000).toFixed(1) + 'м';
         if (amount > 1000) return (amount / 1000).toFixed(1) + 'т';
         return amount.toFixed(0);
-    }
-    function barnEnter() {
-        sound && doorSound.play();
-        view === 'barn' ? dispatch(update({name: 'view', source: 'garden'})) : dispatch(update({name: 'view', source: 'barn'}));
-        dispatch(makeShopActiveItem(null))
-    }
-
-    function pondEnter() {
-        sound && doorSound.play();
-        view === 'pond' ? dispatch(update({name: 'view', source: 'garden'})) : dispatch(update({name: 'view', source: 'pond'}));
-        dispatch(makeShopActiveItem(null))
     }
 
     function menuOpen() {
@@ -59,9 +47,6 @@ const Header = ({ shopContainerRef }) => {
                 <button className='btn__menu' onClick={menuOpen}></button>
                 <div className={sound ? "btn__sound" : "btn__sound no-active"} onClick={switchSound} ref={soundIcon}></div>
             </div>
-            <div className="pond__icon" onClick={pondEnter}></div>
-            <div className="tractor"></div>
-            <div className="barn__icon" onClick={barnEnter}></div>
         </div>
     );
 }

@@ -12,8 +12,14 @@
 }
 
 .bottom_panel-icon {
-    width: 80px;
-    height: 80px;
+    width: 54px;
+    height: 54px;
     background-image: url('../../img/icons/icon_friends.png');
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease;
+}
+
+.bottom_panel-icon:active {
+    background-position: 0 6px;
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 // const axios = require('axios');
 
 
-const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
+const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
   const [users, setUsers] = useState([]);
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,7 @@ const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
       plant: '',
       sell: 0,
     },
-  
+
   ]
   const testUsers = [
     {
@@ -76,7 +76,7 @@ const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
       id: 2,
       lvl: 1,
       fiels: ''
-    }, 
+    },
   ]
 
   useEffect(() => {
@@ -129,27 +129,39 @@ const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
   function openFriendsWindow(user) {
     console.log('открываем');
     console.log(user);
-    
+
     setSelectedFriend(user);
     friendsWindowViewHandler(false)
   }
 
   function userList() {
     const allUsers = new Set([...filteredUsers, ...filteredFriends]);
-    return [...allUsers].map(user => (
-      <div key={user.id} className='friends_window-list__item' >
-        <div className='friends_window-list__item-name' onClick={() => openFriendsWindow(user)}>{user.lvl} {user.userName}</div>
-        {!checkFriend(user) ? (
-          <button className='friends_window-list__item friends_window-btn_add' onClick={() => addFriend(user)}>+</button>
-        ) :
-          <button className='friends_window-list__item friends_window-btn_del' onClick={() => removeFriend(user)}>x</button>
-        }
-      </div>
-    ))
+    return [...allUsers].map(user => {
+      // Динамическая загрузка изображения
+      const userImgUrl = user.imgUrl ? require(`${user.imgUrl}`) : require(`../../img/icons/icon_friends.png`) ; // Используйте imgUrl как запасной вариант
+  
+      return (
+        <div key={user.id} className='friends_window-list__item'>
+          <div className='friends_window-list__item-img' style={{ backgroundImage: `url(${userImgUrl})` }}>
+            {user.lvl}
+          </div>
+  
+          <div className='friends_window-list__item-name' onClick={() => openFriendsWindow(user)}>
+            {user.userName}
+          </div>
+          {!checkFriend(user) ? (
+            <button className='friends_window-list__item friends_window-btn_add' onClick={() => addFriend(user)}></button>
+          ) : (
+            <button className='friends_window-list__item friends_window-btn_del' onClick={() => removeFriend(user)}></button>
+          )}
+        </div>
+      );
+    });
   }
 
   return (
     <div className='friends_window'>
+      <button className='friends_window-close' onClick={() => friendsWindowViewHandler()}></button>
       <div className='friends_window-title'>Друзья</div>
       {loading && <div>Загрузка</div>}
       {error && <div>Ошибка подключения</div>}
@@ -160,16 +172,17 @@ const FriendsWindow = ({setSelectedFriend, friendsWindowViewHandler}) => {
           placeholder="Введите имя"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ width: '100%', padding: '8px', marginTop: '10px' }}
+          style={{ width: '100%', padding: '5px', marginTop: '10px' }}
         />
 
         <button
           onClick={() => setSearchTerm('')}
-          style={{ marginTop: '10px', padding: '8px 16px' }}
+          style={{ marginTop: '10px', padding: '8px 16px', border: 'none', background: 'none' }}
         >
           Х
         </button>
       </div>
+      <br />
       <div className='friends_window-list'>
         {userList()}
       </div>

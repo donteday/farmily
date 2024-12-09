@@ -34,7 +34,7 @@
 .pond__cat {
     display: block;
     position: fixed;
-    bottom: 0;
+    bottom: 100px;
     width: 150px;
     height: 150px;
     background-image: url(../../img/cat.png);

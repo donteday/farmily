@@ -73,9 +73,12 @@
     width: 200px;
     height: 200px;
     background-image: url(../../img/tractor.png);
-    background-size: 90%;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: 0 35px;
+    position: relative;
+    top: -30%;
+    right: -40%;
+    z-index: -1;
 }
 
 .btn__menu {
@@ -119,12 +122,12 @@
 @media (max-width: 540px) {
     .header {
         max-width: 300px;
-        height: 40px;
         font-size: 40px;
         margin-top: 40px;
     }
 
-    .barn__icon, .tractor, .pond__icon {
+    .barn__icon,
+    .pond__icon {
         width: 100px;
         height: 100px;
         filter: drop-shadow(1px 2px 1px rgba(11, 11, 11, 0.176));
@@ -134,9 +137,6 @@
         transform: translateY(3px);
     }
 
-    .tractor {
-        background-position: 0 12px;
-    }
 
     .header__stat {
         max-width: 320px;
@@ -154,4 +154,3 @@
         height: 1px;
     }
 }
-

@@ -96,8 +96,6 @@ function App() {
   }, [dataBarn, dispatch]);
 
   function isView(view) {
-    console.log('drug', selectedFriend);
-
     switch (view) {
       case 'garden':
         return selectedFriend ? <FriendGarden friend={selectedFriend} setSelectedFriend={setSelectedFriend} /> : <Garden />;
@@ -124,6 +122,7 @@ function App() {
       }
       <BottomPanel friendsWindowViewHandler={friendsWindowViewHandler} />
       {friendsWindowView && <FriendsWindow setSelectedFriend={setSelectedFriend} friendsWindowViewHandler={friendsWindowViewHandler} />}
+      <div className='tractor'></div>
     </div>
 
   );
