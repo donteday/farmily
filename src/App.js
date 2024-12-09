@@ -26,7 +26,6 @@ function App() {
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
   const loading = useSelector(state => state.counter.loading);
-  console.log('load', loading);
 
   useEffect(() => {
     dispatch(makeShopActiveItem(null))
@@ -47,15 +46,11 @@ function App() {
     }
   }, [data, chatId, loading]);
 
-
-
   async function sendPlantData(chatId, dataGarden) {
     try {
       const response = await axios.put(`/api/updateGarden/${chatId}`, {
         dataGarden
       });
-      console.log('отправил данные на сервак', dataGarden);
-
       if (response.status !== 200) {
         throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
       }
@@ -65,12 +60,8 @@ function App() {
   }
 
   const init = useCallback(() => {
-    console.log('инициализация', data);
     data.forEach((element, index) => {
       const dateNow = new Date();
-      console.log('get time', dateNow.getTime());
-      console.log('element date', element.date);
-
       if (element.date && (dateNow.getTime() - element.date > element.riseTime)) {
         dispatch(setPlant({ index: index, plant: element.namePlant }));
       }
@@ -88,7 +79,6 @@ function App() {
       init();
     }
   }, [data, init, loading]);
-
 
   useEffect(() => {
     clearInterval(moneyInterval);
@@ -127,7 +117,6 @@ function App() {
   return (
     <div className='app'>
       <Snowfall />
-
       <Header shopContainerRef={shopContainerRef} />
       {isView(viewNow)}
       {
