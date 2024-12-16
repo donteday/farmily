@@ -42,7 +42,7 @@ console.log('ghbdet');
   // }, [dispatch]);
   
 
-  const chatId = 205235580;
+  const chatId = '205235580';
   useEffect(() => {
     dispatch(makeShopActiveItem(null));
     const newSocket = io('http://89.104.69.78:5000', {
