@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlant, makeShopActiveItem, incrementMoney } from './redux/store/store';
+import { setPlant, makeShopActiveItem, incrementMoney, setUserData } from './redux/store/store';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -8,12 +8,13 @@ import Garden from './components/Garden/Garden';
 import Barn from './components/Barn/Barn';
 import Pond from './components/Pond/Pond';
 import BottomPanel from './components/BottomPanel/BottomPanel';
-// import ModalWindow from './components/ModalWindow/ModalWindow';
 import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
-import { fetchUserData } from './redux/store/store';
+// import { fetchUserData } from './redux/store/store';
 import axios from 'axios';
+import { io} from 'socket.io-client';
+
 
 let moneyInterval;
 
@@ -26,19 +27,49 @@ function App() {
   const [friendsWindowView, setFriendsWindowView] = useState(false)
   const [selectedFriend, setSelectedFriend] = useState(null);
   const loading = useSelector(state => state.counter.loading);
+  const [socket, setSocket] = useState(null);
+console.log('ghbdet');
 
-  useEffect(() => {
-    dispatch(makeShopActiveItem(null))
-    dispatch(fetchUserData());
-    const intervalId = setInterval(() => {
-      dispatch(fetchUserData());
-    }, 5000); // 1000 мс = 1 
+  // useEffect(() => {
+  //   dispatch(makeShopActiveItem(null))
+  //   dispatch(fetchUserData());
+  //   const intervalId = setInterval(() => {
+  //     dispatch(fetchUserData());
+  //   }, 5000); // 1000 мс = 1 
 
-    // Очистка интервала при размонтировании компонента
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
+  //   // Очистка интервала при размонтировании компонента
+  //   return () => clearInterval(intervalId);
+  // }, [dispatch]);
+  
 
   const chatId = 205235580;
+  useEffect(() => {
+    dispatch(makeShopActiveItem(null));
+    const newSocket = io('http://89.104.69.78:5000', {
+      query: { chatId }
+    });
+    setSocket(newSocket);
+
+    newSocket.on('userData', (userData) => {
+      console.log(userData);
+      
+      dispatch(setUserData(userData));
+    });
+
+    // newSocket.on('friendData', (friendData) => {
+    //   // Handle friend data update
+    // });
+
+    return () => {
+      newSocket.disconnect();
+    };
+  }, [dispatch, chatId]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit('getUserData', chatId);
+    }
+  }, [socket, chatId]);
 
   useEffect(() => {
     if (!loading && data.length > 0) {

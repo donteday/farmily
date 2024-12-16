@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice} from '@reduxjs/toolkit';
+// import axios from 'axios';
 
 const bedExmple = {
   plowed: false,
@@ -81,12 +81,12 @@ const dataBarnExample = [
   }
 ]
 
-const chatId = 205235580;
+// const chatId = 205235580;
 
-export const fetchUserData = createAsyncThunk('users/fetchUserData', async () => {
-  const response = await axios.get(`/api/users/${chatId}`);
-  return response.data.userData; // Возвращаем полученные данные
-});
+// export const fetchUserData = createAsyncThunk('users/fetchUserData', async () => {
+//   const response = await axios.get(`/api/users/${chatId}`);
+//   return response.data.userData; // Возвращаем полученные данные
+// });
 
 const localStore = localStorage.userDataTest2
 
@@ -146,29 +146,38 @@ export const counterSlice = createSlice({
     },
     update: (state, action) => {
       state[action.payload.name] = action.payload.source;
+    },
+    setUserData: (state, action) => {
+      state.dataGarden = action.payload; 
     }
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUserData.pending, (state) => {
-        state.loading = true; // Устанавливаем состояние загрузки
-        state.error = null; // Сбрасываем ошибку
-      })
-      .addCase(fetchUserData.fulfilled, (state, action) => {
-        state.loading = false; // Устанавливаем состояние загрузки в false
-        state.dataGarden = action.payload; // Обновляем dataGarden
-      })
-      .addCase(fetchUserData.rejected, (state, action) => {
-        state.loading = false; // Устанавливаем состояние загрузки в false
-        state.error = action.error.message; // Сохраняем ошибку
-      });
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(fetchUserData.pending, (state) => {
+  //       state.loading = true; // Устанавливаем состояние загрузки
+  //       state.error = null; // Сбрасываем ошибку
+  //     })
+  //     .addCase(fetchUserData.fulfilled, (state, action) => {
+  //       state.loading = false; // Устанавливаем состояние загрузки в false
+  //       state.dataGarden = action.payload; // Обновляем dataGarden
+  //     })
+  //     .addCase(fetchUserData.rejected, (state, action) => {
+  //       state.loading = false; // Устанавливаем состояние загрузки в false
+  //       state.error = action.error.message; // Сохраняем ошибку
+  //     });
+  // },
 })
 
 
 
 
 
-export const { incrementMoney, plowed, plowedYard, bedAdd, yardAdd, setPlant, setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update } = counterSlice.actions
+export const { incrementMoney, 
+  plowed, 
+  plowedYard, 
+  bedAdd, 
+  yardAdd, 
+  setPlant, 
+  setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update, setUserData } = counterSlice.actions
 
 export default counterSlice.reducer
