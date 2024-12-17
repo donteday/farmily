@@ -45,13 +45,13 @@ console.log('ghbdet');
   const chatId = '205235580';
   useEffect(() => {
     dispatch(makeShopActiveItem(null));
-    const newSocket = io('http://89.104.69.78:5000', {
+    const newSocket = io('https://mypocketfarm.ru:5000', {
       query: { chatId }
     });
     setSocket(newSocket);
 
     newSocket.on('userData', (userData) => {
-      console.log(userData);
+      console.log('data',userData);
       
       dispatch(setUserData(userData));
     });
