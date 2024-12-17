@@ -53,7 +53,7 @@ console.log('ghbdet');
     newSocket.on('userData', (userData) => {
       console.log('data',userData);
       
-      dispatch(setUserData(userData));
+      dispatch(setUserData(userData.userData));
     });
 
     // newSocket.on('friendData', (friendData) => {
