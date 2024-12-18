@@ -38,8 +38,11 @@ function App() {
 
     newSocket.on('userData', (userData) => {
       console.log('poluch data',userData);
-// eslint-disable-next-line
       if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
+        console.log(userData.userData);
+        console.log(data);
+        
+        
         dispatch(setUserData(userData.userData));
         dispatch(setLoading(false));
       }
