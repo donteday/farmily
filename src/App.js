@@ -52,8 +52,8 @@ function App() {
     return () => {
       newSocket.disconnect();
     };
-  }, [dispatch, chatId, data]); 
-  // eslint-disable-next-line
+    // eslint-disable-next-line
+  }, [dispatch, chatId]);
 
   useEffect(() => {
     if (socket) {
