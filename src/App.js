@@ -66,7 +66,8 @@ function App() {
 
   useEffect(() => {
     if (socket && !loading) {
-      console.log('otpravlyau data obratno');
+      console.log('otpravlyau data obratno', data);
+
       
       socket.emit('updateData', chatId, data);
     }
