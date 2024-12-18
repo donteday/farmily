@@ -38,9 +38,11 @@ function App() {
 
     newSocket.on('userData', (userData) => {
       console.log('poluch data',userData);
-      
-      dispatch(setUserData(userData.userData));
-      dispatch(setLoading(false));
+
+      if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
+        dispatch(setUserData(userData.userData));
+        dispatch(setLoading(false));
+      }
     });
 
     // newSocket.on('friendData', (friendData) => {
