@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPlant, makeShopActiveItem, incrementMoney, setUserData } from './redux/store/store';
+import { setPlant, makeShopActiveItem, incrementMoney, setUserData, setLoading } from './redux/store/store';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -12,7 +12,6 @@ import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
 // import { fetchUserData } from './redux/store/store';
-import axios from 'axios';
 import { io} from 'socket.io-client';
 
 
@@ -28,20 +27,7 @@ function App() {
   const [selectedFriend, setSelectedFriend] = useState(null);
   const loading = useSelector(state => state.counter.loading);
   const [socket, setSocket] = useState(null);
-console.log('ghbdet');
-
-  // useEffect(() => {
-  //   dispatch(makeShopActiveItem(null))
-  //   dispatch(fetchUserData());
-  //   const intervalId = setInterval(() => {
-  //     dispatch(fetchUserData());
-  //   }, 5000); // 1000 мс = 1 
-
-  //   // Очистка интервала при размонтировании компонента
-  //   return () => clearInterval(intervalId);
-  // }, [dispatch]);
   
-
   const chatId = '205235580';
   useEffect(() => {
     dispatch(makeShopActiveItem(null));
@@ -54,6 +40,7 @@ console.log('ghbdet');
       console.log('data',userData);
       
       dispatch(setUserData(userData.userData));
+      dispatch(setLoading(false));
     });
 
     // newSocket.on('friendData', (friendData) => {
@@ -72,23 +59,10 @@ console.log('ghbdet');
   }, [socket, chatId]);
 
   useEffect(() => {
-    if (!loading && data.length > 0) {
-      sendPlantData(chatId, data);
+    if (socket && !loading) {
+      socket.emit('updateData', chatId, data);
     }
-  }, [data, chatId, loading]);
-
-  async function sendPlantData(chatId, dataGarden) {
-    try {
-      const response = await axios.put(`/api/updateGarden/${chatId}`, {
-        dataGarden
-      });
-      if (response.status !== 200) {
-        throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
-      }
-    } catch (error) {
-      console.error('Ошибка сети:', error);
-    }
-  }
+  }, [data, socket, loading]);
 
   const init = useCallback(() => {
     data.forEach((element, index) => {

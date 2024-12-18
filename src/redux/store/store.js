@@ -149,6 +149,9 @@ export const counterSlice = createSlice({
     },
     setUserData: (state, action) => {
       state.dataGarden = action.payload; 
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
     }
   },
   // extraReducers: (builder) => {
@@ -177,7 +180,8 @@ export const { incrementMoney,
   plowedYard, 
   bedAdd, 
   yardAdd, 
-  setPlant, 
+  setPlant,
+  setLoading, 
   setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update, setUserData } = counterSlice.actions
 
 export default counterSlice.reducer
