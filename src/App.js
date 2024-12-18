@@ -37,7 +37,7 @@ function App() {
     setSocket(newSocket);
 
     newSocket.on('userData', (userData) => {
-      console.log('data',userData);
+      console.log('poluch data',userData);
       
       dispatch(setUserData(userData.userData));
       dispatch(setLoading(false));
@@ -60,6 +60,8 @@ function App() {
 
   useEffect(() => {
     if (socket && !loading) {
+      console.log('otpravlyau data obratno');
+      
       socket.emit('updateData', chatId, data);
     }
   }, [data, socket, loading]);

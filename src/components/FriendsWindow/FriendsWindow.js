@@ -48,7 +48,7 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     setSearchTerm(findUserName);
     if (searchTerm.length >= 2) {
       try {
-        const response = await axios.get(`/api/findUser/${searchTerm}`);
+        const response = await axios.get(`https://mypocketfarm.ru:5000/api/findUser/${searchTerm}`);
         setResUsers(response.data); // Предполагается, что сервер возвращает массив пользователей
       } catch (error) {
         setError('error');
