@@ -38,7 +38,7 @@ function App() {
 
     newSocket.on('userData', (userData) => {
       console.log('poluch data',userData);
-
+// eslint-disable-next-line
       if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
         dispatch(setLoading(false));
@@ -52,7 +52,8 @@ function App() {
     return () => {
       newSocket.disconnect();
     };
-  }, [dispatch, chatId]);
+  }, [dispatch, chatId, data]); 
+  // eslint-disable-next-line
 
   useEffect(() => {
     if (socket) {
