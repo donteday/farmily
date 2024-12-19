@@ -42,14 +42,12 @@ function App() {
       dispatch(setUserData(userData.userData));
       dispatch(setLoading(false));
     });
-
     dispatch(makeShopActiveItem(null));
 
     return () => newSocket.disconnect();
   }, [dispatch, chatId]);
 
   const updateData = useCallback((data) => {
-    console.log('123');
     console.log('socket', socket);
     console.log('loading data', loading);
     
@@ -65,9 +63,9 @@ function App() {
     [updateData]
   );
 
-  useEffect(() => {
-    debouncedUpdateData(data);
-  }, [data, debouncedUpdateData]);
+  // useEffect(() => {
+  //   debouncedUpdateData(data);
+  // }, [data, debouncedUpdateData]);
 
   const init = useCallback(() => {
     data.forEach((element, index) => {
