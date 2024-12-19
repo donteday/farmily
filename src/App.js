@@ -66,7 +66,7 @@ function App() {
   }, [socket, loading, chatId]);
  // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
-    debounce(updateData, 1000),
+    debounce(updateData, 500),
     [updateData]
   );
 
