@@ -49,6 +49,9 @@ function App() {
 
   const updateData = useCallback((data) => {
     console.log('123');
+    console.log('socket', socket);
+    console.log('loading data', loading);
+    
     
     if (socket && !loading) {
       console.log('Отправляю обновленные данные', data);
