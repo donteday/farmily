@@ -65,7 +65,7 @@ function App() {
 
   useEffect(() => {
     if (socket) {
-      socket.emit('getUser Data', chatId);
+      socket.emit('getUserData', chatId);
     }
   }, [socket, chatId]);
 
