@@ -34,6 +34,7 @@ function App() {
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
     setSocket(newSocket);
+    console.log('Пыиаюсь получить данные с сервера');
     
     newSocket.on('userData', (userData) => {
     console.log('Получил данные с сервера');
