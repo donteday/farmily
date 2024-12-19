@@ -69,9 +69,9 @@ function App() {
     }
   }, [socket, chatId]);
 
-  // useEffect(() => {
-  //   debouncedUpdateData(data);
-  // }, [data, debouncedUpdateData]);
+  useEffect(() => {
+    debouncedUpdateData(data);
+  }, [data, debouncedUpdateData]);
 
   const init = useCallback(() => {
     data.forEach((element, index) => {
