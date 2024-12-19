@@ -47,6 +47,8 @@ function App() {
   }, [dispatch, chatId]);
 
   const updateData = useCallback((data) => {
+    console.log('123');
+    
     if (socket && !loading) {
       console.log('Отправляю обновленные данные', data);
       socket.emit('updateData', chatId, data);
