@@ -36,7 +36,7 @@ function App() {
     setSocket(newSocket);
     
     newSocket.on('userData', (userData) => {
-    console.log('Получил данные с сервера', userData.userData);
+    console.log('Получил данные с сервера');
 
       dispatch(setUserData(userData.userData));
       dispatch(setLoading(false));
