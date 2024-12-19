@@ -63,6 +63,12 @@ function App() {
     [updateData]
   );
 
+  useEffect(() => {
+    if (socket) {
+      socket.emit('getUser Data', chatId);
+    }
+  }, [socket, chatId]);
+
   // useEffect(() => {
   //   debouncedUpdateData(data);
   // }, [data, debouncedUpdateData]);
