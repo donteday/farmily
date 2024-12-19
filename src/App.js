@@ -39,10 +39,10 @@ function App() {
     console.log('Пыиаюсь получить данные с сервера');
     
     newSocket.on('userData', (userData) => {
-    console.log('Получил данные с сервера');
-
-      dispatch(setUserData(userData.userData));
-      dispatch(setLoading(false));
+      if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
+        dispatch(setUserData(userData.userData));
+        dispatch(setLoading(false));
+      }
     });
     dispatch(makeShopActiveItem(null));
 
