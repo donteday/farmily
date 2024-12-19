@@ -17,25 +17,6 @@ import { debounce } from 'lodash';
 
 let moneyInterval;
 
-const useSocket = (chatId) => {
-  const [socket, setSocket] = useState(null);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
-    setSocket(newSocket);
-
-    newSocket.on('userData', (userData) => {
-      dispatch(setUserData(userData.userData));
-      dispatch(setLoading(false));
-    });
-
-    return () => newSocket.disconnect();
-  }, [chatId, dispatch]);
-
-  return socket;
-};
-
 function App() {
   const dispatch = useDispatch();
   const viewNow = useSelector(state => state.counter.view);
@@ -46,31 +27,40 @@ function App() {
   const shopContainerRef = useRef();
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
-  const socket = useSocket(chatId);
 
-  // Используем useCallback для создания стабильной ссылки на функцию
-  // eslint-disable-next-line
-  const updateData = useCallback(
-    debounce((data) => {
-      if (socket && !loading) {
-        console.log('Отправляю обновленные данные', data);
-        socket.emit('updateData', chatId, data);
-      }
-    }, 1000),[socket, loading, chatId]
+  useEffect(() => {
+    const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
+    setSocket(newSocket);
+    console.log('Получил данные с сервера');
+    
+    newSocket.on('userData', (userData) => {
+      dispatch(setUserData(userData.userData));
+      dispatch(setLoading(false));
+    });
+
+    dispatch(makeShopActiveItem(null));
+
+    return () => newSocket.disconnect();
+  }, [dispatch, chatId]);
+
+  const updateData = useCallback((data) => {
+    if (socket && !loading) {
+      console.log('Отправляю обновленные данные', data);
+      socket.emit('updateData', chatId, data);
+    }
+  }, [socket, loading, chatId]);
+ // eslint-disable-next-line
+  const debouncedUpdateData = useCallback(
+    debounce(updateData, 1000),
+    [updateData]
   );
 
-  // Эффект для инициализации и очистки
   useEffect(() => {
-    dispatch(makeShopActiveItem(null));
-    // Здесь можно добавить другую инициализацию, если нужно
-  }, [dispatch]);
-
-  // Эффект для обновления данных
-  useEffect(() => {
-    updateData(data);
-  }, [data, updateData]);
+    debouncedUpdateData(data);
+  }, [data, debouncedUpdateData]);
 
   const init = useCallback(() => {
     data.forEach((element, index) => {
