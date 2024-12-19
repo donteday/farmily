@@ -12,66 +12,65 @@ import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
 // import { fetchUserData } from './redux/store/store';
-import { io} from 'socket.io-client';
-
+import {io} from 'socket.io-client';
+import { debounce } from 'lodash';
 
 let moneyInterval;
 
-function App() {
-  const viewNow = useSelector(state => state.counter.view);
-  const data = useSelector(state => state.counter.dataGarden);
-  const dataBarn = useSelector(state => state.counter.dataBarn);
-  const shopContainerRef = useRef();
-  const dispatch = useDispatch();
-  const [friendsWindowView, setFriendsWindowView] = useState(false)
-  const [selectedFriend, setSelectedFriend] = useState(null);
-  const loading = useSelector(state => state.counter.loading);
+const useSocket = (chatId) => {
   const [socket, setSocket] = useState(null);
-  
-  const chatId = '205235580';
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(makeShopActiveItem(null));
-    const newSocket = io('https://mypocketfarm.ru:5000', {
-      query: { chatId }
-    });
+    const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
     setSocket(newSocket);
 
     newSocket.on('userData', (userData) => {
-      console.log('poluch data',userData);
-      if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
-        console.log(userData.userData);
-        console.log(data);
-        
-        
-        dispatch(setUserData(userData.userData));
-        dispatch(setLoading(false));
-      }
+      dispatch(setUserData(userData.userData));
+      dispatch(setLoading(false));
     });
 
-    // newSocket.on('friendData', (friendData) => {
-    //   // Handle friend data update
-    // });
+    return () => newSocket.disconnect();
+  }, [chatId, dispatch]);
 
-    return () => {
-      newSocket.disconnect();
-    };
-    // eslint-disable-next-line
-  }, [dispatch, chatId]);
+  return socket;
+};
 
+function App() {
+  const dispatch = useDispatch();
+  const viewNow = useSelector(state => state.counter.view);
+  const data = useSelector(state => state.counter.dataGarden);
+  const loading = useSelector(state => state.counter.loading);
+  const dataBarn = useSelector(state => state.counter.dataBarn);
+  
+  const shopContainerRef = useRef();
+  const [friendsWindowView, setFriendsWindowView] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+
+  const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
+  const socket = useSocket(chatId);
+
+  // Используем useCallback для создания стабильной ссылки на функцию
+  // eslint-disable-next-line
+  const updateData = useCallback(
+    debounce((data) => {
+      if (socket && !loading) {
+        console.log('Отправляю обновленные данные', data);
+        socket.emit('updateData', chatId, data);
+      }
+    }, 1000),[socket, loading, chatId]
+  );
+
+  // Эффект для инициализации и очистки
   useEffect(() => {
-    if (socket) {
-      socket.emit('getUserData', chatId);
-    }
-  }, [socket, chatId]);
+    dispatch(makeShopActiveItem(null));
+    // Здесь можно добавить другую инициализацию, если нужно
+  }, [dispatch]);
 
+  // Эффект для обновления данных
   useEffect(() => {
-    if (socket && !loading) {
-      console.log('otpravlyau data obratno', data);
-
-      
-      socket.emit('updateData', chatId, data);
-    }
-  }, [data, socket, loading]);
+    updateData(data);
+  }, [data, updateData]);
 
   const init = useCallback(() => {
     data.forEach((element, index) => {
