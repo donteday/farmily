@@ -28,6 +28,8 @@ function App() {
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [socket, setSocket] = useState(null);
+  const prevDataRef = useRef(data);
+
 
   const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
 
@@ -54,7 +56,12 @@ function App() {
     
     if (socket && !loading) {
       console.log('Отправляю обновленные данные', data);
-      socket.emit('updateData', chatId, data);
+      if (JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
+        socket.emit('updateData', chatId, data);
+        // Обновляем ссылку на предыдущие данные
+        prevDataRef.current = data;
+      }
+
     }
   }, [socket, loading, chatId]);
  // eslint-disable-next-line
