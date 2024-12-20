@@ -12,7 +12,7 @@ import FriendsWindow from './components/FriendsWindow/FriendsWindow';
 import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
 // import { fetchUserData } from './redux/store/store';
-import {io} from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { debounce } from 'lodash';
 
 let moneyInterval;
@@ -22,7 +22,7 @@ function App() {
   const viewNow = useSelector(state => state.counter.view);
   const data = useSelector(state => state.counter.dataGarden);
   const loading = useSelector(state => state.counter.loading);
-  const dataBarn = useSelector(state => state.counter.dataBarn);  
+  const dataBarn = useSelector(state => state.counter.dataBarn);
   const shopContainerRef = useRef();
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
-    setSocket(newSocket); 
+    setSocket(newSocket);
     newSocket.on('userData', (userData) => {
       if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
@@ -45,15 +45,16 @@ function App() {
 
   const updateData = useCallback((data) => {
     if (socket && !loading) {
-      console.log('Отправляю обновленные данные', data);
       if (JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
+        console.log('Отправляю обновленные данные', data);
+
         socket.emit('updateData', chatId, data);
         // Обновляем ссылку на предыдущие данные
         prevDataRef.current = data;
       }
     }
   }, [socket, loading, chatId]);
- // eslint-disable-next-line
+  // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
     debounce(updateData, 1),
     [updateData]

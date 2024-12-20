@@ -37,9 +37,6 @@ const Bed = ({ index, bed }) => {
                 if (data.filter((e) => !e.plowed).length <= 1) {
                     dispatch(bedAdd());
                 }
-                setTimeout(() => {
-                    // sendPlantData(chatId, data);
-                }, 200);
             }
             return;
         }
