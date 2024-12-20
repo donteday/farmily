@@ -47,9 +47,7 @@ function App() {
     if (socket && !loading) {
       if (JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
         console.log('Отправляю обновленные данные', data);
-
         socket.emit('updateData', chatId, data);
-        // Обновляем ссылку на предыдущие данные
         prevDataRef.current = data;
       }
     }
