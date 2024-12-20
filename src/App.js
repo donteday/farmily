@@ -58,7 +58,7 @@ function App() {
   }, [socket, loading, chatId, isUserUpdate]);
   // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
-    debounce(updateData, 100),
+    debounce(updateData, 1),
     [updateData]
   );
 
@@ -81,6 +81,7 @@ function App() {
       if (element.date && (dateNow.getTime() - element.date < element.riseTime)) {
         setTimeout(() => {
           dispatch(setPlant({ index: index, plant: element.namePlant }));
+
         }, element.riseTime - (dateNow.getTime() - element.date));
       }
     });
