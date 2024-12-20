@@ -42,6 +42,7 @@ function App() {
     });
     dispatch(makeShopActiveItem(null));
     return () => newSocket.disconnect();
+  // eslint-disable-next-line
   }, [dispatch, chatId]);
 
   const updateData = useCallback((data) => {
