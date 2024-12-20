@@ -27,6 +27,7 @@ function App() {
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [isUserUpdate, setIsUserUpdate] = useState(false);
   const prevDataRef = useRef(data);
   const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
 
@@ -47,13 +48,14 @@ function App() {
 
   const updateData = useCallback((data) => {
     if (socket && !loading) {
-      if (JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
+      if (isUserUpdate && JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
         console.log('Отправляю обновленные данные', data);
         socket.emit('updateData', chatId, data);
         prevDataRef.current = data;
+        setIsUserUpdate(false);
       }
     }
-  }, [socket, loading, chatId]);
+  }, [socket, loading, chatId, isUserUpdate]);
   // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
     debounce(updateData, 100),
@@ -109,7 +111,7 @@ function App() {
   function isView(view) {
     switch (view) {
       case 'garden':
-        return selectedFriend ? <FriendGarden friend={selectedFriend} setSelectedFriend={setSelectedFriend} /> : <Garden />;
+        return selectedFriend ? <FriendGarden friend={selectedFriend} setSelectedFriend={setSelectedFriend} /> : <Garden setIsUserUpdate={setIsUserUpdate} />;
       case 'barn':
         return <Barn />;
       case 'pond':

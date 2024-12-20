@@ -13,7 +13,7 @@ popSound.preload = 'metadata';
 grassSound.preload = 'metadata';
 shovelSound.preload = 'metadata';
 
-const Bed = ({ index, bed }) => {
+const Bed = ({ index, bed, setIsUserUpdate }) => {
     const dispatch = useDispatch();
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
@@ -37,6 +37,7 @@ const Bed = ({ index, bed }) => {
                 if (data.filter((e) => !e.plowed).length <= 1) {
                     dispatch(bedAdd());
                 }
+                setIsUserUpdate(true);
             }
             return;
         }
@@ -52,9 +53,11 @@ const Bed = ({ index, bed }) => {
                 dispatch(setDatePlant({ index: index, namePlant: activeItem.name, riseTime: activeItem.riseTime, date: dateNow}));
 
                 // sendPlantData(chatId, data);
+                setIsUserUpdate(true);
 
                 setTimeout(() => {
                     dispatch(setPlant({ index: index, plant: activeItem.name }));
+                    setIsUserUpdate(true);
                 }, activeItem.riseTime);
             }
         }
@@ -67,9 +70,7 @@ const Bed = ({ index, bed }) => {
                 dispatch(setSellPrice({ index: index, price: 0 }))
                 dispatch(setPlant({ index: index, plant: '' }));
                 dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
-                setTimeout(() => {
-                    // sendPlantData(chatId, data);
-                }, 200);
+                setIsUserUpdate(true);
             }, 200)
 
         }

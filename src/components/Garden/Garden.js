@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import Bed from "../Bed/Bed";
 
-const Garden = ({ gardenData }) => {
+const Garden = ({ gardenData, setIsUserUpdate}) => {
   const myGarden = useSelector(state => state.counter.dataGarden);
   const data = gardenData || myGarden;
 
@@ -14,6 +14,7 @@ const Garden = ({ gardenData }) => {
               key={index}
               index={index}
               bed={bed}
+              setIsUserUpdate={setIsUserUpdate}
             />)
         }
       </div>
