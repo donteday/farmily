@@ -22,22 +22,17 @@ function App() {
   const viewNow = useSelector(state => state.counter.view);
   const data = useSelector(state => state.counter.dataGarden);
   const loading = useSelector(state => state.counter.loading);
-  const dataBarn = useSelector(state => state.counter.dataBarn);
-  
+  const dataBarn = useSelector(state => state.counter.dataBarn);  
   const shopContainerRef = useRef();
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [socket, setSocket] = useState(null);
   const prevDataRef = useRef(data);
-
-
   const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
 
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
-    setSocket(newSocket);
-    console.log('Пыиаюсь получить данные с сервера');
-    
+    setSocket(newSocket); 
     newSocket.on('userData', (userData) => {
       if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
@@ -45,15 +40,10 @@ function App() {
       }
     });
     dispatch(makeShopActiveItem(null));
-
     return () => newSocket.disconnect();
   }, [dispatch, chatId]);
 
   const updateData = useCallback((data) => {
-    console.log('socket', socket);
-    console.log('loading data', loading);
-    
-    
     if (socket && !loading) {
       console.log('Отправляю обновленные данные', data);
       if (JSON.stringify(prevDataRef.current) !== JSON.stringify(data)) {
@@ -61,12 +51,11 @@ function App() {
         // Обновляем ссылку на предыдущие данные
         prevDataRef.current = data;
       }
-
     }
   }, [socket, loading, chatId]);
  // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
-    debounce(updateData, 100),
+    debounce(updateData, 1),
     [updateData]
   );
 
