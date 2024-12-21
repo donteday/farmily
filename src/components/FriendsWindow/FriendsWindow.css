@@ -1,5 +1,5 @@
 .friends_window {
-    position: absolute;
+    position: fixed;
     padding: 40px;
     width: 80%;
     height: 600px;
