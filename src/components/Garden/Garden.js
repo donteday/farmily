@@ -18,7 +18,8 @@ const Garden = ({friend}) => {
   const [socket, setSocket] = useState(null);
   const [isUserUpdate, setIsUserUpdate] = useState(false);
   const prevDataRef = useRef(data);
-  const chatId = '205235580'; // Это лучше хранить в конфиге или получать динамически
+  const tg = window.Telegram.WebApp.initDataUnsafe;
+  const chatId = tg.user.id; // Это лучше хранить в конфиге или получать динамически
 
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
