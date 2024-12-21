@@ -39,6 +39,12 @@ const Garden = ({friend}) => {
   }, [dispatch, chatId]);
 
   const updateData = useCallback((data) => {
+    console.log('socket', socket);
+    console.log('loading', loading);
+    console.log('data', data);
+    
+    
+    
     if (socket && !loading) {
       console.log('pitaus');
       console.log('isuser', isUserUpdate);
