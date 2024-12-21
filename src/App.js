@@ -14,6 +14,9 @@ import FriendGarden from './components/FriendGarden/FriendGarden';
 
 
 function App() {
+  const WebApp = window.Telegram.WebApp;
+  console.log(WebApp);
+  
   const viewNow = useSelector(state => state.counter.view);
 
   const shopContainerRef = useRef();
