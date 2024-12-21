@@ -11,13 +11,10 @@ let moneyInterval;
 const Garden = ({friend}) => {
   console.log('friend', friend);
   const data = useSelector(state => state.counter.userData);
-  // eslint-disable-next-line 
+  console.log(data);
+  
   const tg = window.Telegram.WebApp.initDataUnsafe;
-
   const chatId = `${tg.user.id}`;
-
-
-
   const dispatch = useDispatch();
 
   const loading = useSelector(state => state.counter.loading);
