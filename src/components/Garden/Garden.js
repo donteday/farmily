@@ -10,11 +10,9 @@ let moneyInterval;
 
 const Garden = ({friend}) => {
   console.log('friend', friend);
-  const data = useSelector(state => state.counter.dataGarden);
-  console.log(data);
-  
+  const data = useSelector(state => state.counter.dataGarden);  
   const tg = window.Telegram.WebApp.initDataUnsafe;
-  const chatId = `${friend?.chatId}` || `${tg.user.id}`;
+  const chatId = friend !== undefined ? `${friend.chatId}` : `${tg.user.id}`;
   const dispatch = useDispatch();
 
   const loading = useSelector(state => state.counter.loading);
