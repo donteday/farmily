@@ -9,10 +9,15 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 let moneyInterval;
 
 const Garden = ({friend}) => {
-  console.log(friend);
-  
+  console.log('friend', friend);
+  const data = [];
+  if (friend) {
+    data = friend.dataGarden;
+  } else {
+    data = useSelector(state => state.counter.dataGarden);
+  };
   const dispatch = useDispatch();
-  const data = useSelector(state => state.counter.dataGarden);
+
   const loading = useSelector(state => state.counter.loading);
   const dataBarn = useSelector(state => state.counter.dataBarn);
   const [socket, setSocket] = useState(null);
@@ -123,6 +128,7 @@ const Garden = ({friend}) => {
               index={index}
               bed={bed}
               setIsUserUpdate={setIsUserUpdate}
+              friend={friend}
             />)
         }
       </div>

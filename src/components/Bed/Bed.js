@@ -13,7 +13,7 @@ popSound.preload = 'metadata';
 grassSound.preload = 'metadata';
 shovelSound.preload = 'metadata';
 
-const Bed = ({ index, bed, setIsUserUpdate }) => {
+const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
     const dispatch = useDispatch();
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
@@ -29,6 +29,7 @@ const Bed = ({ index, bed, setIsUserUpdate }) => {
     }
 
     function bedHandler() {
+        if (friend) return;
         if (!bed.plowed) {
             if (money - bedPrice >= 5) {
                 sound && shovelSound.play();
