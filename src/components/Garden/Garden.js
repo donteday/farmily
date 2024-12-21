@@ -30,8 +30,9 @@ const Garden = ({friend}) => {
       // eslint-disable-next-line
       if (userData.userData !== null && JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
-        dispatch(setLoading(false));
-      }
+      } 
+      dispatch(setLoading(false));
+
     });
     dispatch(makeShopActiveItem(null));
     return () => newSocket.disconnect();
