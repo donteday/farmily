@@ -11,7 +11,7 @@ const FriendGarden = ({ friend, setSelectedFriend }) => {
                 <h2 className='friend-garden__title'>{friend.userName}'s Garden</h2>
                 <div className='friend-garden__header-btn__close' onClick={() => setSelectedFriend(null)}>х</div>
             </div>
-            <Garden gardenData={friend.gardenData} /> {/* Передаем данные огорода друга */}
+            <Garden friend={friend} /> {/* Передаем данные огорода друга */}
         </div>
     );
 }
