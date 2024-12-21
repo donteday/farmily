@@ -12,7 +12,7 @@ import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
 // import { fetchUserData } from './redux/store/store';
 
-var WebApp = window;
+var WebApp = window.Telegram.WebApp;
 
 function App() {
   
