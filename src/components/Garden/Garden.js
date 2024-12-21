@@ -10,11 +10,12 @@ let moneyInterval;
 
 const Garden = ({friend}) => {
   console.log('friend', friend);
+  const userData = useSelector(state => state.counter.userData);
   const data = [];
   if (friend) {
     data = friend.dataGarden;
   } else {
-    data = useSelector(state => state.counter.dataGarden);
+    data = userData;
   };
   const dispatch = useDispatch();
 
