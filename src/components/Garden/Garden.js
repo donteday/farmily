@@ -40,6 +40,10 @@ const Garden = ({friend}) => {
 
   const updateData = useCallback((data) => {
     if (socket && !loading) {
+      console.log('pitaus');
+      console.log('isuser', isUserUpdate);
+      
+      
       if (isUserUpdate && (JSON.stringify(prevDataRef.current) !== JSON.stringify(data))) {
         console.log('Отправляю обновленные данные', data);
         socket.emit('updateData', chatId, data);
