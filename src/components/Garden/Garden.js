@@ -10,13 +10,14 @@ let moneyInterval;
 
 const Garden = ({friend}) => {
   console.log('friend', friend);
-  const userData = useSelector(state => state.counter.userData);
-  const data = [];
-  if (friend) {
-    data = friend.dataGarden;
-  } else {
-    data = userData;
-  };
+  const data = useSelector(state => state.counter.userData);
+  // eslint-disable-next-line 
+  const tg = window.Telegram.WebApp.initDataUnsafe;
+
+  const chatId = `${tg.user.id}`;
+
+
+
   const dispatch = useDispatch();
 
   const loading = useSelector(state => state.counter.loading);
@@ -24,8 +25,6 @@ const Garden = ({friend}) => {
   const [socket, setSocket] = useState(null);
   const [isUserUpdate, setIsUserUpdate] = useState(false);
   const prevDataRef = useRef(data);
-  const tg = window.Telegram.WebApp.initDataUnsafe;
-  const chatId = `${tg.user.id}` ; // Это лучше хранить в конфиге или получать динамически
 
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
