@@ -14,7 +14,7 @@ const Garden = ({friend}) => {
   console.log(data);
   
   const tg = window.Telegram.WebApp.initDataUnsafe;
-  const chatId = `${friend.chatId}` || `${tg.user.id}`;
+  const chatId = `${friend?.chatId}` || `${tg.user.id}`;
   const dispatch = useDispatch();
 
   const loading = useSelector(state => state.counter.loading);
