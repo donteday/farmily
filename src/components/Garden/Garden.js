@@ -10,7 +10,7 @@ let moneyInterval;
 
 const Garden = ({friend}) => {
   console.log('friend', friend);
-  const data = useSelector(state => state.counter.userData);
+  const data = useSelector(state => state.counter.dataGarden);
   console.log(data);
   
   const tg = window.Telegram.WebApp.initDataUnsafe;
