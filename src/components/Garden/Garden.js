@@ -28,7 +28,7 @@ const Garden = ({friend}) => {
       console.log('userData', userData);
       
       // eslint-disable-next-line
-      if (JSON.stringify(userData.userData) !== JSON.stringify(data)) {
+      if (userData.userData !== null && JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
         dispatch(setLoading(false));
       }
