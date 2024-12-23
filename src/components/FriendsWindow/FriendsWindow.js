@@ -7,8 +7,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios';
 
 const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
-  // const [users, setUsers] = useState([]);
-  // const [friends, setFriends] = useState([]);
   const dispatch = useDispatch();  
   const [resUsers, setResUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -31,12 +29,10 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     if (friends.some(friend => friend.id === user.id)) {
       return;
     }
-    dispatch(addFriends({friend: user, isAdding: true}));  // Для редакса
-    // setFriends([...friends, user]);
+    dispatch(addFriends({friend: user, isAdding: true}));
   }
 
   function removeFriend(user) {
-    // setFriends(friends.filter(friend => friend.id !== user.id));
     dispatch(addFriends({friend: user}));
   }
 
