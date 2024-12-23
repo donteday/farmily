@@ -30,7 +30,9 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
     }
 
     function harvestHandler() {
-        if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount <= 3) {
+        console.log('harvestCount', harvestCount);
+        
+        if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount < 3) {
             sound && popSound.play();
             bedRef.current.classList.add('destroy');
             setTimeout(() => {
