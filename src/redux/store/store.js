@@ -106,6 +106,8 @@ export const counterSlice = createSlice({
     dataGarden: dataGardenExample,
     dataBarn: dataBarnStart,
     friends: friendsStart,
+    harvestCount: 0,
+    lastHarvestTime: null,
     loading: true,
     error: null
   },
@@ -171,7 +173,29 @@ export const counterSlice = createSlice({
         
         state.friends = state.friends.filter(user => user.id !== friend.id)
       }
-    }
+    },
+    harvestFromFriends: (state, action) => {
+      const currentTime = new Date();
+      const oneHourAgo = new Date(currentTime - 60 * 60 * 1000); // Время один час назад
+  
+      // Проверяем, прошло ли время с последнего сбора
+      if (state.lastHarvestTime && state.lastHarvestTime > oneHourAgo) {
+          // Если прошло меньше часа, проверяем количество собранных единиц
+          if (state.harvestCount >= 3) {
+            alert('Достигнут лимит!');
+              return; // Ограничение достигнуто, ничего не делаем
+          }
+      } else {
+          // Если прошло больше часа, сбрасываем количество собранных единиц
+          state.harvestCount = 0;
+      }
+  
+      // Собираем урожай
+      state.harvestCount += 1; // Увеличиваем счетчик собранных единиц
+      state.lastHarvestTime = currentTime; // Обновляем время последнего сбора
+  
+      // Здесь вы можете добавить логику для обновления состояния друзей, если это необходимо
+  }
   },
   // extraReducers: (builder) => {
   //   builder
@@ -202,6 +226,7 @@ export const { incrementMoney,
   setPlant,
   setLoading,
   addFriends,
+  harvestFromFriends,
   setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update, setUserData } = counterSlice.actions
 
 export default counterSlice.reducer

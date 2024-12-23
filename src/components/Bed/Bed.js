@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant } from '../../redux/store/store'
+import { incrementMoney, plowed, bedAdd, setPlant, setSellPrice, setDatePlant,harvestFromFriends } from '../../redux/store/store'
 import pop from '../../img/pop.mp3';
 import grass from '../../img/grass.mp3';
 import shovel from '../../img/shovel.mp3';
@@ -17,7 +17,8 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
     const dispatch = useDispatch();
     const money = useSelector(state => state.counter.money);
     const data = useSelector(state => state.counter.dataGarden);
-    const sound = useSelector(state => state.counter.sound)
+    const sound = useSelector(state => state.counter.sound);
+    const harvestCount = useSelector(state => state.counter.harvestCount);
     const activeItem = useSelector(state => state.counter.shopActiveItem);
     const bedPrice = Math.round(index * index * data.length * 1.2);
     const bedRef = useRef();
@@ -28,8 +29,23 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
         return amount.toFixed(0);
     }
 
+    function harvestHandler() {
+        if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount <= 3) {
+            sound && popSound.play();
+            bedRef.current.classList.add('destroy');
+            setTimeout(() => {
+                dispatch(incrementMoney(bed.sell))
+                dispatch(setSellPrice({ index: index, price: 0 }))
+                dispatch(setPlant({ index: index, plant: '' }));
+                dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+                dispatch(harvestFromFriends());
+                setIsUserUpdate(true);
+            }, 200)
+        } else return;
+    }
+
     function bedHandler() {
-        if (friend) return;
+        if (friend) harvestHandler();
         if (!bed.plowed) {
             if (money - bedPrice >= 5) {
                 sound && shovelSound.play();
