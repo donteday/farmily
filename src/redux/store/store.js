@@ -93,6 +93,7 @@ const localStore = localStorage.userDataTest2
 const dataBarnStart = localStore ? JSON.parse(localStore).dataBarn : dataBarnExample;
 
 const moneyStart = localStore ? JSON.parse(localStore).money : 100;
+const friendsStart = localStore ? JSON.parse(localStore).friends || [] : [];
 
 export const counterSlice = createSlice({
   name: 'money',
@@ -104,6 +105,7 @@ export const counterSlice = createSlice({
     shopActiveItem: null,
     dataGarden: dataGardenExample,
     dataBarn: dataBarnStart,
+    friends: friendsStart,
     loading: true,
     error: null
   },
@@ -152,6 +154,9 @@ export const counterSlice = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    addFriends: (state, action) => {
+      state.friends.push(action.payload);
     }
   },
   // extraReducers: (builder) => {
@@ -181,7 +186,8 @@ export const { incrementMoney,
   bedAdd, 
   yardAdd, 
   setPlant,
-  setLoading, 
+  setLoading,
+  addFriends, 
   setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update, setUserData } = counterSlice.actions
 
 export default counterSlice.reducer

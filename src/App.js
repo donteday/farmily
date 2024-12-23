@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState} from 'react';
 import { useSelector} from 'react-redux'
 import './App.css';
 import Header from './components/Header/Header';
@@ -12,24 +12,11 @@ import Snowfall from './components/Snowfall/Snowfall';
 import FriendGarden from './components/FriendGarden/FriendGarden';
 // import { fetchUserData } from './redux/store/store';
 
-
-function App() {
-let WebApp;
-  
-  console.log(WebApp);
-  useEffect(() => {
-    let WebApp = window.Telegram.WebApp;
-    console.log(WebApp);
-    
-  }, []);
-  
+function App() {  
   const viewNow = useSelector(state => state.counter.view);
-
   const shopContainerRef = useRef();
   const [friendsWindowView, setFriendsWindowView] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
-
-
   
   function isView(view) {
     switch (view) {

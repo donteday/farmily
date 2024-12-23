@@ -1,13 +1,19 @@
 import './FriendsWindow.css';
 import React, { useState } from 'react';
+import { addFriends } from './../../redux/store/store';
+import { useSelector, useDispatch } from 'react-redux'
+
+
 import axios from 'axios';
 
 const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
   // const [users, setUsers] = useState([]);
-  const [friends, setFriends] = useState([]);
+  // const [friends, setFriends] = useState([]);
+  const dispatch = useDispatch();  
   const [resUsers, setResUsers] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const friends = useSelector(state => state.counter.friends);  
 
   const filteredUsers = searchTerm.length >= 3
     ? resUsers.filter(user =>
@@ -25,11 +31,12 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     if (friends.some(friend => friend.id === user.id)) {
       return;
     }
-    setFriends([...friends, user]);
+    dispatch(addFriends(user));  // Для редакса
+    // setFriends([...friends, user]);
   }
 
   function removeFriend(user) {
-    setFriends(friends.filter(friend => friend.id !== user.id));
+    // setFriends(friends.filter(friend => friend.id !== user.id));
   }
 
   function checkFriend(user) {
