@@ -31,12 +31,13 @@ const FriendsWindow = ({ setSelectedFriend, friendsWindowViewHandler }) => {
     if (friends.some(friend => friend.id === user.id)) {
       return;
     }
-    dispatch(addFriends(user));  // Для редакса
+    dispatch(addFriends({friend: user, isAdding: true}));  // Для редакса
     // setFriends([...friends, user]);
   }
 
   function removeFriend(user) {
     // setFriends(friends.filter(friend => friend.id !== user.id));
+    dispatch(addFriends({friend: user}));
   }
 
   function checkFriend(user) {

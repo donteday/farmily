@@ -1,4 +1,4 @@
-import { createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 // import axios from 'axios';
 
 const bedExmple = {
@@ -150,13 +150,23 @@ export const counterSlice = createSlice({
       state[action.payload.name] = action.payload.source;
     },
     setUserData: (state, action) => {
-      state.dataGarden = action.payload; 
+      state.dataGarden = action.payload;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
     addFriends: (state, action) => {
-      state.friends.push(action.payload);
+      const { friend, isAdding } = action.payload; // Извлекаем друга и флаг добавления
+
+      if (isAdding) {
+        // Если добавляем друга
+        if (!state.friends.includes(friend)) {
+          state.friends.push(friend);
+        }
+      } else {
+        // Если удаляем друга
+        state.friends = state.friends.filter(user => user.id !== friend.id)
+      }
     }
   },
   // extraReducers: (builder) => {
@@ -180,14 +190,14 @@ export const counterSlice = createSlice({
 
 
 
-export const { incrementMoney, 
-  plowed, 
-  plowedYard, 
-  bedAdd, 
-  yardAdd, 
+export const { incrementMoney,
+  plowed,
+  plowedYard,
+  bedAdd,
+  yardAdd,
   setPlant,
   setLoading,
-  addFriends, 
+  addFriends,
   setPet, makeShopActiveItem, setSellPrice, setDatePlant, barnEnter, update, setUserData } = counterSlice.actions
 
 export default counterSlice.reducer
