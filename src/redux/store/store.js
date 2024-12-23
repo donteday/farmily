@@ -165,6 +165,10 @@ export const counterSlice = createSlice({
         }
       } else {
         // Если удаляем друга
+        console.log('friends', state.friends);
+        console.log('del', friend);
+        
+        
         state.friends = state.friends.filter(user => user.id !== friend.id)
       }
     }
