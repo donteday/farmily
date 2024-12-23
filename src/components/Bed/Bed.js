@@ -33,6 +33,8 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
         console.log('harvestCount', harvestCount);
         
         if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount < 3) {
+            console.log('ворую');
+            
             sound && popSound.play();
             bedRef.current.classList.add('destroy');
             setTimeout(() => {

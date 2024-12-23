@@ -23,8 +23,7 @@ const Garden = ({friend}) => {
   useEffect(() => {
     const newSocket = io('https://mypocketfarm.ru:5000', { query: { chatId } });
     setSocket(newSocket);
-    newSocket.on('userData', (userData) => {
-      console.log('userData', userData);      
+    newSocket.on('userData', (userData) => {   
       // eslint-disable-next-line
       if (userData.userData !== null && JSON.stringify(userData.userData) !== JSON.stringify(data)) {
         dispatch(setUserData(userData.userData));
