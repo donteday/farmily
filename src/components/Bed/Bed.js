@@ -45,11 +45,14 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
                 dispatch(harvestFromFriends());
                 setIsUserUpdate(true);
             }, 200)
-        } else return;
+        } else alert('Превышен лимит, ворюга!');
     }
 
     function bedHandler() {
-        if (friend) harvestHandler();
+        if (friend) {
+            harvestHandler();
+            return;
+        };
         if (!bed.plowed) {
             if (money - bedPrice >= 5) {
                 sound && shovelSound.play();
