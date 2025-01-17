@@ -45,7 +45,8 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
                 dispatch(harvestFromFriends());
                 setIsUserUpdate(true);
             }, 200)
-        } else alert('Превышен лимит, ворюга!');
+        } else console.log('лимит');
+        ;
     }
 
     function bedHandler() {
