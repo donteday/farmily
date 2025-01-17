@@ -90,13 +90,18 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
         if (bed.plant !== 'seedling' && bed.plant !== '') {
             sound && popSound.play();
             bedRef.current.classList.add('destroy');
-            setTimeout(() => {
-                dispatch(incrementMoney(bed.sell))
-                dispatch(setSellPrice({ index: index, price: 0 }))
-                dispatch(setPlant({ index: index, plant: '' }));
-                dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
-                setIsUserUpdate(true);
-            }, 200)
+            dispatch(incrementMoney(bed.sell))
+            dispatch(setSellPrice({ index: index, price: 0 }))
+            dispatch(setPlant({ index: index, plant: '' }));
+            dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+            setIsUserUpdate(true);
+            // setTimeout(() => {
+            //     dispatch(incrementMoney(bed.sell))
+            //     dispatch(setSellPrice({ index: index, price: 0 }))
+            //     dispatch(setPlant({ index: index, plant: '' }));
+            //     dispatch(setDatePlant({ index: index, namePlant: null, riseTime: null, date: null }));
+            //     setIsUserUpdate(true);
+            // }, 200)
 
         }
     }
