@@ -32,7 +32,7 @@ const Bed = ({ index, bed, setIsUserUpdate, friend }) => {
     function harvestHandler() {
         console.log('harvestCount', harvestCount);
         
-        if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount < 3) {
+        if (bed.plant !== 'seedling' && bed.plant !== '' && harvestCount < 30000) {
             console.log('ворую');
             
             sound && popSound.play();

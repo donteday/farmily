@@ -48,7 +48,7 @@ const Garden = ({friend}) => {
   }, [socket, loading, chatId, isUserUpdate]);
   // eslint-disable-next-line
   const debouncedUpdateData = useCallback(
-    debounce(updateData, 500),
+    debounce(updateData, 100),
     [updateData]
   );
 
